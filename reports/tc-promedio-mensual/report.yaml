@@ -1,0 +1,21 @@
+id: report-tc-promedio-mensual
+name: TC Promedio Mensual
+slug: tc-promedio-mensual
+standalone: true
+status: done
+source_of_truth:
+  layout: inputs/screenshots
+  prompts: inputs/xml-spec/XML Spec.xml
+  validation: inputs/pdf/PDF del reporte.pdf
+inputs:
+  xml_spec:
+    - inputs/xml-spec/XML Spec.xml
+  evidence:
+    - inputs/pdf/PDF del reporte.pdf
+    - inputs/screenshots
+outputs:
+  rdl:
+    - TC_promedio_mensual_base.rdl
+  validation:
+    - validations/
+open_questions: []

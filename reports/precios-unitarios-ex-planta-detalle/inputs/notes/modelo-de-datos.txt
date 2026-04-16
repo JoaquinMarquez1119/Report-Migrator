@@ -1,0 +1,2 @@
+El modelo semantico se encuentra en Power BI Service: Data Source=powerbi://api.powerbi.com/v1.0/myorg/BI;Initial Catalog=Datos Prioritarios
+

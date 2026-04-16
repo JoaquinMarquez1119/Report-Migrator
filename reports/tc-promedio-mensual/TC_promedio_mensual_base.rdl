@@ -1,0 +1,830 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>0e0454a9-4794-41dd-b8a4-8c44ae95af6d</rd:ReportID>
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>PBIRB</am:Name>
+      <am:Version>15.7.1815.334</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>PBIRB</am:Name>
+      <am:Version>15.7.1815.334</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2026-03-16T19:50:54.8161969Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="DatosPrioritarios">
+      <rd:SecurityType>Integrated</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>OLEDB-MD</DataProvider>
+        <ConnectString>Data Source=powerbi://api.powerbi.com/v1.0/myorg/BI;Initial Catalog=Datos Prioritarios</ConnectString>
+        <IntegratedSecurity>true</IntegratedSecurity>
+      </ConnectionProperties>
+      <rd:DataSourceID>3c5f39d8-f22b-4f62-b4c5-f273994561f3</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="BI_DatosPrioritarios">
+      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>PBIDATASET</DataProvider>
+        <ConnectString>Data Source=pbiazure://api.powerbi.com/;Identity Provider="https://login.microsoftonline.com/organizations, https://analysis.windows.net/powerbi/api, f0b72488-7082-488a-a7e8-eada97bd842d";Initial Catalog=sobe_wowvirtualserver-03343eef-bfa0-4417-a085-ed40ba738766;Integrated Security=ClaimsToken</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>679e3d27-1ec6-4be5-a37f-ab84af3deba8</rd:DataSourceID>
+      <rd:PowerBIWorkspaceName>BI</rd:PowerBIWorkspaceName>
+      <rd:PowerBIDatasetName>Datos Prioritarios</rd:PowerBIDatasetName>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="dsAnios">
+      <Query>
+        <DataSourceName>BI_DatosPrioritarios</DataSourceName>
+        <CommandText>
+EVALUATE
+SELECTCOLUMNS(
+    DISTINCT('Precios_ExPLanta_TM1'[Años]),
+    "Anios", VALUE('Precios_ExPLanta_TM1'[Años])
+)
+ORDER BY [Anios] DESC
+        </CommandText>
+      </Query>
+      <Fields>
+        <Field Name="ID_Anios_">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>[Anios]</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="dsMeses">
+      <Query>
+        <DataSourceName>BI_DatosPrioritarios</DataSourceName>
+        <CommandText>
+EVALUATE
+DATATABLE(
+    "Mes", INTEGER,
+    "Periodo_Mensual", STRING,
+    {
+        {1, "Ene"},
+        {2, "Feb"},
+        {3, "Mar"},
+        {4, "Abr"},
+        {5, "May"},
+        {6, "Jun"},
+        {7, "Jul"},
+        {8, "Ago"},
+        {9, "Sep"},
+        {10, "Oct"},
+        {11, "Nov"},
+        {12, "Dic"}
+    }
+)
+        </CommandText>
+      </Query>
+      <Fields>
+        <Field Name="ID_Mes_">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>[Mes]</DataField>
+        </Field>
+        <Field Name="ID_Periodo_Mensual_">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>[Periodo_Mensual]</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="dsDescripcion">
+      <Query>
+        <DataSourceName>BI_DatosPrioritarios</DataSourceName>
+        <CommandText>
+EVALUATE
+ROW(
+    "Descripcion",
+    "Promedio mensual del tipo de cambio dólares estadounidense vs pesos uruguayos promedio. Fuente SAP"
+)
+        </CommandText>
+      </Query>
+      <Fields>
+        <Field Name="ID_Descripcion_">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>[Descripcion]</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="dsTCPromedio">
+      <Query>
+        <DataSourceName>BI_DatosPrioritarios</DataSourceName>
+        <CommandText>
+EVALUATE
+SELECTCOLUMNS(
+    FILTER(
+        'Precios_ExPLanta_TM1',
+        'Precios_ExPLanta_TM1'[Unidades] = "N/A" &amp;&amp;
+        'Precios_ExPLanta_TM1'[Productos_ExPlanta] = "N/A" &amp;&amp;
+        'Precios_ExPLanta_TM1'[Mercados] = "N/A" &amp;&amp;
+        'Precios_ExPLanta_TM1'[Periodo_Diario] = "Valor Mensual" &amp;&amp;
+        'Precios_ExPLanta_TM1'[Medidas_ExPlanta] = "Cotización Promedio"
+    ),
+    "Año", VALUE('Precios_ExPLanta_TM1'[Años]),
+    "Mes",
+    SWITCH(
+        'Precios_ExPLanta_TM1'[Periodo_Mensual],
+        "Ene", 1,
+        "Feb", 2,
+        "Mar", 3,
+        "Abr", 4,
+        "May", 5,
+        "Jun", 6,
+        "Jul", 7,
+        "Ago", 8,
+        "Sep", 9,
+        "Oct", 10,
+        "Nov", 11,
+        "Dic", 12,
+        BLANK()
+    ),
+    "DescripcionMiembro", 'Precios_ExPLanta_TM1'[Periodo_Mensual],
+    "CotizacionPromedio", 'Precios_ExPLanta_TM1'[Valor]
+)
+ORDER BY [Año], [Mes]
+        </CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Precios_ExPLanta_TM1_Años_">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Precios_ExPLanta_TM1[Años]</DataField>
+        </Field>
+        <Field Name="Precios_ExPLanta_TM1_Periodo_Mensual_">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>Precios_ExPLanta_TM1[Periodo_Mensual]</DataField>
+        </Field>
+        <Field Name="ID_Año_">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>[Año]</DataField>
+        </Field>
+        <Field Name="ID_Mes_">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>[Mes]</DataField>
+        </Field>
+        <Field Name="ID_DescripcionMiembro_">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>[DescripcionMiembro]</DataField>
+        </Field>
+        <Field Name="ID_CotizacionPromedio_">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>[CotizacionPromedio]</DataField>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=DateSerial(CInt(Fields!ID_Año_.Value), CInt(Fields!ID_Mes_.Value), 1)</FilterExpression>
+          <Operator>GreaterThanOrEqual</Operator>
+          <FilterValues>
+            <FilterValue>=DateSerial(Parameters!AnioInicial.Value, Parameters!MesInicial.Value, 1)</FilterValue>
+          </FilterValues>
+        </Filter>
+        <Filter>
+          <FilterExpression>=DateSerial(CInt(Fields!ID_Año_.Value), CInt(Fields!ID_Mes_.Value), 1)</FilterExpression>
+          <Operator>LessThanOrEqual</Operator>
+          <FilterValues>
+            <FilterValue>=DateAdd("d", -1, DateAdd("m", 1, DateSerial(Parameters!AnioFinal.Value, Parameters!MesFinal.Value, 1)))</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Rectangle Name="BodyCanvas">
+            <ReportItems>
+              <Textbox Name="txtToggleDescripcion">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>¿Qué muestra este reporte?</Value>
+                        <Style>
+                          <FontSize>9pt</FontSize>
+                          <TextDecoration>Underline</TextDecoration>
+                          <Color>Blue</Color>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.38in</Top>
+                <Left>0.28in</Left>
+                <Height>0.22in</Height>
+                <Width>2.4in</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Textbox>
+              <Textbox Name="txtDescripcion">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=First(Fields!ID_Descripcion_.Value, "dsDescripcion")</Value>
+                        <Style>
+                          <Color>#000000</Color>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.66in</Top>
+                <Left>0.26in</Left>
+                <Height>0.28in</Height>
+                <Width>5.4in</Width>
+                <ZIndex>1</ZIndex>
+                <Visibility>
+                  <Hidden>true</Hidden>
+                  <ToggleItem>txtToggleDescripcion</ToggleItem>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Textbox>
+              <Tablix Name="tablixTCPromedio">
+                <TablixBody>
+                  <TablixColumns>
+                    <TablixColumn>
+                      <Width>0.8in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.6in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.95in</Width>
+                    </TablixColumn>
+                  </TablixColumns>
+                  <TablixRows>
+                    <TablixRow>
+                      <Height>0.28in</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrAnio">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value />
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>White</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>White</BackgroundColor>
+                                <Color>White</Color>
+                                <PaddingLeft>4pt</PaddingLeft>
+                                <PaddingRight>4pt</PaddingRight>
+                                <PaddingTop>4pt</PaddingTop>
+                                <PaddingBottom>4pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrMes">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value />
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>White</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>White</BackgroundColor>
+                                <Color>White</Color>
+                                <PaddingLeft>4pt</PaddingLeft>
+                                <PaddingRight>4pt</PaddingRight>
+                                <PaddingTop>4pt</PaddingTop>
+                                <PaddingBottom>4pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrCotizacion">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>Cotización
+Promedio</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Silver</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#0f2543</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>4pt</PaddingLeft>
+                                <PaddingRight>4pt</PaddingRight>
+                                <PaddingTop>4pt</PaddingTop>
+                                <PaddingBottom>4pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                    <TablixRow>
+                      <Height>0.24in</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtAnio">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ID_Año_.Value</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Silver</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>4pt</PaddingLeft>
+                                <PaddingRight>4pt</PaddingRight>
+                                <PaddingTop>4pt</PaddingTop>
+                                <PaddingBottom>4pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtMes">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Fields!ID_DescripcionMiembro_.Value</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Silver</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>4pt</PaddingLeft>
+                                <PaddingRight>4pt</PaddingRight>
+                                <PaddingTop>4pt</PaddingTop>
+                                <PaddingBottom>4pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtCotizacion">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Format(CDec(Fields!ID_CotizacionPromedio_.Value), "N3")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Silver</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <VerticalAlign>Middle</VerticalAlign>
+                                <PaddingLeft>4pt</PaddingLeft>
+                                <PaddingRight>4pt</PaddingRight>
+                                <PaddingTop>4pt</PaddingTop>
+                                <PaddingBottom>4pt</PaddingBottom>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                  </TablixRows>
+                </TablixBody>
+                <TablixColumnHierarchy>
+                  <TablixMembers>
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember />
+                  </TablixMembers>
+                </TablixColumnHierarchy>
+                <TablixRowHierarchy>
+                  <TablixMembers>
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                      <RepeatOnNewPage>true</RepeatOnNewPage>
+                    </TablixMember>
+                    <TablixMember>
+                      <Group Name="Details" />
+                      <SortExpressions>
+                        <SortExpression>
+                          <Value>=Fields!ID_Año_.Value</Value>
+                        </SortExpression>
+                        <SortExpression>
+                          <Value>=Fields!ID_Mes_.Value</Value>
+                        </SortExpression>
+                      </SortExpressions>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixRowHierarchy>
+                <NoRowsMessage>No hay datos disponibles</NoRowsMessage>
+                <DataSetName>dsTCPromedio</DataSetName>
+                <Top>1.9in</Top>
+                <Left>4.62in</Left>
+                <Height>0.52in</Height>
+                <Width>2.35in</Width>
+                <ZIndex>2</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Tablix>
+            </ReportItems>
+            <Top>0in</Top>
+            <Left>0in</Left>
+            <Height>5.9in</Height>
+            <Width>10.2in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+        </ReportItems>
+        <Height>5.9in</Height>
+        <Style />
+      </Body>
+      <Width>10.2in</Width>
+      <Page>
+        <PageHeader>
+          <Height>0.6in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Rectangle Name="rectHeader">
+              <ReportItems>
+                <Textbox Name="txtTitulo">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>Tipo de Cambio Promedio SAP</Value>
+                          <Style>
+                            <FontFamily>Tahoma</FontFamily>
+                            <FontSize>16pt</FontSize>
+                            <FontWeight>Bold</FontWeight>
+                            <Color>White</Color>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style />
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>0.12in</Top>
+                  <Left>0.08in</Left>
+                  <Height>0.25in</Height>
+                  <Width>6.2in</Width>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                  </Style>
+                </Textbox>
+                <Image Name="imgLogo">
+                  <Source>Embedded</Source>
+                  <Value>AncapLogo</Value>
+                  <Sizing>FitProportional</Sizing>
+                  <Top>0.05in</Top>
+                  <Left>8.5in</Left>
+                  <Height>0.42in</Height>
+                  <Width>1.55in</Width>
+                  <ZIndex>1</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                  </Style>
+                </Image>
+              </ReportItems>
+              <Top>0in</Top>
+              <Left>0in</Left>
+              <Height>0.58in</Height>
+              <Width>10.2in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <BottomBorder>
+                  <Color>#ffc728</Color>
+                  <Style>Solid</Style>
+                  <Width>2.25pt</Width>
+                </BottomBorder>
+                <BackgroundColor>#0f254c</BackgroundColor>
+              </Style>
+            </Rectangle>
+          </ReportItems>
+          <Style />
+        </PageHeader>
+        <PageFooter>
+          <Height>0.25in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="txtFechaFooter">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Today()</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <Format>d</Format>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>0in</Top>
+              <Left>0in</Left>
+              <Height>0.2in</Height>
+              <Width>2.5in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Textbox>
+            <Textbox Name="txtPaginaFooter">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!PageNumber</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0in</Top>
+              <Left>3.85in</Left>
+              <Height>0.2in</Height>
+              <Width>2.5in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Textbox>
+            <Textbox Name="txtHoraFooter">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Now()</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <Format>T</Format>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0in</Top>
+              <Left>7.7in</Left>
+              <Height>0.2in</Height>
+              <Width>2.5in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style />
+        </PageFooter>
+        <PageHeight>8.5in</PageHeight>
+        <PageWidth>11in</PageWidth>
+        <LeftMargin>0.4in</LeftMargin>
+        <RightMargin>0.4in</RightMargin>
+        <TopMargin>0.25in</TopMargin>
+        <BottomMargin>0.25in</BottomMargin>
+        <ColumnSpacing>0.13in</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="AnioInicial">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=Year(DateAdd("m", -13, Today()))</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Fecha Inicio: Año:</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>dsAnios</DataSetName>
+          <ValueField>ID_Anios_</ValueField>
+          <LabelField>ID_Anios_</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="MesInicial">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=Month(DateAdd("m", -13, Today()))</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Mes:</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>dsMeses</DataSetName>
+          <ValueField>ID_Mes_</ValueField>
+          <LabelField>ID_Periodo_Mensual_</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="AnioFinal">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=Year(DateAdd("m", -1, Today()))</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Fecha Fin: Año:</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>dsAnios</DataSetName>
+          <ValueField>ID_Anios_</ValueField>
+          <LabelField>ID_Anios_</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="MesFinal">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=Month(DateAdd("m", -1, Today()))</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Mes:</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>dsMeses</DataSetName>
+          <ValueField>ID_Mes_</ValueField>
+          <LabelField>ID_Periodo_Mensual_</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>2</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>AnioInicial</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>MesInicial</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>AnioFinal</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>MesFinal</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <EmbeddedImages>
+    <EmbeddedImage Name="AncapLogo">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <Language>es-UY</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+</Report>

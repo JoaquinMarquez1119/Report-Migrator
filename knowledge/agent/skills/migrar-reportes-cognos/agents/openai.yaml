@@ -1,0 +1,4 @@
+interface:
+  display_name: "Migrar Reportes Cognos"
+  short_description: "Migra reportes Cognos a RDL con fidelidad"
+  default_prompt: "Use $migrar-reportes-cognos para migrar este reporte de Cognos a Power BI Report Builder usando los artefactos del workspace."

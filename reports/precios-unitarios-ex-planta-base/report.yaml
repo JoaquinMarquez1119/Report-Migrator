@@ -1,0 +1,29 @@
+id: report-precios-unitarios-ex-planta-base
+name: Precios Unitarios Ex Planta
+slug: precios-unitarios-ex-planta-base
+status: done
+standalone: true
+source_of_truth:
+  layout: inputs/screenshots/report-reference
+  logic: inputs/queries
+  prompts: inputs/xml-spec/xml-spec-cognos.xml
+  validation: inputs/screenshots/report-builder-validation
+inputs:
+  xml_spec:
+    - inputs/xml-spec/xml-spec-cognos.xml
+  queries:
+    - inputs/queries
+  evidence:
+    - inputs/pdf/precios-unitarios-ex-planta.pdf
+    - inputs/notes
+    - inputs/screenshots
+  assets:
+    - inputs/assets/Ancap_logo_horizontal.jpg
+  mappings:
+    - inputs/mappings/cognos-to-powerbi-report-builder.md
+outputs:
+  rdl:
+    - Precios_unitarios_ex_planta_base.rdl
+  validation:
+    - validations/
+open_questions: []

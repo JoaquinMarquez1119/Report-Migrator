@@ -1,0 +1,864 @@
+<report xmlns="http://developer.cognos.com/schemas/report/15.3/" expressionLocale="es" useStyleVersion="10" viewPagesAsTabs="topLeft"><!--RSU-SPC-0093 La especificación de informe se ha actualizado de " http://developer.cognos.com/schemas/report/11.0/" a " http://developer.cognos.com/schemas/report/15.3/" en 2021- 6- 4.16:39:9-->
+				<modelPath>/content/package[@name='Datos Prioritarios']/model[@name='2026-03-11T17:23:38.107Z']</modelPath>
+				<drillBehavior/>
+				<layouts>
+					<layout>
+						<reportPages>
+							<page name="Resumen">
+								<style>
+									<defaultStyles>
+										<defaultStyle refStyle="pg"/>
+									</defaultStyles>
+								</style>
+								<pageBody>
+									<style>
+										<defaultStyles>
+											<defaultStyle refStyle="pb"/>
+										</defaultStyles>
+									<CSS value="text-align:center"/></style>
+									<contents><table><style><CSS value="border-collapse:collapse;width:100%;background-color:#153776;border-bottom:2.25pt solid rgb(255  , 199  , 40)"/><defaultStyles><defaultStyle refStyle="tb"/><defaultStyle refStyle="GuidedLayoutMargin"/></defaultStyles></style><tableRows><tableRow><tableCells><tableCell><contents><table><style><defaultStyles><defaultStyle refStyle="tb"/></defaultStyles><CSS value="border-collapse:collapse;width:100%"/></style><tableRows><tableRow><tableCells><tableCell><contents><textItem><dataSource><staticValue>Precios Unitarios Ex Planta</staticValue></dataSource><style><CSS value="color:white;font-weight:bold;font-size:16pt;font-family:Tahoma"/></style></textItem><table><style><defaultStyles><defaultStyle refStyle="tb"/></defaultStyles><CSS value="border-collapse:collapse;width:100%"/></style><tableRows><tableRow><tableCells><tableCell><contents/><style><CSS value="text-align:center"/></style></tableCell></tableCells></tableRow></tableRows></table><textItem><dataSource><reportExpression>case ParamDisplayValue('pProducto')
+when ('Asfalto AC-20') then ('Asfalto AC-30') 
+when ('Super 95 Sp') then ('Gasolina Super 95')
+when ('Premium 97 Sp') then ('Gasolina Premium 97')
+when ('Gasoil Comun') then ('Gasoil 50-S')
+when ('Gasoil Especial') then ('Gasoil 10-S')
+else (ParamDisplayValue('pProducto'))
+end</reportExpression></dataSource><style><CSS value="font-size:16pt;font-weight:bold;color:white"/></style></textItem><textItem><dataSource><staticValue> - </staticValue></dataSource><style><CSS value="font-size:12pt;font-weight:bold;color:white"/></style></textItem><textItem><dataSource><reportExpression>ParamDisplayValue('pAño')</reportExpression></dataSource><style><CSS value="font-size:16pt;font-weight:bold;color:white"/></style></textItem></contents><style><CSS value="padding:5px 3px 3px 3px;text-align:center;vertical-align:middle"/></style></tableCell></tableCells></tableRow></tableRows></table></contents><style><CSS value="height:60px;background-color:rgb(15  , 37  , 76);padding-left:10px;vertical-align:middle;text-align:center"/></style></tableCell><tableCell><contents><image>
+			<dataSource>
+				<staticValue>../samples/images/Ancap_logo_horizontal.JPG</staticValue>
+			</dataSource>
+		</image></contents><style><CSS value="text-align:right;width:150px;background-color:rgb(15  , 37  , 73);padding-right:10px"/></style></tableCell></tableCells></tableRow></tableRows></table><block>
+			<contents/>
+		<style><CSS value="height:30px"/><defaultStyles><defaultStyle refStyle="GuidedLayoutMargin"/></defaultStyles></style></block><conditionalBlocks>
+			<conditionalBlockDefault>
+				<contents/>
+			</conditionalBlockDefault>
+		<conditionalBlockCases refVariable="Unidad"><conditionalBlock refVariableValue="USD/m3"><contents><crosstab horizontalPagination="true" name="Tabla de referencias cruzadas1" refQuery="Consulta3USD" rowsPerPage="5000">
+			<crosstabCorner>
+				<contents/>
+				
+			<style><defaultStyles><defaultStyle refStyle="freezeCorner"/></defaultStyles><CSS value="text-align:center;background-color:white"/></style></crosstabCorner>
+			
+			
+			
+			<style>
+				<CSS value="border-collapse:collapse"/>
+				<defaultStyles>
+					<defaultStyle refStyle="xt"/>
+				</defaultStyles>
+			</style>
+		<crosstabFactCell><contents><textItem><dataSource><cellValue/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="mv"/></defaultStyles></style></crosstabFactCell><crosstabRows><crosstabNode><crosstabNodeMembers><crosstabNodeMember edgeLocation="e1" refDataItem="Fecha"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.5cm"/></style></textItem></contents><style><CSS value="padding:5px;background-color:rgb(220,220,220);font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><propertyList><propertyItem refDataItem="Filtro"/></propertyList><sortList><sortItem refDataItem="AñoMes"/></sortList></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabRows><crosstabColumns><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e18"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e3" refDataItem="Precio Público"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e19"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e4" refDataItem="Precio Exonerado"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e21"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e5" refDataItem="IVA"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e22"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e6" refDataItem="Precio sin IVA"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e23"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e7" refDataItem="IMESI"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e24"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e8" refDataItem="Cotización"><style><CSS value="padding:5px;background-color:#153767;color:white;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><dataItemLabel refDataItem="Cotización"/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e25"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e9" refDataItem="Precio sin impuesto"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e26"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e10" refDataItem="Margen y Bonificaciones"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e27"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e11" refDataItem="Tasa de Inflamable"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e28"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e12" refDataItem="Tasa de URSEA"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e33"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e13" refDataItem="Fideicomiso"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e32"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e14" refDataItem="Flete"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e31"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e15" refDataItem="Precio Ex Planta"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e30"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e16" refDataItem="Densidad"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades U$S" edgeLocation="e29"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e17" refDataItem="Demanda"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabColumns><crosstabIntersections><crosstabIntersection row="e1" column="e18"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e19"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e21"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e22"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e23"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e24"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e25"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e26"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e27"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalSize="2" decimalDelimiter="," useGrouping="true" groupDelimiter="." whenMissing="-" whenZero="-"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e28"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e33"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e32"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e31"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e30"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e29"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection></crosstabIntersections><crosstabSuppress/><noDataHandler><contents><block><contents><textItem><dataSource><staticValue/></dataSource></textItem></contents></block></contents></noDataHandler></crosstab></contents></conditionalBlock><conditionalBlock refVariableValue="$/lt ó $/kg según corresponda"><contents><crosstab horizontalPagination="true" name="Tabla de referencias cruzadas2" refQuery="Consulta3$" rowsPerPage="5000">
+			<crosstabCorner>
+				<contents/>
+				
+			<style><defaultStyles><defaultStyle refStyle="freezeCorner"/></defaultStyles><CSS value="text-align:center;background-color:white"/></style></crosstabCorner>
+			
+			
+			
+			<style>
+				<CSS value="border-collapse:collapse"/>
+				<defaultStyles>
+					<defaultStyle refStyle="xt"/>
+				</defaultStyles>
+			</style>
+		<crosstabFactCell><contents><textItem><dataSource><cellValue/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="mv"/></defaultStyles></style></crosstabFactCell><crosstabRows><crosstabNode><crosstabNodeMembers><crosstabNodeMember edgeLocation="e1" refDataItem="Fecha"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.5cm"/></style></textItem></contents><style><CSS value="padding:5px;background-color:rgb(220,220,220);font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><propertyList><propertyItem refDataItem="Filtro"/></propertyList><sortList><sortItem refDataItem="AñoMes"/></sortList></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabRows><crosstabColumns><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e18"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e3" refDataItem="Precio Público"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e19"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e4" refDataItem="Precio Exonerado"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e21"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e5" refDataItem="IVA"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e22"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e6" refDataItem="Precio sin IVA"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e23"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e7" refDataItem="IMESI"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e24"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e8" refDataItem="Cotización"><style><CSS value="padding:5px;background-color:#153767;color:white;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><dataItemLabel refDataItem="Cotización"/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e25"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e9" refDataItem="Precio sin impuesto"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e26"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e10" refDataItem="Margen y Bonificaciones"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e27"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e11" refDataItem="Tasa de Inflamable"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e28"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e12" refDataItem="Tasa de URSEA"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e29"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e13" refDataItem="Fideicomiso"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e30"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e14" refDataItem="Flete"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e31"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e15" refDataItem="Precio Ex Planta"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e32"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e16" refDataItem="Densidad"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Unidades $" edgeLocation="e33"><style><CSS value="padding:5px;background-color:silver;color:black;font-weight:bold;text-align:center;border:0.5pt solid gray"/><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember edgeLocation="e17" refDataItem="Demanda"><contents><textItem><dataSource><memberCaption/></dataSource><style><CSS value="width:1.75cm"/></style></textItem></contents><style><defaultStyles><defaultStyle refStyle="freezeColumns"/></defaultStyles><CSS value="padding:5px;background-color:#153767;font-weight:bold;color:white;text-align:center;border:0.5pt solid gray"/></style></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabColumns><crosstabIntersections><crosstabIntersection row="e1" column="e18"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e33"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e32"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e19"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e21"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e22"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e23"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e24"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e25"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e26"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e27"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalSize="2" decimalDelimiter="," useGrouping="true" groupDelimiter="." whenMissing="-" whenZero="-"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e28"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e31"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e30"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection><crosstabIntersection row="e1" column="e29"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection></crosstabIntersections><crosstabSuppress/><noDataHandler><contents><block><contents><textItem><dataSource><staticValue/></dataSource></textItem></contents></block></contents></noDataHandler></crosstab></contents><style><CSS value="overflow:auto"/></style></conditionalBlock></conditionalBlockCases></conditionalBlocks><conditionalBlocks>
+			<conditionalBlockDefault>
+				<contents/>
+			<style><CSS value="margin-top:10px"/></style></conditionalBlockDefault>
+		<conditionalBlockCases refVariable="Unidad"><conditionalBlock refVariableValue="USD/m3"><contents><crosstab horizontalPagination="true" name="Tabla de referencias cruzadas6" refQuery="Ex Planta Planilla FINAL con Densidad">
+			<crosstabCorner>
+				<contents><textItem><dataSource><staticValue>USD/m3</staticValue></dataSource></textItem></contents>
+				<style>
+					<defaultStyles>
+						<defaultStyle refStyle="xm"/>
+					</defaultStyles>
+				<CSS value="text-align:center;vertical-align:middle"/></style>
+			</crosstabCorner>
+			
+			
+			
+			<style>
+				<CSS value="border-collapse:collapse"/>
+				<defaultStyles>
+					<defaultStyle refStyle="xt"/>
+				</defaultStyles>
+			</style>
+		<crosstabColumns><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Concepto2" edgeLocation="e2"><style><CSS value="padding:5px;background-color:#153767;color:white;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><reportExpression>case [Ex Planta Planilla FINAL con Densidad].[Concepto2]
+when('PPI sin tasas e impuestos + Factor X') then('Precio Ex Planta (PEP)')
+when('PEP') then('Precio Ex Planta (PEP)')
+when('Factor X o factor de ajuste') then('Factor de ajuste')
+when('PPI sin tasas e impuestos') then('PEP calculado por URSEA (*)')
+when('Factor d para GLP Dec 205/023') then('Monto diferencial por zonas "d"')
+else [Ex Planta Planilla FINAL con Densidad].[Concepto2]
+end</reportExpression></dataSource></textItem></contents><sortList><sortItem refDataItem="Orden"/></sortList></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember refDataItem="Año" edgeLocation="e3"><style><defaultStyles><defaultStyle refStyle="ml"/></defaultStyles><CSS value="display:none"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabColumns><crosstabRows><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Dia" edgeLocation="e4"><style><CSS value="padding:5px;background-color:rgb(220,220,220);font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents><sortList><sortItem refDataItem="Fecha"/></sortList></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabRows><crosstabIntersections><crosstabIntersection row="e4" column="e2"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection></crosstabIntersections><defaultMeasure refDataItem="Valor USD/m3"/><crosstabFactCell><contents><textItem><dataSource><cellValue/></dataSource></textItem></contents><style><defaultStyles><defaultStyle refStyle="mv"/></defaultStyles></style></crosstabFactCell><crosstabSuppress/></crosstab></contents><style><CSS value="padding-top:20px"/></style></conditionalBlock><conditionalBlock refVariableValue="$/lt ó $/kg según corresponda"><contents><crosstab horizontalPagination="true" name="Tabla de referencias cruzadas9" refQuery="Ex Planta Planilla FINAL con Densidad">
+			<crosstabCorner>
+				<contents><singleton name="Singleton2" refQuery="Producto">
+			<contents><textItem><dataSource><dataItemValue refDataItem="Unidad2"/></dataSource></textItem></contents>
+		</singleton></contents>
+				<style>
+					<defaultStyles>
+						<defaultStyle refStyle="xm"/>
+					</defaultStyles>
+				<CSS value="text-align:center;vertical-align:middle"/></style>
+			</crosstabCorner>
+			
+			
+			
+			<style>
+				<CSS value="border-collapse:collapse"/>
+				<defaultStyles>
+					<defaultStyle refStyle="xt"/>
+				</defaultStyles>
+			</style>
+		<crosstabColumns><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Concepto2" edgeLocation="e2"><style><CSS value="padding:5px;background-color:#153767;color:white;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><reportExpression>case [Ex Planta Planilla FINAL con Densidad].[Concepto2]
+when('PPI sin tasas e impuestos + Factor X') then('Precio Ex Planta (PEP)')
+when('PEP') then('Precio Ex Planta (PEP)')
+when('Factor X o factor de ajuste') then('Factor de ajuste')
+when('PPI sin tasas e impuestos') then('PEP calculado por URSEA (*)')
+when('Factor d para GLP Dec 205/023') then('Monto diferencial por zonas "d"')
+else [Ex Planta Planilla FINAL con Densidad].[Concepto2]
+end</reportExpression></dataSource></textItem></contents><sortList><sortItem refDataItem="Orden"/></sortList></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember refDataItem="Año" edgeLocation="e3"><style><defaultStyles><defaultStyle refStyle="ml"/></defaultStyles><CSS value="display:none"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabColumns><crosstabRows><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Dia" edgeLocation="e4"><style><CSS value="padding:5px;background-color:rgb(220,220,220);font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents><sortList><sortItem refDataItem="Fecha"/></sortList></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabRows><crosstabIntersections><crosstabIntersection row="e4" column="e2"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/><dataFormat><numberFormat decimalDelimiter="," decimalSize="2" groupDelimiter="." useGrouping="true"/></dataFormat></style></crosstabIntersection></crosstabIntersections><defaultMeasure refDataItem="Valor"/><crosstabFactCell><contents><textItem><dataSource><cellValue/></dataSource></textItem></contents><style><defaultStyles><defaultStyle refStyle="mv"/></defaultStyles></style></crosstabFactCell><crosstabSuppress/></crosstab></contents><style><CSS value="padding-top:20px"/></style></conditionalBlock></conditionalBlockCases></conditionalBlocks><table><style><CSS value="border-collapse:collapse;width:100%;margin-top:20px"/><defaultStyles><defaultStyle refStyle="tb"/><defaultStyle refStyle="GuidedLayoutMargin"/></defaultStyles></style><tableRows><tableRow><tableCells><tableCell><contents><textItem><dataSource><staticValue>El 8/06/2021 el Poder Ejecutivo fijó el PVP de este producto en 81,44 $/kg. Este precio incluye un margen comercial que en los hechos no era percibido por ningún actor de la cadena. En el presente reporte el PVP se expone con ese precio para ser coincidente con lo fijado por PE, pero ANCAP facturó el producto al precio sin considerar ese margen. Esta situación se regularizó a partir del 1/05/2022 y desde esa fecha coinciden el PVP publicado por PE con el utilizado por ANCAP para la facturación y el detallado en este reporte. </staticValue></dataSource><conditionalStyleRefs><conditionalStyleRef refConditionalStyle="Butano"/></conditionalStyleRefs></textItem></contents><style><CSS value="text-align:left;vertical-align:top;width:50%"/></style></tableCell><tableCell><contents><list horizontalPagination="true" refQuery="Texto *" name="Lista1">
+			
+			
+			
+			
+			<style>
+				<CSS value="border-collapse:collapse"/>
+				<defaultStyles>
+					<defaultStyle refStyle="ls"/>
+				</defaultStyles>
+			</style>
+		<listColumns><listColumn><listColumnTitle><style><defaultStyles><defaultStyle refStyle="lt"/></defaultStyles><CSS value="display:none"/></style><contents><textItem><dataSource><dataItemLabel refDataItem="Producto"/></dataSource></textItem></contents></listColumnTitle><listColumnBody><style><defaultStyles><defaultStyle refStyle="lc"/></defaultStyles><CSS value="display:none"/></style><contents><textItem><dataSource><dataItemValue refDataItem="Producto"/></dataSource></textItem></contents></listColumnBody></listColumn><listColumn><listColumnTitle><style><defaultStyles><defaultStyle refStyle="lt"/></defaultStyles><CSS value="display:none"/></style><contents><textItem><dataSource><dataItemLabel refDataItem="Texto"/></dataSource></textItem></contents></listColumnTitle><listColumnBody><style><defaultStyles><defaultStyle refStyle="lm"/></defaultStyles><CSS value="border-top-style:none;border-right-style:none;border-bottom-style:none;border-left-style:none"/></style><contents><textItem><dataSource><dataItemValue refDataItem="Texto"/></dataSource></textItem></contents></listColumnBody></listColumn></listColumns><noDataHandler><contents><block><contents><textItem><dataSource><staticValue/></dataSource></textItem></contents></block></contents></noDataHandler></list></contents><style><CSS value="text-align:right;vertical-align:top;padding-top:20px;padding-right:30px;width:50%"/><defaultStyles><defaultStyle refStyle="GuidedLayoutLeftPadding"/></defaultStyles></style></tableCell></tableCells></tableRow></tableRows></table><block>
+			<contents><textItem><dataSource><staticValue>Referentes: Jefe Ventas Combustibles y Lubricantes</staticValue></dataSource></textItem></contents>
+		<style><CSS value="text-align:left;padding-top:20px;padding-left:20px"/></style></block></contents>
+								</pageBody>
+							</page>
+						<page name="Detalle">
+			<pageBody>
+				<contents><conditionalBlocks>
+			<conditionalBlockDefault>
+				<contents/>
+			</conditionalBlockDefault>
+		<conditionalBlockCases refVariable="Unidad"><conditionalBlock refVariableValue="USD/m3"><contents><crosstab horizontalPagination="true" name="Tabla de referencias cruzadas10" refQuery="Ex Planta Planilla Detalle FINAL con Densidad">
+			<crosstabCorner>
+				<contents><textItem><dataSource><staticValue>USD/m3</staticValue></dataSource></textItem></contents>
+				<style>
+					<defaultStyles>
+						<defaultStyle refStyle="xm"/>
+					</defaultStyles>
+				<CSS value="text-align:center;vertical-align:middle"/></style>
+			</crosstabCorner>
+			
+			
+			<noDataHandler>
+				<contents>
+					<block>
+						<contents>
+							<textItem>
+								<dataSource>
+									<staticValue>No hay datos disponibles</staticValue>
+								</dataSource>
+							</textItem>
+						</contents>
+						<style>
+							<CSS value="padding:16px;"/>
+						</style>
+					</block>
+				</contents>
+			</noDataHandler>
+			<style>
+				<CSS value="border-collapse:collapse"/>
+				<defaultStyles>
+					<defaultStyle refStyle="xt"/>
+				</defaultStyles>
+			</style>
+		<crosstabColumns><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Concepto2" edgeLocation="e2"><style><CSS value="padding:5px;background-color:#153767;color:white;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><reportExpression>case [Ex Planta Planilla Detalle FINAL con Densidad].[Concepto2]
+when('Margen de distribuidoras') then('Margen de distribución')
+when('Flete, de plantas a estaciones de servicio (mes n-2)') then('Flete')
+when('Compensación Con Fin Social (CFS)') then('Compensación Bonificación EESS con Fin Social (CFS)')
+when('Tasa IMM sobre CL dist primaria al interior (23,2% del total)') then('Tasa inflamable')
+when('Tasa URSEA etapa primaria') then('Tasa URSEA primaria')
+when('Fideicomiso Gasoil (dto. 347/006)') then('Fideicomiso Gasoil')
+when('PPI sin tasas e impuestos + Factor X') then('Precio Ex Planta (PEP)')
+when('PEP') then('Precio Ex Planta (PEP)')
+when('Factor X o factor de ajuste') then('Factor de ajuste')
+when('PPI sin tasas e impuestos') then('PEP calculado por URSEA (*)')
+when('Factor d para GLP Dec 205/023') then('Monto diferencial por zonas "d"')
+else [Ex Planta Planilla Detalle FINAL con Densidad].[Concepto2]
+end
+</reportExpression></dataSource></textItem></contents><sortList><sortItem refDataItem="Orden1"/></sortList><propertyList><propertyItem refDataItem="Decimales"/></propertyList></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember refDataItem="Año" edgeLocation="e3"><style><defaultStyles><defaultStyle refStyle="ml"/></defaultStyles><CSS value="display:none"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents><propertyList><propertyItem refDataItem="Decimales"/></propertyList></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabColumns><crosstabRows><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Dia" edgeLocation="e4"><style><CSS value="padding:5px;background-color:rgb(220,220,220);font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents><sortList><sortItem refDataItem="Fecha"/></sortList><propertyList><propertyItem refDataItem="Decimales"/></propertyList></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabRows><crosstabIntersections><crosstabIntersection row="e4" column="e2"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/></style><conditionalStyleRefs><conditionalStyleRef refConditionalStyle="Estilo condicional 2"/></conditionalStyleRefs></crosstabIntersection></crosstabIntersections><defaultMeasure refDataItem="Valor USD/m3"/><crosstabFactCell><contents><textItem><dataSource><cellValue/></dataSource></textItem></contents><style><defaultStyles><defaultStyle refStyle="mv"/></defaultStyles></style></crosstabFactCell><crosstabSuppress/></crosstab></contents></conditionalBlock><conditionalBlock refVariableValue="$/lt ó $/kg según corresponda"><contents><crosstab horizontalPagination="true" name="Tabla de referencias cruzadas11" refQuery="Ex Planta Planilla Detalle FINAL con Densidad">
+			<crosstabCorner>
+				<contents><singleton name="Singleton4" refQuery="Producto">
+			<contents><textItem><dataSource><dataItemValue refDataItem="Unidad2"/></dataSource></textItem></contents>
+		</singleton></contents>
+				<style>
+					<defaultStyles>
+						<defaultStyle refStyle="xm"/>
+					</defaultStyles>
+				<CSS value="text-align:center;vertical-align:middle"/></style>
+			</crosstabCorner>
+			
+			
+			<noDataHandler>
+				<contents>
+					<block>
+						<contents>
+							<textItem>
+								<dataSource>
+									<staticValue>No hay datos disponibles</staticValue>
+								</dataSource>
+							</textItem>
+						</contents>
+						<style>
+							<CSS value="padding:16px;"/>
+						</style>
+					</block>
+				</contents>
+			</noDataHandler>
+			<style>
+				<CSS value="border-collapse:collapse"/>
+				<defaultStyles>
+					<defaultStyle refStyle="xt"/>
+				</defaultStyles>
+			</style>
+		<crosstabColumns><crosstabNode><crosstabNestedNodes><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Concepto2" edgeLocation="e2"><style><CSS value="padding:5px;background-color:#153767;color:white;font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><reportExpression>case [Ex Planta Planilla Detalle FINAL con Densidad].[Concepto2]
+when('Margen de distribuidoras') then('Margen de distribución')
+when('Flete, de plantas a estaciones de servicio (mes n-2)') then('Flete')
+when('Compensación Con Fin Social (CFS)') then('Compensación Bonificación EESS con Fin Social (CFS)')
+when('Tasa IMM sobre CL dist primaria al interior (23,2% del total)') then('Tasa inflamable')
+when('Tasa URSEA etapa primaria') then('Tasa URSEA primaria')
+when('Fideicomiso Gasoil (dto. 347/006)') then('Fideicomiso Gasoil')
+when('PPI sin tasas e impuestos + Factor X') then('Precio Ex Planta (PEP)')
+when('PEP') then('Precio Ex Planta (PEP)')
+when('Factor X o factor de ajuste') then('Factor de ajuste')
+when('PPI sin tasas e impuestos') then('PEP calculado por URSEA (*)')
+when('Factor d para GLP Dec 205/023') then('Monto diferencial por zonas "d"')
+else [Ex Planta Planilla Detalle FINAL con Densidad].[Concepto2]
+end</reportExpression></dataSource></textItem></contents><sortList><sortItem refDataItem="Orden1"/></sortList><propertyList><propertyItem refDataItem="Decimales"/></propertyList></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabNestedNodes><crosstabNodeMembers><crosstabNodeMember refDataItem="Año" edgeLocation="e3"><style><defaultStyles><defaultStyle refStyle="ml"/></defaultStyles><CSS value="display:none"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents><propertyList><propertyItem refDataItem="Orden"/></propertyList></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabColumns><crosstabRows><crosstabNode><crosstabNodeMembers><crosstabNodeMember refDataItem="Dia" edgeLocation="e4"><style><CSS value="padding:5px;background-color:rgb(220,220,220);font-weight:bold;text-align:center;border:0.5pt solid gray"/></style><contents><textItem><dataSource><memberCaption/></dataSource></textItem></contents><sortList><sortItem refDataItem="Fecha"/></sortList></crosstabNodeMember></crosstabNodeMembers></crosstabNode></crosstabRows><crosstabIntersections><crosstabIntersection row="e4" column="e2"><style><CSS value="background-color:rgb(242,242,242);border:0.5pt solid gray"/></style><conditionalStyleRefs><conditionalStyleRef refConditionalStyle="Estilo condicional 2"/></conditionalStyleRefs></crosstabIntersection></crosstabIntersections><defaultMeasure refDataItem="Valor"/><crosstabFactCell><contents><textItem><dataSource><cellValue/></dataSource></textItem></contents><style><defaultStyles><defaultStyle refStyle="mv"/></defaultStyles></style></crosstabFactCell><crosstabSuppress/></crosstab></contents></conditionalBlock></conditionalBlockCases></conditionalBlocks><table><style><defaultStyles><defaultStyle refStyle="tb"/></defaultStyles><CSS value="border-collapse:collapse;width:100%;margin-top:20px"/></style><tableRows><tableRow><tableCells><tableCell><contents><textItem><dataSource><staticValue>El 8/06/2021 el Poder Ejecutivo fijó el PVP de este producto en 81,44 $/kg. Este precio incluye un margen comercial que en los hechos no era percibido por ningún actor de la cadena. En el presente reporte el PVP se expone con ese precio para ser coincidente con lo fijado por PE, pero ANCAP facturó el producto al precio sin considerar ese margen. Esta situación se regularizó a partir del 1/05/2022 y desde esa fecha coinciden el PVP publicado por PE con el utilizado por ANCAP para la facturación y el detallado en este reporte. </staticValue></dataSource><conditionalStyleRefs><conditionalStyleRef refConditionalStyle="Butano"/></conditionalStyleRefs></textItem></contents><style><CSS value="text-align:left;vertical-align:top;width:50%"/></style></tableCell><tableCell><contents><block>
+			<contents><list horizontalPagination="true" refQuery="Texto *" name="Lista2">
+			
+			
+			
+			
+			<style>
+				<CSS value="border-collapse:collapse"/>
+				<defaultStyles>
+					<defaultStyle refStyle="ls"/>
+				</defaultStyles>
+			</style>
+		<listColumns><listColumn><listColumnTitle><style><defaultStyles><defaultStyle refStyle="lt"/></defaultStyles><CSS value="display:none"/></style><contents><textItem><dataSource><dataItemLabel refDataItem="Producto"/></dataSource></textItem></contents></listColumnTitle><listColumnBody><style><defaultStyles><defaultStyle refStyle="lc"/></defaultStyles><CSS value="display:none"/></style><contents><textItem><dataSource><dataItemValue refDataItem="Producto"/></dataSource></textItem></contents></listColumnBody></listColumn><listColumn><listColumnTitle><style><defaultStyles><defaultStyle refStyle="lt"/></defaultStyles><CSS value="display:none"/></style><contents><textItem><dataSource><dataItemLabel refDataItem="Texto"/></dataSource></textItem></contents></listColumnTitle><listColumnBody><style><defaultStyles><defaultStyle refStyle="lm"/></defaultStyles><CSS value="border-top-style:none;border-right-style:none;border-bottom-style:none;border-left-style:none"/></style><contents><textItem><dataSource><dataItemValue refDataItem="Texto"/></dataSource></textItem></contents></listColumnBody></listColumn></listColumns><noDataHandler><contents><block><contents><textItem><dataSource><staticValue/></dataSource></textItem></contents></block></contents></noDataHandler></list></contents>
+		<style><CSS value="text-align:right;padding-top:20px;padding-right:30px"/></style></block></contents><style><CSS value="text-align:right;vertical-align:top;padding-top:20px;padding-right:30px;width:50%"/><defaultStyles><defaultStyle refStyle="GuidedLayoutLeftPadding"/></defaultStyles></style></tableCell></tableCells></tableRow></tableRows></table><block>
+			<contents><textItem><dataSource><staticValue>Referentes: Jefe Ventas Combustibles y Lubricantes</staticValue></dataSource></textItem></contents>
+		<style><CSS value="text-align:left;padding-top:20px;padding-left:20px"/></style></block></contents>
+				<style>
+					<defaultStyles>
+						<defaultStyle refStyle="pb"/>
+					</defaultStyles>
+				<CSS value="text-align:center"/></style>
+			</pageBody>
+			<style>
+				<defaultStyles>
+					<defaultStyle refStyle="pg"/>
+				</defaultStyles>
+			</style>
+		<pageHeader><contents><table><style><CSS value="border-collapse:collapse;width:100%;background-color:#153776;border-bottom:2.25pt solid rgb(255  , 199  , 40)"/><defaultStyles><defaultStyle refStyle="tb"/><defaultStyle refStyle="GuidedLayoutMargin"/></defaultStyles></style><tableRows><tableRow><tableCells><tableCell><contents><table><style><defaultStyles><defaultStyle refStyle="tb"/></defaultStyles><CSS value="border-collapse:collapse;width:100%"/></style><tableRows><tableRow><tableCells><tableCell><contents><textItem><dataSource><staticValue>Precios Unitarios Ex Planta</staticValue></dataSource><style><CSS value="color:white;font-weight:bold;font-size:16pt;font-family:Tahoma"/></style></textItem><table><style><defaultStyles><defaultStyle refStyle="tb"/></defaultStyles><CSS value="border-collapse:collapse;width:100%"/></style><tableRows><tableRow><tableCells><tableCell><contents/><style><CSS value="text-align:center"/></style></tableCell></tableCells></tableRow></tableRows></table><textItem><dataSource><reportExpression>case ParamDisplayValue('pProducto')
+when ('Asfalto AC-20') then ('Asfalto AC-30') 
+when ('Super 95 Sp') then ('Gasolina Super 95')
+when ('Premium 97 Sp') then ('Gasolina Premium 97')
+when ('Gasoil Comun') then ('Gasoil 50-S')
+when ('Gasoil Especial') then ('Gasoil 10-S')
+else (ParamDisplayValue('pProducto'))
+end</reportExpression></dataSource><style><CSS value="font-size:16pt;font-weight:bold;color:white"/></style></textItem><textItem><dataSource><staticValue> - </staticValue></dataSource><style><CSS value="font-size:12pt;font-weight:bold;color:white"/></style></textItem><textItem><dataSource><reportExpression>ParamDisplayValue('pAño')</reportExpression></dataSource><style><CSS value="font-size:16pt;font-weight:bold;color:white"/></style></textItem></contents><style><CSS value="padding:5px 3px 3px 3px;text-align:center;vertical-align:middle"/></style></tableCell></tableCells></tableRow></tableRows></table></contents><style><CSS value="height:60px;background-color:rgb(15  , 37  , 76);padding-left:10px;vertical-align:middle;text-align:center"/></style></tableCell><tableCell><contents><image>
+			<dataSource>
+				<staticValue>../samples/images/Ancap_logo_horizontal.JPG</staticValue>
+			</dataSource>
+		</image></contents><style><CSS value="text-align:right;width:150px;background-color:rgb(15  , 37  , 73);padding-right:10px"/></style></tableCell></tableCells></tableRow></tableRows></table></contents></pageHeader><pageFooter><contents/></pageFooter></page></reportPages>
+					<promptPages><page name="Página de solicitud1">
+			<pageHeader>
+				<contents>
+					<block>
+						<contents>
+							<textItem>
+								<dataSource>
+									<staticValue/>
+								</dataSource>
+								<style>
+									<defaultStyles>
+										<defaultStyle refStyle="tt"/>
+									</defaultStyles>
+								</style>
+							</textItem>
+						</contents>
+						<style>
+							<defaultStyles>
+								<defaultStyle refStyle="ta"/>
+							</defaultStyles>
+						</style>
+					</block>
+				</contents>
+				<style>
+					<defaultStyles>
+						<defaultStyle refStyle="hp"/>
+					</defaultStyles>
+				</style>
+			</pageHeader>
+			<pageBody>
+				<contents><selectValue parameter="pAño" refQuery="pAño"><useItem refDataItem="Año nombre1"/></selectValue><selectValue parameter="pProducto" refQuery="Consulta2"><useItem refDataItem="Productos_ExPlanta1"/></selectValue></contents>
+				<style>
+					<defaultStyles>
+						<defaultStyle refStyle="py"/>
+					</defaultStyles>
+				</style>
+			</pageBody>
+			<pageFooter>
+				<contents>
+					<promptButton type="cancel">
+						<contents/>
+						<style>
+							<defaultStyles>
+								<defaultStyle refStyle="bp"/>
+							</defaultStyles>
+						</style>
+					</promptButton>
+					<promptButton type="back">
+						<contents/>
+						<style>
+							<defaultStyles>
+								<defaultStyle refStyle="bp"/>
+							</defaultStyles>
+						</style>
+					</promptButton>
+					<promptButton type="next">
+						<contents/>
+						<style>
+							<defaultStyles>
+								<defaultStyle refStyle="bp"/>
+							</defaultStyles>
+						</style>
+					</promptButton>
+					<promptButton type="finish">
+						<contents/>
+						<style>
+							<defaultStyles>
+								<defaultStyle refStyle="bp"/>
+							</defaultStyles>
+						</style>
+					</promptButton>
+				</contents>
+				<style>
+					<defaultStyles>
+						<defaultStyle refStyle="fp"/>
+					</defaultStyles>
+				</style>
+			</pageFooter>
+			<style>
+				<defaultStyles>
+					<defaultStyle refStyle="pp"/>
+				</defaultStyles>
+			</style>
+		</page></promptPages></layout>
+				</layouts>
+			<XMLAttributes><XMLAttribute name="RS_CreateExtendedDataItems" output="no" value="true"/><XMLAttribute name="listSeparator" output="no" value=";"/><XMLAttribute output="no" name="decimalSeparator" value=","/><XMLAttribute output="no" name="RS_modelModificationTime" value="2026-03-11T17:23:38.530Z"/></XMLAttributes><classStyles><classStyle label="freezeRows" name="freezeRows"/><classStyle label="freezeCorner" name="freezeCorner"/><classStyle label="freezeColumns" name="freezeColumns"/><classStyle name="GuidedLayoutLeftPadding"><CSS value="padding-left:5px;border-top-width:1px;border-bottom-width:1px;border-left-width:1px;border-right-width:1px"/></classStyle><classStyle name="GuidedLayoutTopPadding"><CSS value="padding-top:5px;border-top-width:1px;border-bottom-width:1px;border-left-width:1px;border-right-width:1px"/></classStyle><classStyle name="GuidedLayoutRightPadding"><CSS value="padding-right:5px;border-top-width:1px;border-bottom-width:1px;border-left-width:1px;border-right-width:1px"/></classStyle><classStyle name="GuidedLayoutBottomPadding"><CSS value="padding-bottom:5px;border-top-width:1px;border-bottom-width:1px;border-left-width:1px;border-right-width:1px"/></classStyle><classStyle name="GuidedLayoutMargin"><CSS value="margin-bottom:10px"/></classStyle></classStyles><reportName>Precios Unitarios Ex Planta - detalle</reportName><queries><query name="pAño">
+			<source>
+				<model/>
+			</source>
+			<selection><dataItem aggregate="none" rollupAggregate="none" name="Años"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Años]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Año nombre1"><expression>cast([Años];integer)</expression></dataItem></selection>
+		</query><query name="Consulta3$">
+			<source>
+				<model/>
+			</source>
+			<selection><dataItem aggregate="none" rollupAggregate="none" name="Productos"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Productos_ExPlanta]='GLP') then('Supergas') else([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Productos_ExPlanta])</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Años"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Años]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Periodo_Mensual"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Periodo_Mensual]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Fecha"><expression>[Dia]+''</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Mes Número"><expression>case [Periodo_Mensual]
+when('Ene') then(1)
+when('Feb') then(2)
+when('Mar') then(3)
+when('Abr') then(4)
+when('May') then(5)
+when('Jun') then(6)
+when('Jul') then(7)
+when('Ago') then(8)
+when('Sep') then(9)
+when('Oct') then(10)
+when('Nov') then(11)
+when('Dic') then(12)
+end
+</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="2"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Mercados"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Mercados]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Unidades $"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Unidades] in ('$/ton';'$/m3';'$/litro';'$/kg';'N/A')) then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Unidades]) else(null)</expression></dataItem><dataItem name="Unidades U$S"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Unidades] in ('U$S/m3';'U$S/ton';'N/A')) then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Unidades]) else(null)</expression></dataItem><dataItem name="children([Unidades])1"><expression>if(?pUnidad?='USD/m3') then(1) else(0)</expression></dataItem><dataItem name="Precio Público"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Precio Público') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Precio Exonerado"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Precio Exonerado') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="IVA"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='IVA') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Precio sin IVA"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Precio sin IVA') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="IMESI"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='IMESI') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)
+</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Cotización Dólar Promedio"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Cotización Promedio') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Cotización"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Cotización') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Precio sin impuesto"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Precio sin impuesto') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Margen y Bonificaciones"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Margen y Bonificaciones') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Tasa de Inflamable"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Tasa de Inflamable') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Tasa de URSEA"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Tasa de URSEA') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Fideicomiso"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Fideicomiso') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Flete"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Flete') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Precio Ex Planta"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Precio Ex Planta') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Densidad"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Densidad') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Demanda"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Demanda') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="U$S/m3 P pub"><expression>[Precio Público]/[Cotización Dólar Promedio]</expression></dataItem><dataItem name="U$S/m3 ex"><expression>[Precio Exonerado]/[Cotización Dólar Promedio]</expression></dataItem><dataItem name="U$S/m3 s/iva"><expression>[Precio sin IVA]/[Cotización Dólar Promedio]</expression></dataItem><dataItem name="Cantidad_Dias" aggregate="none" rollupAggregate="none"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Cantidad_Dias]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem name="Dia"><expression>If ([Años]= extract(year;current_date)  AND [Mes Número]= extract(month;current_date) )
+then ( cast(extract(day;current_date);varchar(2)) +'-'+[Periodo_Mensual])
+else ( cast([Cantidad_Dias];varchar(2))+'-'+[Periodo_Mensual])
+</expression></dataItem><dataItem name="Filtro"><expression>case 
+when([Años]= extract(year;current_date) and [Mes Número] = extract(month;current_date)) then (0)
+else (1)
+end</expression></dataItem><dataItem name="AñoMes"><expression>cast([Años];integer)*100+[Mes Número]</expression></dataItem><dataItem name="Filtro ProdMes"><expression>case
+when(?pProducto? in ('Queroseno Montevideo';'Queroseno Interior') and [AñoMes]&gt;202107) then(0)  
+when(?pProducto? not in ('Asfalto 150/200';'Asfalto AC-20';'Asfalto MC1';'Asfalto RC2';'Propano Industrial';'Propano Redes';'Supergas';'Supergas A Granel';'Queroseno Montevideo';'Queroseno Interior') and [AñoMes]&gt;202106) then(0) 
+when(?pProducto? in ('Propano Industrial';'Propano Redes';'Supergas';'Supergas A Granel') and [AñoMes]&gt;202306) then(0) 
+else(1)
+end</expression></dataItem></selection>
+		<detailFilters><detailFilter><filterExpression>[Mercados]='Interno'</filterExpression></detailFilter><detailFilter><filterExpression>[Años]=?pAño?</filterExpression></detailFilter><detailFilter><filterExpression>[Filtro] = 1</filterExpression></detailFilter><detailFilter><filterExpression>[Filtro ProdMes]=1</filterExpression></detailFilter><detailFilter><filterExpression>[Productos]=?pProducto?</filterExpression></detailFilter><detailFilter><filterExpression>[Unidades $] is not null</filterExpression></detailFilter></detailFilters></query><query name="Consulta3USD">
+			<source>
+				<model/>
+			</source>
+			<selection><dataItem aggregate="none" rollupAggregate="none" name="Productos"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Productos_ExPlanta]='GLP') 
+	then('Supergas')
+	else([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Productos_ExPlanta])
+	</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Años"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Años]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Periodo_Mensual"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Periodo_Mensual]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Fecha"><expression>[Dia]+''</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Mes Número"><expression>case [Periodo_Mensual]
+when('Ene') then(1)
+when('Feb') then(2)
+when('Mar') then(3)
+when('Abr') then(4)
+when('May') then(5)
+when('Jun') then(6)
+when('Jul') then(7)
+when('Ago') then(8)
+when('Sep') then(9)
+when('Oct') then(10)
+when('Nov') then(11)
+when('Dic') then(12)
+end
+</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="2"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Mercados"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Mercados]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Unidades $"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Unidades] in ('$/ton';'$/m3';'$/litro';'$/kg';'N/A')) then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Unidades]) else(null)</expression></dataItem><dataItem name="Unidades U$S"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Unidades] in ('U$S/m3';'U$S/ton';'N/A')) then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Unidades]) else(null)</expression></dataItem><dataItem name="children([Unidades])1"><expression>if(?pUnidad?='USD/m3') then(1) else(0)</expression></dataItem><dataItem name="Precio Público"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Precio Público') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Precio Exonerado"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Precio Exonerado') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="IVA"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='IVA') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Precio sin IVA"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Precio sin IVA') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="IMESI"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='IMESI') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)
+</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Cotización Dólar Promedio"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Cotización Promedio') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Cotización"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Cotización') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Precio sin impuesto"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Precio sin impuesto') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Margen y Bonificaciones"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Margen y Bonificaciones') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Tasa de Inflamable"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Tasa de Inflamable') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Tasa de URSEA"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Tasa de URSEA') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Fideicomiso"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Fideicomiso') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Flete"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Flete') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Precio Ex Planta"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Precio Ex Planta') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Densidad"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Densidad') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Demanda"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Demanda') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="U$S/m3 P pub"><expression>[Precio Público]/[Cotización Dólar Promedio]</expression></dataItem><dataItem name="U$S/m3 ex"><expression>[Precio Exonerado]/[Cotización Dólar Promedio]</expression></dataItem><dataItem name="U$S/m3 s/iva"><expression>[Precio sin IVA]/[Cotización Dólar Promedio]</expression></dataItem><dataItem name="Cantidad_Dias" aggregate="none" rollupAggregate="none"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Cantidad_Dias]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem name="Dia"><expression>If ([Años]= extract(year;current_date)  AND [Mes Número]= extract(month;current_date) )
+then ( cast(extract(day;current_date);varchar(2)) +'-'+[Periodo_Mensual])
+else ( cast([Cantidad_Dias];varchar(2))+'-'+[Periodo_Mensual])
+</expression></dataItem><dataItem name="Filtro"><expression>case 
+when([Años]= extract(year;current_date) and [Mes Número] = extract(month;current_date)) then (0)
+else (1)
+end</expression></dataItem><dataItem name="AñoMes"><expression>cast([Años];integer)*100+[Mes Número]</expression></dataItem><dataItem name="Filtro ProdMes"><expression>case
+when(?pProducto? in ('Queroseno Montevideo';'Queroseno Interior') and [AñoMes]&gt;202107) then(0)  
+when(?pProducto? not in ('Asfalto 150/200';'Asfalto AC-20';'Asfalto MC1';'Asfalto RC2';'Propano Industrial';'Propano Redes';'Supergas';'Supergas A Granel';'Queroseno Montevideo';'Queroseno Interior') and [AñoMes]&gt;202106) then(0)
+when(?pProducto? in ('Propano Industrial';'Propano Redes';'Supergas';'Supergas A Granel') and [AñoMes]&gt;202306) then(0) 
+else(1)
+end</expression></dataItem></selection>
+		<detailFilters><detailFilter><filterExpression>[Mercados]='Interno'</filterExpression></detailFilter><detailFilter><filterExpression>[Años]=?pAño?</filterExpression></detailFilter><detailFilter><filterExpression>[Filtro] = 1</filterExpression></detailFilter><detailFilter><filterExpression>[Filtro ProdMes]=1</filterExpression></detailFilter><detailFilter><filterExpression>[Productos]=?pProducto?</filterExpression></detailFilter><detailFilter use="prohibited"><filterExpression>[Productos] not in ('Supergas';'Supergas A Granel';'Propano Industrial';'Propano Redes')</filterExpression></detailFilter><detailFilter><filterExpression>[Unidades U$S] is not null</filterExpression></detailFilter></detailFilters></query><query name="Consulta2">
+			<source>
+				<model/>
+			</source>
+			<selection><dataItem aggregate="none" rollupAggregate="none" name="Productos_ExPlanta1"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Productos_ExPlanta]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem></selection>
+		</query><query name="Producto">
+			<source>
+				<model/>
+			</source>
+			<selection><dataItem aggregate="none" rollupAggregate="none" name="Producto"><expression>case [Datos Prioritarios].[Precios_Ex_Planta].[Producto]
+when('GLP') then('Supergas')
+when('Propano Industrial') then('Propano')
+when('Supergas A Granel') then('Propano')
+else [Datos Prioritarios].[Precios_Ex_Planta].[Producto]
+end
+</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Unidad2"><expression>case [Producto]
+when('GLP') then('$/kg')
+when('Propano') then('$/kg')
+when('Supergas') then('$/kg')
+when('Supergas A Granel') then('$/kg')
+when('Propano Industrial') then('$/kg')
+when('Propano Redes') then('$/kg')
+when('Asfalto AC-20') then('$/kg')
+when('Asfalto 150/200') then('$/kg')
+when('Asfalto MC1') then('$/kg')
+when('Asfalto RC2') then('$/kg')
+when('Butano Desodorizado') then('$/kg')
+else('$/lt')
+end</expression></dataItem><dataItem name="Parametro"><expression>case ?pProducto?
+when('Supergas A Granel') then('Propano')
+when('Propano Industrial') then('Propano')
+when('GLP') then('Supergas')
+else ?pProducto?
+end
+</expression></dataItem></selection>
+		<detailFilters><detailFilter><filterExpression>cast([Producto];varchar(20))=[Parametro]</filterExpression></detailFilter><detailFilter use="prohibited"><filterExpression>cast([Producto];varchar(20))=?pProducto?</filterExpression></detailFilter></detailFilters></query><query name="Texto *">
+			<source>
+				<model/>
+			</source>
+			<selection><dataItem aggregate="none" rollupAggregate="none" name="Producto"><expression>[Datos Prioritarios].[Precios_Ex_Planta].[Producto]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Texto"><expression>if([Producto] in ('Queroseno Montevideo';'Queroseno Interior';'Gasolina Av 100 Octanos';'Jet A1';'Supergas A Granel';'Supergas';'Propano Industrial';'Propano Redes';'Butano Desodorizado';'Solvente 1197';'Disan';'Base insecticida';'Asfalto AC-30';'Asfalto 150/200';'Asfalto MC1';'Asfalto RC2';'Aguarras';'Querosol';'Hexano Comercial')) then('') else('(*) Equivale al precio del Subtotal 3 del Informe URSEA')
+
+</expression></dataItem></selection>
+		<detailFilters><detailFilter><filterExpression>cast([Producto];varchar(20))=?pProducto?</filterExpression></detailFilter></detailFilters></query><query name="Cotizaciones">
+			<source>
+				<model/>
+			</source>
+			<selection><dataItem aggregate="none" rollupAggregate="none" name="Años"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Años]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Periodo_Mensual"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Periodo_Mensual]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Mes Número"><expression>case [Periodo_Mensual]
+when('Ene') then(1)
+when('Feb') then(2)
+when('Mar') then(3)
+when('Abr') then(4)
+when('May') then(5)
+when('Jun') then(6)
+when('Jul') then(7)
+when('Ago') then(8)
+when('Sep') then(9)
+when('Oct') then(10)
+when('Nov') then(11)
+when('Dic') then(12)
+end
+</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="2"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Valor" aggregate="none" rollupAggregate="none"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem name="Cantidad_Dias" aggregate="none" rollupAggregate="none"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Cantidad_Dias]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Medidas_ExPlanta"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="N/A;N/A;N/A;Cotización" aggregate="none" rollupAggregate="none"><expression>if([Medidas_ExPlanta]='Cotización') then([Valor]) else(0)</expression></dataItem><dataItem name="Fecha"><expression>_make_timestamp([Años];[Mes Número];1)
+</expression></dataItem><dataItem name="Dia"><expression>If ([Años]= extract(year;current_date)  AND [Mes Número]= extract(month;current_date) )
+then ( cast(extract(day;current_date);varchar(2)) +'-'+[Periodo_Mensual])
+else ( cast([Cantidad_Dias];varchar(2))+'-'+[Periodo_Mensual])
+</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Productos_ExPlanta"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Productos_ExPlanta]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem></selection>
+		<detailFilters><detailFilter><filterExpression>[Años]=?pAño?</filterExpression></detailFilter><detailFilter><filterExpression>[N/A;N/A;N/A;Cotización]&lt;&gt;0</filterExpression></detailFilter><detailFilter><filterExpression>[Periodo_Mensual]&lt;&gt;'Base'</filterExpression></detailFilter></detailFilters></query><query name="Cotizaciones FORMATO">
+			<source>
+				
+			<queryRef refQuery="Cotizaciones"/></source>
+			<selection><dataItem name="Año"><expression>[Cotizaciones].[Años]</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Fecha"><expression>[Cotizaciones].[Fecha]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="4"/><XMLAttribute output="no" name="RS_dataUsage" value="1"/></XMLAttributes></dataItem><dataItem name="Dia"><expression>[Cotizaciones].[Dia]</expression></dataItem><dataItem name="Concepto2"><expression>''</expression></dataItem><dataItem name="TC"><expression>if([Cotizaciones].[Años]&lt;2022) then(0) else([Cotizaciones].[N/A;N/A;N/A;Cotización])</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem name="Valor"><expression>0</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem name="Valor USD/m3"><expression>0</expression></dataItem><dataItem name="Orden"><expression>0</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Productos_ExPlanta"><expression>[Cotizaciones].[Productos_ExPlanta]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem></selection>
+		</query><query name="Ex Planta Planilla">
+			<source>
+				<model/>
+			</source>
+			<selection><dataItem aggregate="none" rollupAggregate="none" name="Fecha"><expression>[Datos Prioritarios].[Precios_Ex_Planta].[Fecha]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="4"/><XMLAttribute output="no" name="RS_dataUsage" value="1"/></XMLAttributes></dataItem><dataItem name="Año"><expression>cast(extract(year;[Fecha]);integer)</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Concepto"><expression>[Datos Prioritarios].[Precios_Ex_Planta].[Concepto]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Concepto2"><expression>if([Producto] in ('Premium 97 Sp';'Super 95 Sp';'Gasoil Comun';'Gasoil Especial';'Fuel Oil Pesado';'Fuel Oil Medio';'Queroseno Montevideo';'Queroseno Interior') and [Concepto]='PPI sin tasas e impuestos + Factor X') then('Precio Ex Planta (PEP)') else(
+if([Producto] not in ('Premium 97 Sp';'Super 95 Sp';'Gasoil Comun';'Gasoil Especial';'Fuel Oil Pesado';'Fuel Oil Medio') and [Concepto]='PPI sin tasas e impuestos + Factor X') then('Precio Ex Planta (PEP)')
+else([Concepto])
+)</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="EncabezadosenDatosPrioritarios"><expression>[Datos Prioritarios].[Precios_Ex_Planta].[EncabezadosenDatosPrioritarios]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Producto"><expression>if([Datos Prioritarios].[Precios_Ex_Planta].[Producto]='GLP') 
+	then('Supergas') 
+	else(
+		if(?pProducto?='Supergas A Granel' and [Datos Prioritarios].[Precios_Ex_Planta].[Producto]='Propano')
+			then('Supergas A Granel')
+			else(
+				if(?pProducto?='Propano Industrial' and [Datos Prioritarios].[Precios_Ex_Planta].[Producto]='Propano')
+				then('Propano Industrial')
+				else([Datos Prioritarios].[Precios_Ex_Planta].[Producto])
+			)
+	)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem aggregate="total" name="TC"><expression>[Datos Prioritarios].[Precios_Ex_Planta].[TC]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem aggregate="total" name="Valor"><expression>[Datos Prioritarios].[Precios_Ex_Planta].[Valor]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem name="Valor USD/m3" aggregate="total"><expression>[Datos Prioritarios].[Precios_Ex_Planta].[Valor]</expression></dataItem><dataItem name="Mes Número"><expression>extract(month;[Datos Prioritarios].[Precios_Ex_Planta].[Fecha])</expression></dataItem><dataItem name="Mes numero"><expression>cast([Mes Número];integer)</expression></dataItem><dataItem name="Periodo_Mensual"><expression>case extract(month;[Datos Prioritarios].[Precios_Ex_Planta].[Fecha])
+when(1) then('Ene')
+when(2) then('Feb')
+when(3) then('Mar')
+when(4) then('Abr')
+when(5) then('May')
+when(6) then('Jun')
+when(7) then('Jul')
+when(8) then('Ago')
+when(9) then('Set')
+when(10) then('Oct')
+when(11) then('Nov')
+when(12) then('Dic')
+end
+</expression></dataItem><dataItem name="Cantidad dias"><expression>extract(day;_last_of_month ([Fecha]))</expression></dataItem><dataItem name="Dia"><expression>If ([Año]= extract(year;current_date)  AND [Mes numero]= extract(month;current_date) )
+then ( cast(extract(day;current_date);varchar(2)) +'-'+[Periodo_Mensual] )
+else ( cast([Cantidad dias];varchar(2))+'-'+[Periodo_Mensual] )
+</expression></dataItem><dataItem name="Filtro QInterior"><expression>if([Producto] in ('Queroseno Interior') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Precio Intermedio Transitorio (PIT) (impuestos incluidos)';'Precio Ex Planta (PEP) (impuestos incluidos)';'Precio Ex Planta (PEP) sin flete secundario (impuestos incluidos)';'Precio Ex Planta (PEP)')) then(1) else(0)</expression></dataItem><dataItem name="Filtro QMontevideo"><expression>if([Producto] in ('Queroseno Montevideo') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Precio Intermedio Transitorio (PIT) (impuestos incluidos)';'Precio Ex Planta (PEP) (impuestos incluidos)';'Precio Ex Planta (PEP)')) then(1) else(0)</expression></dataItem><dataItem name="Filtro Butano"><expression>if([Producto] in ('Butano Desodorizado') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Precio Ex Planta (PEP) sin flete secundario (impuestos incluidos)';'Precio Ex Planta (PEP)')) then(1) else(0)</expression></dataItem><dataItem name="Filtro Ultimos"><expression>if([Producto] in ('Aguarras';'Gasolina Av 100 Octanos';'Gasolina Av 100 Octanos(Estado)';'Gasolina Av 100 Octanos(Particular)';'Jet A1';'Solvente 1197';'Disan';'Base insecticida';'Querosol';'Queroseno Montevideo';'Queroseno Interior';'Hexano Comercial') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Precio Ex Planta (PEP) (impuestos incluidos)';'Precio Ex Planta (PEP)')) then(1) else(0)</expression></dataItem><dataItem name="Filtro FO"><expression>if([Producto] in ('Fuel Oil Medio';'Fuel Oil Pesado') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Precio Ex Planta (PEP) (impuestos incluidos)';'Precio Ex Planta (PEP)';'Factor X o factor de ajuste';'PPI sin tasas e impuestos';'PPI n-1 Periodo URSEA';'PPI n-2 Periodo URSEA')) then(1) else(0)</expression></dataItem><dataItem name="Filtro Supergas"><expression>if([Producto] in ('Supergas') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Precio Intermedio Transitorio (PIT) (impuestos incluidos)';'Precio Ex Planta (PEP) (impuestos incluidos)';'PEP';'Factor X o factor de ajuste';'PPI sin tasas e impuestos';'Factor d para GLP Dec 205/023';'PPI n-1 Periodo URSEA';'PPI n-2 Periodo URSEA')) then(1) else(0)
+
+</expression></dataItem><dataItem name="Filtro Propano"><expression>if([Producto] in ('Propano';'Supergas A Granel';'Propano Industrial') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Precio Ex Planta (PEP) (impuestos incluidos)';'Precio Ex Planta (PEP)';'Factor X o factor de ajuste';'PPI sin tasas e impuestos';'PPI n-1 Periodo URSEA';'PPI n-2 Periodo URSEA')) then(1) else(0)</expression></dataItem><dataItem name="Filtro"><expression>if([Producto] in ('Queroseno Montevideo')) then([Filtro QMontevideo]) 
+else(
+
+if([Producto] in ('Queroseno Interior')) then([Filtro QInterior]) 
+else(
+
+if([Producto] in ('Fuel Oil Medio';'Fuel Oil Pesado')) then([Filtro FO]) 
+else(
+
+if([Producto] in ('Butano Desodorizado')) then([Filtro Butano])
+else(
+
+
+if([Producto] in ('Supergas')) then([Filtro Supergas])
+else(
+
+if([Producto] in ('Propano';'Supergas A Granel';'Propano Industrial')) then([Filtro Propano])
+else(
+
+if([Producto] in ('Aguarras';'Gasolina Av 100 Octa';'Gasolina Av 100 Octanos';'Gasolina Av 100 Octanos(Estado)';'Gasolina Av 100 Octanos(Particular)';'Jet A1';'Solvente 1197';'Disan';'Base insecticida';'Querosol';'Hexano Comercial')) 
+
+then([Filtro Ultimos]) 
+else(
+if([Producto] in ('Super 95 Sp';'Gasoil Comun';'Gasoil Especial';'Premium 97 Sp')
+) 
+then(1) else(0)
+
+)
+)
+)
+)
+)
+)
+)</expression></dataItem><dataItem name="Unidad"><expression>?pUnidad?</expression></dataItem><dataItem name="Orden"><expression>case [Concepto2]
+when('Precio de Venta al Público (PVP) (impuestos incluidos)') then(1)
+when('Precio Intermedio Transitorio (PIT) (impuestos incluidos)') then(2)
+when('Precio Ex Planta (PEP) (impuestos incluidos)') then(3)
+when('Precio Ex Planta (PEP) sin flete secundario (impuestos incluidos)') then(4)
+when('PPI sin tasas e impuestos + Factor X') then(5)
+when('Precio Ex Planta (PEP)') then(6)
+when('PEP') then(6)
+when('Precio ex planta (netback PVP)') then(6)
+when('Factor X o factor de ajuste') then(7)
+when('PPI sin tasas e impuestos') then(8)
+when('Monto diferencial por zonas "d"') then(9)
+when('PPI n-1 Periodo URSEA') then(10)
+when('PPI n-2 Periodo URSEA') then(11)
+else 9
+end</expression></dataItem><dataItem name="Unidad2"><expression>case [Producto]
+when('Supergas') then('$/kg')
+when('Supergas A Granel') then('$/kg')
+when('Propano Industrial') then('$/kg')
+when('Propano Redes') then('$/kg')
+when('Asfalto AC-20') then('$/kg')
+when('Asfalto 150/200') then('$/kg')
+when('Asfalto MC1') then('$/kg')
+when('Asfalto RC2') then('$/kg')
+when('Butano Desodorizado') then('$/kg')
+else('$/lt')
+end</expression></dataItem><dataItem aggregate="total" name="Nueva Cotizacion"><expression>0</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem></selection>
+		<detailFilters><detailFilter><filterExpression>cast([Producto];varchar(50))=?pProducto?</filterExpression></detailFilter><detailFilter><filterExpression>[Año]=?pAño?</filterExpression></detailFilter><detailFilter><filterExpression>[Concepto] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Precio Intermedio Transitorio (PIT) (impuestos incluidos)';'Precio Ex Planta (PEP) (impuestos incluidos)';'Precio Ex Planta (PEP) sin flete secundario (impuestos incluidos)';'PPI sin tasas e impuestos + Factor X';'Factor X o factor de ajuste';'PPI sin tasas e impuestos';'Precio Ex Planta (PEP)';'Factor d para GLP Dec 205/023';'PEP';'PPI n-1 Periodo URSEA';'PPI n-2 Periodo URSEA')
+
+
+
+
+</filterExpression></detailFilter><detailFilter><filterExpression>[Filtro]=1</filterExpression></detailFilter><detailFilter><filterExpression>[Unidad]=?pUnidad?</filterExpression></detailFilter></detailFilters></query><query name="Ex Planta Nuevo FORMATO">
+			<source>
+				
+			<queryRef refQuery="Ex Planta Planilla"/></source>
+			<selection><dataItem name="Año"><expression>[Ex Planta Planilla].[Año]</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Fecha"><expression>[Ex Planta Planilla].[Fecha]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="4"/><XMLAttribute output="no" name="RS_dataUsage" value="1"/></XMLAttributes></dataItem><dataItem name="Dia"><expression>[Ex Planta Planilla].[Dia]</expression></dataItem><dataItem name="Concepto2"><expression>[Ex Planta Planilla].[Concepto2]</expression></dataItem><dataItem aggregate="total" name="TC"><expression>if([Ex Planta Planilla].[Año]&gt;2021) then(0) else([Ex Planta Planilla].[TC])</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem aggregate="total" name="Valor"><expression>[Ex Planta Planilla].[Valor]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem aggregate="total" name="Valor USD/m3"><expression>[Ex Planta Planilla].[Valor USD/m3]</expression></dataItem><dataItem name="Orden"><expression>[Ex Planta Planilla].[Orden]</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Producto"><expression>[Ex Planta Planilla].[Producto]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem></selection>
+		</query><query name="Cotizaciones FORMATO Detalle">
+			<source>
+				
+			<queryRef refQuery="Cotizaciones"/></source>
+			<selection><dataItem name="Año"><expression>[Cotizaciones].[Años]</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Fecha"><expression>[Cotizaciones].[Fecha]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="4"/><XMLAttribute output="no" name="RS_dataUsage" value="1"/></XMLAttributes></dataItem><dataItem name="Dia"><expression>[Cotizaciones].[Dia]</expression></dataItem><dataItem name="Concepto2"><expression>''</expression></dataItem><dataItem name="TC"><expression>if([Cotizaciones].[Años]&lt;2022) then(0) else([Cotizaciones].[N/A;N/A;N/A;Cotización])</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem name="Valor"><expression>0</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem name="Valor USD/m3"><expression>0</expression></dataItem><dataItem name="Orden"><expression>0</expression></dataItem><dataItem name="Decimales"><expression>0</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Productos_ExPlanta"><expression>[Cotizaciones].[Productos_ExPlanta]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem></selection>
+		</query><query name="Ex Planta Planilla Detalle">
+			<source>
+				<model/>
+			</source>
+			<selection><dataItem aggregate="none" rollupAggregate="none" name="Fecha"><expression>[Datos Prioritarios].[Precios_Ex_Planta].[Fecha]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="4"/><XMLAttribute output="no" name="RS_dataUsage" value="1"/></XMLAttributes></dataItem><dataItem name="Año"><expression>cast(extract(year;[Fecha]);integer)</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Concepto"><expression>case [Datos Prioritarios].[Precios_Ex_Planta].[Concepto]
+when('Tasa IMM sobre CL despachado en la tablada para EESS (77% restante)') then('Tasa inflamable etapa secundaria')
+when('Tasa IMM (para que cierre 0.6% PVP sin impuestos)') then('Tasa inflamable etapa secundaria')
+when('Tasa URSEA flete, de plantas a estaciones de servicio (mes n-2)') then('Tasa URSEA etapa secundaria')
+when('Tasa URSEA S/ IMM cierre') then('Tasa URSEA etapa secundaria')
+when('Tasa URSEA CFS') then('Tasa URSEA etapa secundaria')
+when('IVA flete, de plantas a estaciones de servicio (mes n-2) + compensación') then('IVA etapa secundaria')
+when('IVA S/ IMM y URSEA cierre ') then('IVA etapa secundaria')
+when('IVA CFS') then('IVA etapa secundaria')
+else [Datos Prioritarios].[Precios_Ex_Planta].[Concepto]
+end</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Concepto2"><expression>if([Producto] in ('Premium 97 Sp';'Super 95 Sp';'Gasoil Comun';'Gasoil Especial';'Fuel Oil Pesado';'Fuel Oil Medio';'Queroseno Montevideo';'Queroseno Interior') and [Concepto]='PPI sin tasas e impuestos + Factor X') then('Precio Ex Planta (PEP)') else(
+if([Producto] not in ('Premium 97 Sp';'Super 95 Sp';'Gasoil Comun';'Gasoil Especial';'Fuel Oil Pesado';'Fuel Oil Medio') and [Concepto]='PPI sin tasas e impuestos + Factor X') then('Precio Ex Planta (PEP)')
+else([Concepto])
+)
+
+</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Producto"><expression>if([Datos Prioritarios].[Precios_Ex_Planta].[Producto]='GLP') 
+	then('Supergas') 
+	else(
+		if(?pProducto?='Supergas A Granel' and [Datos Prioritarios].[Precios_Ex_Planta].[Producto]='Propano')
+			then('Supergas A Granel')
+			else(
+				if(?pProducto?='Propano Industrial' and [Datos Prioritarios].[Precios_Ex_Planta].[Producto]='Propano')
+				then('Propano Industrial')
+				else([Datos Prioritarios].[Precios_Ex_Planta].[Producto])
+			)
+	)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem aggregate="total" name="TC"><expression>[Datos Prioritarios].[Precios_Ex_Planta].[TC]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem aggregate="total" name="Valor"><expression>[Datos Prioritarios].[Precios_Ex_Planta].[Valor]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem name="Valor USD/m3" aggregate="total"><expression>([Datos Prioritarios].[Precios_Ex_Planta].[Valor]/[TC])*1000</expression></dataItem><dataItem name="Mes Número"><expression>extract(month;[Datos Prioritarios].[Precios_Ex_Planta].[Fecha])</expression></dataItem><dataItem name="Mes numero"><expression>cast([Mes Número];integer)</expression></dataItem><dataItem name="Periodo_Mensual"><expression>case extract(month;[Datos Prioritarios].[Precios_Ex_Planta].[Fecha])
+when(1) then('Ene')
+when(2) then('Feb')
+when(3) then('Mar')
+when(4) then('Abr')
+when(5) then('May')
+when(6) then('Jun')
+when(7) then('Jul')
+when(8) then('Ago')
+when(9) then('Set')
+when(10) then('Oct')
+when(11) then('Nov')
+when(12) then('Dic')
+end
+</expression></dataItem><dataItem name="Cantidad dias"><expression>extract(day;_last_of_month ([Fecha]))</expression></dataItem><dataItem name="Dia"><expression>If ([Año]= extract(year;current_date)  AND [Mes numero]= extract(month;current_date) )
+then ( cast(extract(day;current_date);varchar(2)) +'-'+[Periodo_Mensual] )
+else ( cast([Cantidad dias];varchar(2))+'-'+[Periodo_Mensual] )
+</expression></dataItem><dataItem name="Filtro Ultimos"><expression>if([Producto] in ('Gasolina Av 100 Octanos';'Gasolina Av 100 Octanos(Estado)';'Gasolina Av 100 Octanos(Particular)';'Jet A1') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Precio Ex Planta (PEP) (impuestos incluidos)';'Tasa IMM sobre CL dist primaria al interior (23,2% del total)';'IMESI';'Tasa URSEA etapa primaria';'FUDAEE';'PPI sin tasas e impuestos';'Precio Ex Planta (PEP)')) then(1) else(0)</expression></dataItem><dataItem name="Filtro Ultimos1"><expression>if([Producto] in ('Aguarras';'Solvente 1197';'Disan';'Base insecticida';'Querosol';'Queroseno Montevideo';'Queroseno Interior';'Hexano Comercial') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Margen de distribuidoras';'IVA etapa distribución';'Precio Ex Planta (PEP) (impuestos incluidos)';'Tasa IMM sobre CL dist primaria al interior (23,2% del total)';'IMESI';'Tasa URSEA etapa primaria';'FUDAEE';'IVA etapa primaria';'PPI sin tasas e impuestos';'Precio Ex Planta (PEP)')) then(1) else(0)</expression></dataItem><dataItem name="Filtro FO"><expression>if([Producto] in ('Fuel Oil Medio';'Fuel Oil Pesado') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Margen de distribuidoras';'Tasa URSEA etapa distribución';'IVA etapa distribución';'Precio Ex Planta (PEP) (impuestos incluidos)';'Tasa URSEA etapa primaria';'FUDAEE';'IVA etapa primaria';'Precio Ex Planta (PEP)';'Factor X o factor de ajuste';'PPI sin tasas e impuestos';'PPI n-1 Periodo URSEA';'PPI n-2 Periodo URSEA')) then(1) else(0)
+</expression></dataItem><dataItem name="Filtro QInterior"><expression>if([Producto] in ('Queroseno Interior') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Bonificación estaciones de servicio';'Tasa URSEA etapa venta al público';'Precio Intermedio Transitorio (PIT) (impuestos incluidos)';'Margen de distribuidoras';'Tasa URSEA etapa distribución';'Precio Ex Planta (PEP) (impuestos incluidos)';'Flete, de plantas a estaciones de servicio (mes n-2)';'Tasa URSEA etapa secundaria';'IVA etapa secundaria';'Precio Ex Planta (PEP) sin flete secundario (impuestos incluidos)';'IMESI';'Tasa URSEA etapa primaria';'FUDAEE';'Precio Ex Planta (PEP)')) then(1) else(0)
+
+
+
+
+
+
+
+</expression></dataItem><dataItem name="Filtro QMontevideo"><expression>if([Producto] in ('Queroseno Montevideo') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Bonificación estaciones de servicio';'Tasa URSEA etapa venta al público';'Precio Intermedio Transitorio (PIT) (impuestos incluidos)';'Margen de distribuidoras';'Tasa URSEA etapa distribución';'Precio Ex Planta (PEP) (impuestos incluidos)';'IMESI';'Tasa URSEA etapa primaria';'FUDAEE';'Precio Ex Planta (PEP)')) then(1) else(0)
+
+
+</expression></dataItem><dataItem name="Filtro Butano"><expression>if([Producto] in ('Butano Desodorizado') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Precio Ex Planta (PEP) sin flete secundario (impuestos incluidos)';'Tasa IMM sobre CL dist primaria al interior (23,2% del total)';'Tasa URSEA etapa primaria';'FUDAEE';'IVA etapa primaria';'Precio Ex Planta (PEP)')) then(1) else(0)</expression></dataItem><dataItem name="Filtro Supergas"><expression>if([Producto] in ('Supergas') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Margen de distribución de GLP envasado';'Tasa URSEA etapa venta al público';'IVA etapa venta al público';'Precio Intermedio Transitorio (PIT) (impuestos incluidos)';'Margen de envasado';'Margen de distribuidoras';'Tasa URSEA etapa distribución';'IVA etapa distribución';'Precio Ex Planta (PEP) (impuestos incluidos)';'Tasa URSEA etapa primaria';'FUDAEE';'IVA etapa primaria';'PEP';'Factor X o factor de ajuste';'PPI sin tasas e impuestos';'Factor d para GLP Dec 205/023';'PPI n-1 Periodo URSEA';'PPI n-2 Periodo URSEA')) then(1) else(0)
+
+</expression></dataItem><dataItem name="Filtro Propano"><expression>if([Producto] in ('Propano';'Supergas A Granel';'Propano Industrial') and [Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Margen de distribuidoras';'Tasa URSEA etapa distribución';'IVA etapa distribución';'Precio Ex Planta (PEP) (impuestos incluidos)';'Tasa URSEA etapa primaria';'FUDAEE';'IVA etapa primaria';'Precio Ex Planta (PEP)';'Factor X o factor de ajuste';'PPI sin tasas e impuestos';'PPI n-1 Periodo URSEA';'PPI n-2 Periodo URSEA')) then(1) else(0)</expression></dataItem><dataItem name="Filtro"><expression>if([Producto] in ('Queroseno Montevideo')) then([Filtro QMontevideo]) else(
+if([Producto] in ('Queroseno Interior')) then([Filtro QInterior]) else(
+if([Producto] in ('Fuel Oil Medio';'Fuel Oil Pesado')) then([Filtro FO]) else(
+if([Producto] in ('Gasolina Av 100 Octa';'Gasolina Av 100 Octanos';'Gasolina Av 100 Octanos(Estado)';'Gasolina Av 100 Octanos(Particular)';'Jet A1')) then([Filtro Ultimos]) else(
+if([Producto] in ('Aguarras';'Solvente 1197';'Disan';'Base insecticida';'Querosol';'Queroseno Montevideo';'Queroseno Interior';'Hexano Comercial')) then([Filtro Ultimos1]) else(
+if([Producto] in ('Butano Desodorizado')) then([Filtro Butano]) else(
+if([Producto] in ('Supergas')) then([Filtro Supergas])else(
+if([Producto] in ('Propano';'Supergas A Granel';'Propano Industrial')) then([Filtro Propano])else(
+if([Producto] in ('Super 95 Sp';'Gasoil Comun';'Gasoil Especial';'Premium 97 Sp')) then(1) else(0)
+
+)
+)
+)
+)
+)
+)
+)
+)</expression></dataItem><dataItem name="Unidad"><expression>?pUnidad?</expression></dataItem><dataItem name="Orden"><expression>case [Concepto2]
+when('Precio de Venta al Público (PVP) (impuestos incluidos)') then(1)
+when('Margen de distribución de GLP envasado') then(2)
+when('Tasa URSEA etapa venta al público') then(3)
+when('IVA etapa venta al público') then(3)
+when('Precio Intermedio Transitorio (PIT) (impuestos incluidos)') then(4)
+when('Bonificación estaciones de servicio') then(2)
+when('Tasa URSEA etapa venta al público') then(3)
+when('IVA etapa venta al público') then(4)
+when('Precio Intermedio Transitorio (PIT) (impuestos incluidos)') then(5)
+when('Margen de envasado') then(5)
+when('Margen de distribuidoras') then(6)
+when('Tasa URSEA etapa distribución') then(7)
+when('IVA etapa distribución') then(8)
+when('Precio Ex Planta (PEP) (impuestos incluidos)') then(9)
+when('Flete, de plantas a estaciones de servicio (mes n-2)') then(10)
+when('Tasa inflamable etapa secundaria') then(11)
+when('Tasa URSEA etapa secundaria') then(12)
+when('IVA etapa secundaria') then(13)
+when('Compensación Con Fin Social (CFS)') then(14)
+when('Precio Ex Planta (PEP) sin flete secundario (impuestos incluidos)') then(15)
+when('Tasa IMM sobre CL dist primaria al interior (23,2% del total)')then(16)
+when('IMESI')then(17)
+when('Impuesto CO2')then(17)
+when('Tasa URSEA etapa primaria')then(18)
+when('FUDAEE')then(19)
+when('Fideicomiso Gasoil (dto. 347/006)')then(20)
+when('IVA etapa primaria')then(21)
+when('PPI sin tasas e impuestos + Factor X') then(22)
+when('Precio Ex Planta (PEP)') then(24)
+when('PEP') then(24)
+when('Factor X o factor de ajuste') then(25)
+when('Factor de ajuste') then(26)
+when('PPI sin tasas e impuestos') then(27)
+when('PEP calculado por URSEA (*)') then(27)
+else 28
+end</expression></dataItem><dataItem name="Decimales"><expression>if([Concepto] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Precio Intermedio Transitorio (PIT) (impuestos incluidos)';'Precio Ex Planta (PEP) (impuestos incluidos)';'Precio Ex Planta (PEP) sin flete secundario (impuestos incluidos)';'PPI sin tasas e impuestos + Factor X';'Factor X o factor de ajuste';'PPI sin tasas e impuestos')) then(1) else(0)
+</expression></dataItem></selection>
+		<detailFilters><detailFilter><filterExpression>cast([Producto];varchar(50))=?pProducto?</filterExpression></detailFilter><detailFilter><filterExpression>[Año]=?pAño?</filterExpression></detailFilter><detailFilter><filterExpression>[Filtro]=1</filterExpression></detailFilter><detailFilter><filterExpression>[Unidad]=?pUnidad?</filterExpression></detailFilter></detailFilters></query><query name="Ex Planta Planilla Detalle FORMATO">
+			<source>
+				
+			<queryRef refQuery="Ex Planta Planilla Detalle"/></source>
+			<selection><dataItem name="Año"><expression>[Ex Planta Planilla Detalle].[Año]</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Fecha"><expression>[Ex Planta Planilla Detalle].[Fecha]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="4"/><XMLAttribute output="no" name="RS_dataUsage" value="1"/></XMLAttributes></dataItem><dataItem name="Dia"><expression>[Ex Planta Planilla Detalle].[Dia]</expression></dataItem><dataItem name="Concepto2"><expression>[Ex Planta Planilla Detalle].[Concepto2]</expression></dataItem><dataItem aggregate="total" name="TC"><expression>if([Ex Planta Planilla Detalle].[Año]&gt;2021) then(0) else([Ex Planta Planilla Detalle].[TC])</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem aggregate="total" name="Valor"><expression>[Ex Planta Planilla Detalle].[Valor]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem aggregate="total" name="Valor USD/m3"><expression>[Ex Planta Planilla Detalle].[Valor USD/m3]</expression></dataItem><dataItem name="Orden"><expression>[Ex Planta Planilla Detalle].[Orden]</expression></dataItem><dataItem name="Decimales"><expression>[Ex Planta Planilla Detalle].[Decimales]</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Producto"><expression>[Ex Planta Planilla Detalle].[Producto]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem></selection>
+		</query><query name="Ex Planta Planilla FINAL">
+			<source>
+				
+			<queryOperation name="Unión1">
+			<queryRefs><queryRef refQuery="Cotizaciones FORMATO"/><queryRef refQuery="Ex Planta Nuevo FORMATO"/></queryRefs>
+			<projectionList autoGenerated="true"><queryItem name="Año"/><queryItem name="Fecha"/><queryItem name="Dia"/><queryItem name="Concepto2"/><queryItem name="TC"/><queryItem name="Valor"/><queryItem name="Valor USD/m3"/><queryItem name="Orden"/><queryItem name="Productos_ExPlanta"/></projectionList>
+		</queryOperation></source>
+			<selection><dataItem name="Año"><expression>[Unión1].[Año]</expression></dataItem><dataItem name="Numero"><expression>month([Unión1].[Fecha])</expression></dataItem><dataItem name="Producto"><expression>[Unión1].[Productos_ExPlanta]</expression></dataItem><dataItem name="Concepto2"><expression>[Unión1].[Concepto2]</expression></dataItem><dataItem name="Fecha"><expression>[Unión1].[Fecha]</expression></dataItem><dataItem name="Densidad"><expression>0</expression></dataItem><dataItem name="Valor USD/m3" aggregate="total" solveOrder="2"><expression>([Valor]/[TC])*1000</expression></dataItem><dataItem name="TC" aggregate="maximum" solveOrder="1"><expression>maximum([Unión1].[TC] for [Fecha])</expression></dataItem><dataItem name="Valor" aggregate="total" solveOrder="1"><expression>[Unión1].[Valor]</expression></dataItem><dataItem name="Dia"><expression>[Unión1].[Dia]</expression></dataItem><dataItem name="Orden" aggregate="total"><expression>[Unión1].[Orden]</expression></dataItem></selection>
+		<detailFilters><detailFilter><filterExpression>[Producto]=?pProducto?</filterExpression></detailFilter></detailFilters></query><query name="Ex Planta Planilla Detalle FINAL">
+			<source>
+				
+			<queryOperation name="Unión2">
+			<queryRefs><queryRef refQuery="Ex Planta Planilla Detalle FORMATO"/><queryRef refQuery="Cotizaciones FORMATO Detalle"/></queryRefs>
+			<projectionList autoGenerated="true"><queryItem name="Año"/><queryItem name="Fecha"/><queryItem name="Dia"/><queryItem name="Concepto2"/><queryItem name="TC"/><queryItem name="Valor"/><queryItem name="Valor USD/m3"/><queryItem name="Orden"/><queryItem name="Decimales"/><queryItem name="Producto"/></projectionList>
+		</queryOperation></source>
+			<selection><dataItem name="Año"><expression>[Unión2].[Año]</expression></dataItem><dataItem name="Numero"><expression>month([Unión2].[Fecha])</expression></dataItem><dataItem name="Producto"><expression>[Unión2].[Producto]</expression></dataItem><dataItem name="Concepto2"><expression>[Unión2].[Concepto2]</expression></dataItem><dataItem name="Fecha"><expression>[Unión2].[Fecha]</expression></dataItem><dataItem name="Densidad"><expression>0</expression></dataItem><dataItem name="Valor USD/m3" aggregate="total" solveOrder="2"><expression>([Valor]/[TC])*1000</expression></dataItem><dataItem name="TC" aggregate="maximum" solveOrder="1"><expression>maximum([Unión2].[TC] for [Fecha])</expression></dataItem><dataItem name="Valor" aggregate="total" solveOrder="1"><expression>[Unión2].[Valor]</expression></dataItem><dataItem name="Dia"><expression>[Unión2].[Dia]</expression></dataItem><dataItem name="Orden" aggregate="total"><expression>[Unión2].[Orden]</expression></dataItem><dataItem name="Decimales" aggregate="total"><expression>[Unión2].[Decimales]</expression></dataItem></selection>
+		<detailFilters><detailFilter><filterExpression>[Producto]=?pProducto?</filterExpression></detailFilter></detailFilters></query><query name="Densidades datos">
+			<source>
+				<model/>
+			</source>
+			<selection><dataItem aggregate="none" rollupAggregate="none" name="Años"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Años]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="pAño"><expression>if([Años]&lt;&gt;'Año Base') then(cast([Años];integer)) else(null)</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Periodo_Mensual"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Periodo_Mensual]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Periodo Mensual"><expression>case [Número]
+when(1) then('Ene')
+when(2) then('Feb')
+when(3) then('Mar')
+when(4) then('Abr')
+when(5) then('May')
+when(6) then('Jun')
+when(7) then('Jul')
+when(8) then('Ago')
+when(9) then('Sep')
+when(10) then('Oct')
+when(11) then('Nov')
+when(12) then('Dic')
+end</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Número"><expression>case [Periodo_Mensual]
+when('Ene') then(1)
+when('Feb') then(2)
+when('Mar') then(3)
+when('Abr') then(4)
+when('May') then(5)
+when('Jun') then(6)
+when('Jul') then(7)
+when('Ago') then(8)
+when('Sep') then(9)
+when('Oct') then(10)
+when('Nov') then(11)
+when('Dic') then(12)
+end
+</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="2"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Valor Mensual"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Periodo_Diario]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Productos_ExPlanta"><expression>'Productos_ExPlanta'</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="children([Productos_ExPlanta])"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Productos_ExPlanta]</expression></dataItem><dataItem name="Producto"><expression>if(cast([children([Productos_ExPlanta]])];varchar(20))='Gasolina Av 100 Octa') then('Gasolina Av 100 Octanos') else(cast([children([Productos_ExPlanta]])];varchar(20)))</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Medidas_ExPlanta"><expression>[Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Densidad"><expression>if([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Medidas_ExPlanta]='Densidad') then([Datos Prioritarios].[Precios_ExPLanta_2_TM1].[Valor]) else(0)</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Filtro"><expression>if([pAño]=2021 and [Número]&lt;7 or [pAño]&lt;2021) then(0) else(1)</expression></dataItem><dataItem name="Cantidad dias"><expression>extract(day;_last_of_month (_make_timestamp([pAño];[Número];1)))</expression></dataItem><dataItem name="Dia"><expression>If ([pAño]= extract(year;current_date)  AND [Número]= extract(month;current_date) )
+then ( cast(extract(day;current_date);varchar(2)) +'-'+[Periodo Mensual] )
+else ( cast([Cantidad dias];varchar(2))+'-'+[Periodo Mensual] )
+</expression></dataItem></selection>
+		<detailFilters><detailFilter><filterExpression>[Años]&lt;&gt;'Año Base'</filterExpression></detailFilter><detailFilter><filterExpression>[Producto] not like 'RPMS%'</filterExpression></detailFilter><detailFilter><filterExpression>[Producto]&lt;&gt;'N/A'</filterExpression></detailFilter><detailFilter><filterExpression>[children([Productos_ExPlanta]])] not in ('Asfalto 150/200';'Asfalto AC-20';'Asfalto MC1';'Asfalto RC2';'Propano Redes')</filterExpression></detailFilter><detailFilter><filterExpression>[Filtro]=1</filterExpression></detailFilter><detailFilter><filterExpression>[pAño]=?pAño?</filterExpression></detailFilter><detailFilter><filterExpression>[Periodo_Mensual]&lt;&gt;'Base'</filterExpression></detailFilter></detailFilters></query><query name="Densidades">
+			<source>
+				
+			<queryRef refQuery="Densidades datos"/></source>
+			<selection><dataItem name="pAño"><expression>[Densidades datos].[pAño]</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Número"><expression>[Densidades datos].[Número]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="2"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Producto"><expression>[Densidades datos].[Producto]</expression></dataItem><dataItem aggregate="none" rollupAggregate="none" name="Medidas_ExPlanta"><expression>[Densidades datos].[Medidas_ExPlanta]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="3"/><XMLAttribute output="no" name="RS_dataUsage" value="0"/></XMLAttributes></dataItem><dataItem name="Fecha"><expression>_make_timestamp([pAño];[Número];1)</expression></dataItem><dataItem name="Densidad"><expression>[Densidades datos].[Densidad]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/></XMLAttributes></dataItem><dataItem name="Precio Ex Planta USD"><expression>0</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem name="TC"><expression>0</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/><XMLAttribute output="no" name="RS_dataUsage" value="2"/></XMLAttributes></dataItem><dataItem name="Precio Ex Planta UYU"><expression>0</expression></dataItem><dataItem name="Dia"><expression>[Densidades datos].[Dia]</expression></dataItem><dataItem name="Orden"><expression>0</expression></dataItem></selection>
+		<detailFilters><detailFilter><filterExpression>[Medidas_ExPlanta]='Densidad'</filterExpression></detailFilter><detailFilter><filterExpression>[Producto]=?pProducto?</filterExpression></detailFilter></detailFilters></query><query name="Ex Planta Planilla FINAL con Densidad">
+			<source>
+				
+			<joinOperation>
+			<joinOperands>
+				<joinOperand><queryRef refQuery="Ex Planta Planilla FINAL"/></joinOperand>
+				<joinOperand><queryRef refQuery="Densidades"/></joinOperand>
+			</joinOperands>
+			<joinFilter>
+				<filterExpression>[Ex Planta Planilla FINAL].[Año] = [Densidades].[pAño] and
+[Ex Planta Planilla FINAL].[Numero] = [Densidades].[Número] and
+[Ex Planta Planilla FINAL].[Producto] = [Densidades].[Producto]</filterExpression>
+			</joinFilter>
+		</joinOperation></source>
+			<selection><dataItem name="Año"><expression>[Ex Planta Planilla FINAL].[Año]</expression></dataItem><dataItem name="Numero"><expression>[Ex Planta Planilla FINAL].[Numero]</expression></dataItem><dataItem name="Producto"><expression>[Ex Planta Planilla FINAL].[Producto]</expression></dataItem><dataItem name="Concepto2"><expression>[Ex Planta Planilla FINAL].[Concepto2]</expression></dataItem><dataItem name="Fecha"><expression>[Ex Planta Planilla FINAL].[Fecha]</expression></dataItem><dataItem aggregate="total" name="Valor USD/m3"><expression>if([Producto] in ('Butano Desodorizado';'Supergas';'Supergas A Granel';'Propano';'Propano Industrial')) then([Ex Planta Planilla FINAL].[Valor USD/m3]*[Densidad]) else([Ex Planta Planilla FINAL].[Valor USD/m3])</expression></dataItem><dataItem aggregate="maximum" name="TC"><expression>[Ex Planta Planilla FINAL].[TC]</expression></dataItem><dataItem aggregate="total" name="Valor"><expression>[Ex Planta Planilla FINAL].[Valor]</expression></dataItem><dataItem name="Dia"><expression>[Ex Planta Planilla FINAL].[Dia]</expression></dataItem><dataItem name="Orden" aggregate="none"><expression>[Ex Planta Planilla FINAL].[Orden]</expression></dataItem><dataItem name="Densidad"><expression>[Densidades].[Densidad]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/></XMLAttributes></dataItem></selection>
+		</query><query name="Ex Planta Planilla Detalle FINAL con Densidad">
+			<source>
+				
+			<joinOperation>
+			<joinOperands>
+				<joinOperand><queryRef refQuery="Ex Planta Planilla Detalle FINAL"/></joinOperand>
+				<joinOperand><queryRef refQuery="Densidades"/></joinOperand>
+			</joinOperands>
+			<joinFilter>
+				<filterExpression>[Ex Planta Planilla Detalle FINAL].[Año] = [Densidades].[pAño] and
+[Ex Planta Planilla Detalle FINAL].[Numero] = [Densidades].[Número] and
+[Ex Planta Planilla Detalle FINAL].[Producto] = [Densidades].[Producto]</filterExpression>
+			</joinFilter>
+		</joinOperation></source>
+			<selection><dataItem name="Año"><expression>[Ex Planta Planilla Detalle FINAL].[Año]</expression></dataItem><dataItem name="Numero"><expression>[Ex Planta Planilla Detalle FINAL].[Numero]</expression></dataItem><dataItem name="Producto"><expression>[Ex Planta Planilla Detalle FINAL].[Producto]</expression></dataItem><dataItem name="Concepto2"><expression>[Ex Planta Planilla Detalle FINAL].[Concepto2]</expression></dataItem><dataItem name="Fecha"><expression>[Ex Planta Planilla Detalle FINAL].[Fecha]</expression></dataItem><dataItem aggregate="total" name="Valor USD/m3"><expression>if([Producto] in ('Butano Desodorizado';'Supergas';'Supergas A Granel';'Propano';'Propano Industrial')) then([Ex Planta Planilla Detalle FINAL].[Valor USD/m3]*[Densidad]) else([Ex Planta Planilla Detalle FINAL].[Valor USD/m3])</expression></dataItem><dataItem aggregate="maximum" name="TC"><expression>[Ex Planta Planilla Detalle FINAL].[TC]</expression></dataItem><dataItem aggregate="total" name="Valor"><expression>[Ex Planta Planilla Detalle FINAL].[Valor]</expression></dataItem><dataItem name="Dia"><expression>[Ex Planta Planilla Detalle FINAL].[Dia]</expression></dataItem><dataItem aggregate="total" name="Orden"><expression>[Ex Planta Planilla Detalle FINAL].[Orden]</expression></dataItem><dataItem aggregate="total" name="Decimales"><expression>[Ex Planta Planilla Detalle FINAL].[Decimales]</expression></dataItem><dataItem name="Densidad"><expression>[Densidades].[Densidad]</expression><XMLAttributes><XMLAttribute output="no" name="RS_dataType" value="9"/></XMLAttributes></dataItem><dataItem name="Orden1"><expression>case [Concepto2]
+when('Precio de Venta al Público (PVP) (impuestos incluidos)') then(1)
+when('Margen de distribución de GLP envasado') then(2)
+when('Tasa URSEA etapa venta al público') then(3)
+when('IVA etapa venta al público') then(3.1)
+when('Precio Intermedio Transitorio (PIT) (impuestos incluidos)') then(4)
+when('Bonificación estaciones de servicio') then(2)
+when('Tasa URSEA etapa venta al público') then(3)
+when('IVA etapa venta al público') then(4)
+when('Precio Intermedio Transitorio (PIT) (impuestos incluidos)') then(5)
+when('Margen de envasado') then(5)
+when('Margen de distribuidoras') then(6)
+when('Tasa URSEA etapa distribución') then(7)
+when('IVA etapa distribución') then(8)
+when('Precio Ex Planta (PEP) (impuestos incluidos)') then(9)
+when('Flete, de plantas a estaciones de servicio (mes n-2)') then(10)
+when('Tasa inflamable etapa secundaria') then(11)
+when('Tasa URSEA etapa secundaria') then(12)
+when('IVA etapa secundaria') then(13)
+when('Compensación Con Fin Social (CFS)') then(14)
+when('Precio Ex Planta (PEP) sin flete secundario (impuestos incluidos)') then(15)
+when('Tasa IMM sobre CL dist primaria al interior (23,2% del total)')then(16)
+when('IMESI')then(17)
+when('Impuesto CO2')then(17)
+when('Tasa URSEA etapa primaria')then(18)
+when('FUDAEE')then(19)
+when('Fideicomiso Gasoil (dto. 347/006)')then(20)
+when('IVA etapa primaria')then(21)
+when('PPI sin tasas e impuestos + Factor X') then(22)
+when('Precio Ex Planta (PEP)') then(24)
+when('PEP') then(24)
+when('Factor X o factor de ajuste') then(25)
+when('Factor de ajuste') then(26)
+when('PPI sin tasas e impuestos') then(27)
+when('PEP calculado por URSEA (*)') then(27)
+when('Monto diferencial por zonas "d"') then(28)
+when('PPI n-1 Periodo URSEA') then(29)
+when('PPI n-2 Periodo URSEA') then(30)
+else 28
+end</expression></dataItem></selection>
+		</query></queries><reportVariables><reportVariable type="string" name="Unidad">
+			<reportExpression>ParamDisplayValue('pUnidad')</reportExpression>
+		<variableValues><variableValue value="USD/m3"/><variableValue value="$/lt ó $/kg según corresponda"/></variableValues></reportVariable><reportVariable type="boolean" name="MostrarPestañaDetalle">
+			<reportExpression>ParamDisplayValue('pProducto') not in ('Supergas';'Supergas A Granel';'Propano Redes';'Propano Industrial';'Asfalto RC2';'Asfalto MC1';'Asfalto AC-30';'Asfalto 150/200')</reportExpression>
+			<variableValues>
+				<variableValue value="1"/>
+			</variableValues>
+		</reportVariable></reportVariables><namedConditionalStyles><advancedConditionalStyle name="Estilo condicional 1"><styleCases><styleCase><style><dataFormat><numberFormat decimalSize="2" decimalDelimiter="," groupDelimiter="." useGrouping="true"/></dataFormat></style><reportCondition>[Ex Planta Planilla Detalle FINAL].[Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Precio Intermedio Transitorio (PIT) (impuestos incluidos)';'Precio Ex Planta (PEP) (impuestos incluidos)';'Precio Ex Planta (PEP) sin flete secundario (impuestos incluidos)';'PPI sin tasas e impuestos + Factor X';'Factor X o factor de ajuste';'PPI sin tasas e impuestos';'Precio Ex Planta (PEP)';'Factor d para GLP Dec 205/023')</reportCondition></styleCase></styleCases><styleDefault><style><dataFormat><numberFormat decimalSize="4" decimalDelimiter="," useGrouping="true" groupDelimiter="."/></dataFormat></style></styleDefault></advancedConditionalStyle><advancedConditionalStyle name="Butano"><styleCases><styleCase><reportCondition>ParamDisplayValue('pProducto')='Butano Desodorizado'</reportCondition></styleCase></styleCases><styleDefault><style><CSS value="display:none"/></style></styleDefault></advancedConditionalStyle><advancedConditionalStyle name="Estilo condicional 2"><styleCases><styleCase><style><dataFormat><numberFormat decimalSize="2" decimalDelimiter="," useGrouping="true" groupDelimiter="."/></dataFormat></style><reportCondition>[Ex Planta Planilla Detalle FINAL con Densidad].[Concepto2] in ('Precio de Venta al Público (PVP) (impuestos incluidos)';'Precio Intermedio Transitorio (PIT) (impuestos incluidos)';'Precio Ex Planta (PEP) (impuestos incluidos)';'Precio Ex Planta (PEP) sin flete secundario (impuestos incluidos)';'PPI sin tasas e impuestos + Factor X';'Factor X o factor de ajuste';'PPI sin tasas e impuestos';'Precio Ex Planta (PEP)';'Factor d para GLP Dec 205/023';'PPI n-1 Periodo URSEA';'PPI n-2 Periodo URSEA')</reportCondition></styleCase></styleCases><styleDefault><style><dataFormat><numberFormat decimalSize="4" decimalDelimiter="," useGrouping="true" groupDelimiter="."/></dataFormat></style></styleDefault></advancedConditionalStyle></namedConditionalStyles></report>

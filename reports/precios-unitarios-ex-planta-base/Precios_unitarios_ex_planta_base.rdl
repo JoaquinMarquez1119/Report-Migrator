@@ -1,0 +1,2918 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:am="http://schemas.microsoft.com/sqlserver/reporting/authoringmetadata">
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportID>77b0a5b9-b2a2-4fb8-992a-69b3b354b4ff</rd:ReportID>
+  <am:AuthoringMetadata>
+    <am:CreatedBy>
+      <am:Name>PBIRB</am:Name>
+      <am:Version>15.7.1815.334</am:Version>
+    </am:CreatedBy>
+    <am:UpdatedBy>
+      <am:Name>PBIRB</am:Name>
+      <am:Version>15.7.1815.334</am:Version>
+    </am:UpdatedBy>
+    <am:LastModifiedTimestamp>2026-03-18T13:53:51.5321051Z</am:LastModifiedTimestamp>
+  </am:AuthoringMetadata>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="BI_DatosPrioritarios">
+      <rd:SecurityType>None</rd:SecurityType>
+      <ConnectionProperties>
+        <DataProvider>PBIDATASET</DataProvider>
+        <ConnectString>Data Source=pbiazure://api.powerbi.com/;Identity Provider="https://login.microsoftonline.com/organizations, https://analysis.windows.net/powerbi/api, f0b72488-7082-488a-a7e8-eada97bd842d";Initial Catalog=sobe_wowvirtualserver-03343eef-bfa0-4417-a085-ed40ba738766;Integrated Security=ClaimsToken</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>679e3d27-1ec6-4be5-a37f-ab84af3deba8</rd:DataSourceID>
+      <rd:PowerBIWorkspaceName>BI</rd:PowerBIWorkspaceName>
+      <rd:PowerBIDatasetName>Datos Prioritarios</rd:PowerBIDatasetName>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="dsAnio">
+      <Query>
+        <DataSourceName>BI_DatosPrioritarios</DataSourceName>
+        <CommandText>
+EVALUATE
+VAR __Anios =
+    ADDCOLUMNS(
+        DISTINCT('Precios_ExPLanta_2_TM1'[Años]),
+        "AnioNum", IFERROR(VALUE('Precios_ExPLanta_2_TM1'[Años]), BLANK())
+    )
+RETURN
+SELECTCOLUMNS(
+    FILTER(__Anios, NOT ISBLANK([AnioNum]) &amp;&amp; [AnioNum] &lt;= YEAR(TODAY())),
+    "Anio", [AnioNum]
+)
+ORDER BY [Anio] DESC
+        </CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Anio">
+          <rd:TypeName>System.Int32</rd:TypeName>
+          <DataField>[Anio]</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="dsDescripcion">
+      <Query>
+        <DataSourceName>BI_DatosPrioritarios</DataSourceName>
+        <CommandText>
+EVALUATE
+ROW(
+    "Descripcion",
+    "Precios Ex planta promedio mensuales en USD/m3 y $/lt (o $/kg. según corresponda), para los productos mercado interno. Supergas, propano, butano desodorizado y asfaltos se expresan en $/kg. Desde Enero 2022 todos los productos se convierten a USD/m3 con el T.C. promedio del mes (o promedio del período transcurrido del mes si no es al cierre del mismo). Para el período Julio-Diciembre 2021, todos los productos excepto Supergas, propano y asfaltos se convirtieron a USD con el T.C. promedio del período que tomó URSEA para el cálculo de los PPI."
+        &amp; UNICHAR(10) &amp;
+    "Los Precios Ex planta surgen de deducirle a los Precios de venta al Público, los costos unitarios de flete, tasas, márgenes, bonificaciones e impuestos que correspondieran, como se observa al ingresar a cada producto."
+        &amp; UNICHAR(10) &amp;
+    "La Tasa inflamable fue derogada a partir del 13 de agosto de 2023."
+        &amp; UNICHAR(10) &amp;
+    "A partir de Julio de 2025, cambió la metodología de fijación de los PPI. El Poder Ejecutivo actualiza mensualmente el PEP y aprueba cada dos meses el PVP, tomando como referencia para el cálculo el promedio de los dos últimos valores de PPI publicados por la URSEA. En virtud de ello, se agregan en el resumen y detalle de los productos a los que aplica esta metodología (Gasolinas, Gasoil, Fueloil medio y pesado, Supergás y Propano) dos nuevos componentes ""PPI n-1 Periodo URSEA"" y ""PPI n-2 Periodo URSEA""."
+        &amp; UNICHAR(10) &amp;
+    "Para cada mes, para los productos expresados en $/kg se empleará en el cálculo la densidad real promedio del mes anterior."
+        &amp; UNICHAR(10) &amp;
+    "Para los productos cuyas paridades de importación publica URSEA, la diferencia entre los Precios ex planta calculados de esta manera (partiendo de los precios de venta al público aprobados por PE para cada mes) y el Precio ex planta calculado por URSEA, es el Factor de Ajuste."
+)
+        </CommandText>
+      </Query>
+      <Fields>
+        <Field Name="Descripcion">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>[Descripcion]</DataField>
+        </Field>
+      </Fields>
+    </DataSet>
+    <DataSet Name="dsTabla">
+      <Query>
+        <DataSourceName>BI_DatosPrioritarios</DataSourceName>
+        <CommandText>
+EVALUATE
+VAR __CurDate = TODAY()
+VAR __CurYear = YEAR(__CurDate)
+VAR __CurMonth = MONTH(__CurDate)
+VAR __CurDay = DAY(__CurDate)
+
+VAR __BranchASeed1 =
+    ADDCOLUMNS(
+        SUMMARIZECOLUMNS(
+            'Precios_ExPLanta_2_TM1'[Años],
+            'Precios_ExPLanta_2_TM1'[Periodo_Mensual],
+            'Precios_ExPLanta_2_TM1'[Productos_ExPlanta],
+            FILTER(
+                ALL('Precios_ExPLanta_2_TM1'),
+                'Precios_ExPLanta_2_TM1'[Años] &lt;&gt; "Año Base" &amp;&amp;
+                'Precios_ExPLanta_2_TM1'[Periodo_Mensual] &lt;&gt; "Base" &amp;&amp;
+                LEFT('Precios_ExPLanta_2_TM1'[Productos_ExPlanta], 4) &lt;&gt; "RPMS" &amp;&amp;
+                'Precios_ExPLanta_2_TM1'[Productos_ExPlanta] IN {
+                    "Asfalto 150/200", "Asfalto AC-20", "Asfalto MC1", "Asfalto RC2",
+                    "Propano Industrial", "Propano Redes", "Supergas", "Supergas A Granel"
+                }
+            ),
+            "PrecioUSDRaw", CALCULATE(SUM('Precios_ExPLanta_2_TM1'[Valor]), 'Precios_ExPLanta_2_TM1'[Medidas_ExPlanta] = "Precio Ex Planta"),
+            "DensidadRaw", CALCULATE(SUM('Precios_ExPLanta_2_TM1'[Valor]), 'Precios_ExPLanta_2_TM1'[Medidas_ExPlanta] = "Densidad"),
+            "CotizacionRaw", CALCULATE(SUM('Precios_ExPLanta_2_TM1'[Valor]), 'Precios_ExPLanta_2_TM1'[Medidas_ExPlanta] = "Cotización", 'Precios_ExPLanta_2_TM1'[Mercados] = "Interno", 'Precios_ExPLanta_2_TM1'[Unidades] = "N/A")
+        ),
+        "pAnio", VALUE('Precios_ExPLanta_2_TM1'[Años]),
+        "MesNumero", SWITCH('Precios_ExPLanta_2_TM1'[Periodo_Mensual], "Ene", 1, "Feb", 2, "Mar", 3, "Abr", 4, "May", 5, "Jun", 6, "Jul", 7, "Ago", 8, "Sep", 9, "Oct", 10, "Nov", 11, "Dic", 12, BLANK())
+    )
+VAR __BranchASeed =
+    ADDCOLUMNS(
+        __BranchASeed1,
+        "AnioMes", [pAnio] * 100 + [MesNumero],
+        "Dia", IF([pAnio] = __CurYear &amp;&amp; [MesNumero] = __CurMonth, FORMAT(__CurDay, "0") &amp; "-" &amp; 'Precios_ExPLanta_2_TM1'[Periodo_Mensual], FORMAT(DAY(EOMONTH(DATE([pAnio], [MesNumero], 1), 0)), "0") &amp; "-" &amp; 'Precios_ExPLanta_2_TM1'[Periodo_Mensual])
+    )
+VAR __BranchA =
+    SELECTCOLUMNS(
+        FILTER(
+            __BranchASeed,
+            NOT ('Precios_ExPLanta_2_TM1'[Productos_ExPlanta] IN { "Propano Industrial", "Propano Redes", "Supergas", "Supergas A Granel" } &amp;&amp; [AnioMes] &gt; 202306)
+        ),
+        "pAnio", [pAnio],
+        "MesNumero", [MesNumero],
+        "Dia", [Dia],
+        "Producto", 'Precios_ExPLanta_2_TM1'[Productos_ExPlanta],
+        "PrecioExPlantaUSD", [PrecioUSDRaw],
+        "PrecioExPlantaUYU", IF('Precios_ExPLanta_2_TM1'[Productos_ExPlanta] IN { "Asfalto 150/200", "Asfalto AC-20" }, DIVIDE([PrecioUSDRaw] * [CotizacionRaw], 1000), DIVIDE([PrecioUSDRaw] * DIVIDE([CotizacionRaw], [DensidadRaw], BLANK()), 1000)),
+        "CotizacionPromedio", [CotizacionRaw]
+    )
+
+VAR __BranchBSeed1 =
+    ADDCOLUMNS(
+        SUMMARIZECOLUMNS(
+            'Precios_ExPLanta_2_TM1'[Años],
+            'Precios_ExPLanta_2_TM1'[Periodo_Mensual],
+            'Precios_ExPLanta_2_TM1'[Productos_ExPlanta],
+            FILTER(
+                ALL('Precios_ExPLanta_2_TM1'),
+                'Precios_ExPLanta_2_TM1'[Años] &lt;&gt; "Año Base" &amp;&amp;
+                'Precios_ExPLanta_2_TM1'[Periodo_Mensual] &lt;&gt; "Base" &amp;&amp;
+                LEFT('Precios_ExPLanta_2_TM1'[Productos_ExPlanta], 4) &lt;&gt; "RPMS" &amp;&amp;
+                NOT (
+                    'Precios_ExPLanta_2_TM1'[Productos_ExPlanta] IN {
+                        "Asfalto 150/200", "Asfalto AC-20", "Asfalto MC1", "Asfalto RC2",
+                        "Propano Industrial", "Propano Redes", "Supergas", "Supergas A Granel"
+                    }
+                )
+            ),
+            "PrecioUSDRaw", CALCULATE(SUM('Precios_ExPLanta_2_TM1'[Valor]), 'Precios_ExPLanta_2_TM1'[Medidas_ExPlanta] = "Precio Ex Planta"),
+            "DensidadRaw", CALCULATE(SUM('Precios_ExPLanta_2_TM1'[Valor]), 'Precios_ExPLanta_2_TM1'[Medidas_ExPlanta] = "Densidad"),
+            "CotizacionRaw", CALCULATE(SUM('Precios_ExPLanta_2_TM1'[Valor]), 'Precios_ExPLanta_2_TM1'[Medidas_ExPlanta] = "Cotización")
+        ),
+        "pAnio", VALUE('Precios_ExPLanta_2_TM1'[Años]),
+        "MesNumero", SWITCH('Precios_ExPLanta_2_TM1'[Periodo_Mensual], "Ene", 1, "Feb", 2, "Mar", 3, "Abr", 4, "May", 5, "Jun", 6, "Jul", 7, "Ago", 8, "Sep", 9, "Oct", 10, "Nov", 11, "Dic", 12, BLANK()),
+        "ProductoNormalizado", IF('Precios_ExPLanta_2_TM1'[Productos_ExPlanta] = "Gasolina Av 100 Octa", "Gasolina Av 100 Octanos", 'Precios_ExPLanta_2_TM1'[Productos_ExPlanta])
+    )
+VAR __BranchBSeed =
+    ADDCOLUMNS(
+        __BranchBSeed1,
+        "AnioMes", [pAnio] * 100 + [MesNumero],
+        "Dia", IF([pAnio] = __CurYear &amp;&amp; [MesNumero] = __CurMonth, FORMAT(__CurDay, "0") &amp; "-" &amp; 'Precios_ExPLanta_2_TM1'[Periodo_Mensual], FORMAT(DAY(EOMONTH(DATE([pAnio], [MesNumero], 1), 0)), "0") &amp; "-" &amp; 'Precios_ExPLanta_2_TM1'[Periodo_Mensual])
+    )
+VAR __BranchB =
+    SELECTCOLUMNS(
+        FILTER(__BranchBSeed, IF([ProductoNormalizado] IN { "Queroseno Montevideo", "Queroseno Interior" }, [AnioMes] &lt;= 202107, [AnioMes] &lt;= 202106)),
+        "pAnio", [pAnio],
+        "MesNumero", [MesNumero],
+        "Dia", [Dia],
+        "Producto", [ProductoNormalizado],
+        "PrecioExPlantaUSD", [PrecioUSDRaw],
+        "PrecioExPlantaUYU", IF([ProductoNormalizado] = "Butano Desodorizado", DIVIDE([PrecioUSDRaw] * DIVIDE([CotizacionRaw], [DensidadRaw], BLANK()), 1000), DIVIDE([PrecioUSDRaw] * [CotizacionRaw], 1000)),
+        "CotizacionPromedio", [CotizacionRaw]
+    )
+
+VAR __PlanillaSeed1 =
+    ADDCOLUMNS(
+        SUMMARIZECOLUMNS(
+            'Precios_Ex_Planta'[Fecha],
+            'Precios_Ex_Planta'[Producto],
+            'Precios_Ex_Planta'[TC],
+            FILTER(
+                ALL('Precios_Ex_Planta'),
+                'Precios_Ex_Planta'[Concepto] IN { "PPI sin tasas e impuestos + Factor X", "PEP" } &amp;&amp;
+                NOT (IF('Precios_Ex_Planta'[Producto] = "GLP", "Supergas", 'Precios_Ex_Planta'[Producto]) = "Supergas" &amp;&amp; 'Precios_Ex_Planta'[Concepto] = "PPI sin tasas e impuestos + Factor X")
+            ),
+            "PrecioUYURaw", SUM('Precios_Ex_Planta'[Valor])
+        ),
+        "pAnio", YEAR('Precios_Ex_Planta'[Fecha]),
+        "MesNumero", MONTH('Precios_Ex_Planta'[Fecha]),
+        "ProductoNormalizado", IF('Precios_Ex_Planta'[Producto] = "GLP", "Supergas", 'Precios_Ex_Planta'[Producto])
+    )
+VAR __PlanillaSeed2 =
+    ADDCOLUMNS(
+        __PlanillaSeed1,
+        "AnioMes", [pAnio] * 100 + [MesNumero],
+        "Dia", IF([pAnio] = __CurYear &amp;&amp; [MesNumero] = __CurMonth, FORMAT(__CurDay, "0") &amp; "-" &amp; SWITCH([MesNumero], 1, "Ene", 2, "Feb", 3, "Mar", 4, "Abr", 5, "May", 6, "Jun", 7, "Jul", 8, "Ago", 9, "Sep", 10, "Oct", 11, "Nov", 12, "Dic"), FORMAT(DAY(EOMONTH('Precios_Ex_Planta'[Fecha], 0)), "0") &amp; "-" &amp; SWITCH([MesNumero], 1, "Ene", 2, "Feb", 3, "Mar", 4, "Abr", 5, "May", 6, "Jun", 7, "Jul", 8, "Ago", 9, "Sep", 10, "Oct", 11, "Nov", 12, "Dic"))
+    )
+VAR __PlanillaBase =
+    SELECTCOLUMNS(
+        FILTER(
+            __PlanillaSeed2,
+            NOT ([ProductoNormalizado] IN { "GasolinaAv100Octanos(Es)", "GasolinaAv100Octanos(Pa)", "Asfalto 150/200", "Asfalto AC-20", "Asfalto MC1", "Asfalto RC2", "Propano Redes" }) &amp;&amp;
+            IF([ProductoNormalizado] = "Supergas" || [ProductoNormalizado] = "Propano", [AnioMes] &gt; 202306, IF([ProductoNormalizado] IN { "Queroseno Montevideo", "Queroseno Interior" }, [AnioMes] &gt; 202107, [AnioMes] &gt; 202106))
+        ),
+        "pAnio", [pAnio],
+        "MesNumero", [MesNumero],
+        "Producto", [ProductoNormalizado],
+        "PrecioUYU", [PrecioUYURaw],
+        "TCPlanilla", IF([pAnio] &lt; 2022, 'Precios_Ex_Planta'[TC], BLANK()),
+        "Dia", [Dia]
+    )
+
+VAR __TM1LookupSeed1 =
+    ADDCOLUMNS(
+        SUMMARIZECOLUMNS(
+            'Precios_ExPLanta_2_TM1'[Años],
+            'Precios_ExPLanta_2_TM1'[Periodo_Mensual],
+            'Precios_ExPLanta_2_TM1'[Productos_ExPlanta],
+            FILTER(
+                ALL('Precios_ExPLanta_2_TM1'),
+                'Precios_ExPLanta_2_TM1'[Años] &lt;&gt; "Año Base" &amp;&amp;
+                'Precios_ExPLanta_2_TM1'[Periodo_Mensual] &lt;&gt; "Base" &amp;&amp;
+                LEFT('Precios_ExPLanta_2_TM1'[Productos_ExPlanta], 4) &lt;&gt; "RPMS" &amp;&amp;
+                'Precios_ExPLanta_2_TM1'[Mercados] = "Interno" &amp;&amp;
+                NOT ('Precios_ExPLanta_2_TM1'[Productos_ExPlanta] IN { "Asfalto 150/200", "Asfalto AC-20", "Asfalto MC1", "Asfalto RC2", "Propano Redes", "Supergas A Granel" })
+            ),
+            "CotizacionRaw", CALCULATE(SUM('Precios_ExPLanta_2_TM1'[Valor]), 'Precios_ExPLanta_2_TM1'[Medidas_ExPlanta] = "Cotización", 'Precios_ExPLanta_2_TM1'[Unidades] = "N/A"),
+            "DensidadRaw", CALCULATE(SUM('Precios_ExPLanta_2_TM1'[Valor]), 'Precios_ExPLanta_2_TM1'[Medidas_ExPlanta] = "Densidad")
+        ),
+        "pAnio", VALUE('Precios_ExPLanta_2_TM1'[Años]),
+        "MesNumero", SWITCH('Precios_ExPLanta_2_TM1'[Periodo_Mensual], "Ene", 1, "Feb", 2, "Mar", 3, "Abr", 4, "May", 5, "Jun", 6, "Jul", 7, "Ago", 8, "Sep", 9, "Oct", 10, "Nov", 11, "Dic", 12, BLANK()),
+        "ProductoNormalizado", IF('Precios_ExPLanta_2_TM1'[Productos_ExPlanta] = "Propano Industrial", "Propano", IF('Precios_ExPLanta_2_TM1'[Productos_ExPlanta] = "GLP", "Supergas", IF('Precios_ExPLanta_2_TM1'[Productos_ExPlanta] = "Gasolina Av 100 Octa", "Gasolina Av 100 Octanos", 'Precios_ExPLanta_2_TM1'[Productos_ExPlanta])))
+    )
+VAR __TM1LookupSeed2 =
+    ADDCOLUMNS(
+        __TM1LookupSeed1,
+        "AnioMes", [pAnio] * 100 + [MesNumero],
+        "Dia", IF([pAnio] = __CurYear &amp;&amp; [MesNumero] = __CurMonth, FORMAT(__CurDay, "0") &amp; "-" &amp; 'Precios_ExPLanta_2_TM1'[Periodo_Mensual], FORMAT(DAY(EOMONTH(DATE([pAnio], [MesNumero], 1), 0)), "0") &amp; "-" &amp; 'Precios_ExPLanta_2_TM1'[Periodo_Mensual])
+    )
+VAR __TM1Lookup =
+    SELECTCOLUMNS(
+        FILTER(__TM1LookupSeed2, IF([ProductoNormalizado] = "Supergas" || [ProductoNormalizado] = "Propano", [AnioMes] &gt; 202306, IF([ProductoNormalizado] IN { "Queroseno Montevideo", "Queroseno Interior" }, [AnioMes] &gt; 202107, [AnioMes] &gt; 202106))),
+        "LookupAnio", [pAnio],
+        "LookupMesNumero", [MesNumero],
+        "LookupProducto", [ProductoNormalizado],
+        "CotizacionTM1", [CotizacionRaw],
+        "DensidadTM1", IF([pAnio] = 2021 &amp;&amp; [MesNumero] &lt; 7 || [pAnio] &lt; 2021, BLANK(), [DensidadRaw]),
+        "DiaTM1", [Dia]
+    )
+
+VAR __DensidadLookupSeed1 =
+    ADDCOLUMNS(
+        SUMMARIZECOLUMNS(
+            'Precios_ExPLanta_2_TM1'[Años],
+            'Precios_ExPLanta_2_TM1'[Periodo_Mensual],
+            'Precios_ExPLanta_2_TM1'[Productos_ExPlanta],
+            FILTER(
+                ALL('Precios_ExPLanta_2_TM1'),
+                'Precios_ExPLanta_2_TM1'[Años] &lt;&gt; "Año Base" &amp;&amp;
+                'Precios_ExPLanta_2_TM1'[Periodo_Mensual] &lt;&gt; "Base" &amp;&amp;
+                LEFT('Precios_ExPLanta_2_TM1'[Productos_ExPlanta], 4) &lt;&gt; "RPMS" &amp;&amp;
+                'Precios_ExPLanta_2_TM1'[Productos_ExPlanta] &lt;&gt; "N/A" &amp;&amp;
+                NOT ('Precios_ExPLanta_2_TM1'[Productos_ExPlanta] IN { "Asfalto 150/200", "Asfalto AC-20", "Asfalto MC1", "Asfalto RC2", "Propano Redes" })
+            ),
+            "DensidadRaw", CALCULATE(SUM('Precios_ExPLanta_2_TM1'[Valor]), 'Precios_ExPLanta_2_TM1'[Medidas_ExPlanta] = "Densidad")
+        ),
+        "pAnio", VALUE('Precios_ExPLanta_2_TM1'[Años]),
+        "MesNumero", SWITCH('Precios_ExPLanta_2_TM1'[Periodo_Mensual], "Ene", 1, "Feb", 2, "Mar", 3, "Abr", 4, "May", 5, "Jun", 6, "Jul", 7, "Ago", 8, "Sep", 9, "Oct", 10, "Nov", 11, "Dic", 12, BLANK()),
+        "ProductoLookup", IF('Precios_ExPLanta_2_TM1'[Productos_ExPlanta] = "Gasolina Av 100 Octa", "Gasolina Av 100 Octanos", 'Precios_ExPLanta_2_TM1'[Productos_ExPlanta])
+    )
+VAR __DensidadLookupSeed2 =
+    ADDCOLUMNS(
+        __DensidadLookupSeed1,
+        "AnioMes", [pAnio] * 100 + [MesNumero],
+        "Dia", IF([pAnio] = __CurYear &amp;&amp; [MesNumero] = __CurMonth, FORMAT(__CurDay, "0") &amp; "-" &amp; 'Precios_ExPLanta_2_TM1'[Periodo_Mensual], FORMAT(DAY(EOMONTH(DATE([pAnio], [MesNumero], 1), 0)), "0") &amp; "-" &amp; 'Precios_ExPLanta_2_TM1'[Periodo_Mensual]),
+        "Filtro", IF([pAnio] = 2021 &amp;&amp; [MesNumero] &lt; 7 || [pAnio] &lt; 2021, 0, 1)
+    )
+VAR __DensidadLookup =
+    SELECTCOLUMNS(
+        FILTER(__DensidadLookupSeed2, [Filtro] = 1),
+        "LookupAnio", [pAnio],
+        "LookupMesNumero", [MesNumero],
+        "LookupProducto", [ProductoLookup],
+        "DensidadTM1", [DensidadRaw]
+    )
+
+VAR __BranchCSeed =
+    ADDCOLUMNS(
+        __PlanillaBase,
+        "AnioMes", [pAnio] * 100 + [MesNumero],
+        "CotizacionTM1",
+            VAR __LookupAnio = [pAnio]
+            VAR __LookupMes = [MesNumero]
+            VAR __LookupProducto = [Producto]
+            RETURN
+            MAXX(
+                FILTER(
+                    __TM1Lookup,
+                    [LookupAnio] = __LookupAnio &amp;&amp;
+                    [LookupMesNumero] = __LookupMes &amp;&amp;
+                    [LookupProducto] = __LookupProducto
+                ),
+                [CotizacionTM1]
+            ),
+        "DensidadTM1",
+            VAR __LookupAnio = [pAnio]
+            VAR __LookupMes = [MesNumero]
+            VAR __LookupProducto = IF([Producto] = "Propano", "Propano Industrial", [Producto])
+            RETURN
+            MAXX(
+                FILTER(
+                    __DensidadLookup,
+                    [LookupAnio] = __LookupAnio &amp;&amp;
+                    [LookupMesNumero] = __LookupMes &amp;&amp;
+                    [LookupProducto] = __LookupProducto
+                ),
+                [DensidadTM1]
+            ),
+        "ProductoFinal", IF([Producto] = "Propano", "Propano Industrial", [Producto])
+    )
+VAR __BranchCBase =
+    ADDCOLUMNS(
+        __BranchCSeed,
+        "CotizacionUsada", IF([pAnio] &lt; 2022, [TCPlanilla], [CotizacionTM1]),
+        "PrecioUSDsinDensidad", DIVIDE([PrecioUYU], IF([pAnio] &lt; 2022, [TCPlanilla], [CotizacionTM1]), BLANK()) * 1000,
+        "PrecioUSD", IF([Producto] IN { "Butano Desodorizado", "Supergas", "Propano", "Propano Industrial" }, DIVIDE([PrecioUYU], IF([pAnio] &lt; 2022, [TCPlanilla], [CotizacionTM1]), BLANK()) * 1000 * [DensidadTM1], DIVIDE([PrecioUYU], IF([pAnio] &lt; 2022, [TCPlanilla], [CotizacionTM1]), BLANK()) * 1000)
+    )
+VAR __BranchCRegular =
+    SELECTCOLUMNS(
+        __BranchCBase,
+        "pAnio", [pAnio],
+        "MesNumero", [MesNumero],
+        "Dia", [Dia],
+        "Producto", [ProductoFinal],
+        "PrecioExPlantaUSD", [PrecioUSD],
+        "PrecioExPlantaUYU", [PrecioUYU],
+        "CotizacionPromedio", [CotizacionUsada]
+    )
+VAR __BranchCSupergasGranel =
+    SELECTCOLUMNS(
+        FILTER(__BranchCBase, [Producto] = "Propano" &amp;&amp; [AnioMes] &lt;= 202312),
+        "pAnio", [pAnio],
+        "MesNumero", [MesNumero],
+        "Dia", [Dia],
+        "Producto", "Supergas A Granel",
+        "PrecioExPlantaUSD", [PrecioUSDsinDensidad] * [DensidadTM1],
+        "PrecioExPlantaUYU", [PrecioUYU],
+        "CotizacionPromedio", [CotizacionUsada]
+    )
+
+VAR __FinalRows =
+    ADDCOLUMNS(
+        UNION(__BranchA, __BranchB, __BranchCRegular, __BranchCSupergasGranel),
+        "Orden", SWITCH([Producto], "Super 95 Sp", 1, "Premium 97 Sp", 2, "Queroseno Montevideo", 3, "Queroseno Interior", 4, "Gasoil Comun", 5, "Gasoil Especial", 6, "Gasolina Av 100 Octanos", 7, "Jet A1", 8, "Supergas", 9, "Supergas A Granel", 10, "Butano Desodorizado", 11, "Propano Industrial", 12, "Propano Redes", 13, "Fuel Oil Pesado", 14, "Fuel Oil Medio", 15, "Solvente 1197", 16, "Disan", 17, "Base insecticida", 18, "Aguarras", 19, "Querosol", 20, "Hexano Comercial", 21, "Asfalto AC-20", 22, "Asfalto 150/200", 23, "Asfalto MC1", 24, "Asfalto RC2", 25, 999),
+        "Unidad", SWITCH([Producto], "Supergas", "$/kg", "Supergas A Granel", "$/kg", "Propano Industrial", "$/kg", "Propano Redes", "$/kg", "Asfalto AC-20", "$/kg", "Asfalto 150/200", "$/kg", "Asfalto MC1", "$/kg", "Asfalto RC2", "$/kg", "Butano Desodorizado", "$/kg", "$/lt")
+    )
+RETURN
+SELECTCOLUMNS(__FinalRows, "pAnio", [pAnio], "MesNumero", [MesNumero], "Dia", [Dia], "Producto", [Producto], "Orden", [Orden], "Unidad", [Unidad], "PrecioExPlantaUSD", [PrecioExPlantaUSD], "PrecioExPlantaUYU", [PrecioExPlantaUYU], "CotizacionPromedio", [CotizacionPromedio])
+ORDER BY [Orden], [Producto], [MesNumero]
+        </CommandText>
+      </Query>
+      <Fields>
+        <Field Name="pAnio">
+          <rd:TypeName>System.Int32</rd:TypeName>
+          <DataField>[pAnio]</DataField>
+        </Field>
+        <Field Name="MesNumero">
+          <rd:TypeName>System.Int32</rd:TypeName>
+          <DataField>[MesNumero]</DataField>
+        </Field>
+        <Field Name="Dia">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>[Dia]</DataField>
+        </Field>
+        <Field Name="Producto">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>[Producto]</DataField>
+        </Field>
+        <Field Name="Orden">
+          <rd:TypeName>System.Int32</rd:TypeName>
+          <DataField>[Orden]</DataField>
+        </Field>
+        <Field Name="Unidad">
+          <rd:TypeName>System.String</rd:TypeName>
+          <DataField>[Unidad]</DataField>
+        </Field>
+        <Field Name="PrecioExPlantaUSD">
+          <rd:TypeName>System.Double</rd:TypeName>
+          <DataField>[PrecioExPlantaUSD]</DataField>
+        </Field>
+        <Field Name="PrecioExPlantaUYU">
+          <rd:TypeName>System.Double</rd:TypeName>
+          <DataField>[PrecioExPlantaUYU]</DataField>
+        </Field>
+        <Field Name="CotizacionPromedio">
+          <rd:TypeName>System.Double</rd:TypeName>
+          <DataField>[CotizacionPromedio]</DataField>
+        </Field>
+      </Fields>
+      <Filters>
+        <Filter>
+          <FilterExpression>=Fields!pAnio.Value</FilterExpression>
+          <Operator>Equal</Operator>
+          <FilterValues>
+            <FilterValue>=Parameters!pAnio.Value</FilterValue>
+          </FilterValues>
+        </Filter>
+      </Filters>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Rectangle Name="BodyCanvas">
+            <ReportItems>
+              <Textbox Name="txtToggleDescripcion">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>¿Qué muestra este reporte?</Value>
+                        <Style>
+                          <FontSize>9pt</FontSize>
+                          <TextDecoration>Underline</TextDecoration>
+                          <Color>Blue</Color>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.06944in</Top>
+                <Left>0.12in</Left>
+                <Height>0.22in</Height>
+                <Width>2.3in</Width>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Textbox>
+              <Textbox Name="txtDescripcion">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>=First(Fields!Descripcion.Value, "dsDescripcion")</Value>
+                        <Style>
+                          <FontSize>8.5pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>0.33111in</Top>
+                <Left>0.12in</Left>
+                <Height>1.29444in</Height>
+                <Width>9.8in</Width>
+                <ZIndex>1</ZIndex>
+                <Visibility>
+                  <Hidden>false</Hidden>
+                  <ToggleItem>txtToggleDescripcion</ToggleItem>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Textbox>
+              <Rectangle Name="rectUnidad">
+                <ReportItems>
+                  <Textbox Name="txtUnidadTitulo">
+                    <CanGrow>true</CanGrow>
+                    <KeepTogether>true</KeepTogether>
+                    <Paragraphs>
+                      <Paragraph>
+                        <TextRuns>
+                          <TextRun>
+                            <Value>Seleccione la unidad:</Value>
+                            <Style>
+                              <FontSize>9pt</FontSize>
+                              <FontWeight>Bold</FontWeight>
+                            </Style>
+                          </TextRun>
+                        </TextRuns>
+                        <Style />
+                      </Paragraph>
+                    </Paragraphs>
+                    <Top>0.02in</Top>
+                    <Left>0.04in</Left>
+                    <Height>0.2in</Height>
+                    <Width>1.4in</Width>
+                    <Style>
+                      <Border>
+                        <Style>None</Style>
+                      </Border>
+                    </Style>
+                  </Textbox>
+                  <Textbox Name="txtUnidadOpcion1">
+                    <CanGrow>true</CanGrow>
+                    <KeepTogether>true</KeepTogether>
+                    <Paragraphs>
+                      <Paragraph>
+                        <TextRuns>
+                          <TextRun>
+                            <Value>=IIF(Parameters!pUnidad.Value = "USD/m3", "(*) USD/m3", "( ) USD/m3")</Value>
+                            <Style>
+                              <FontSize>8pt</FontSize>
+                            </Style>
+                          </TextRun>
+                        </TextRuns>
+                        <Style />
+                      </Paragraph>
+                    </Paragraphs>
+                    <Top>0.28in</Top>
+                    <Left>0.06in</Left>
+                    <Height>0.18in</Height>
+                    <Width>1.45in</Width>
+                    <ZIndex>1</ZIndex>
+                    <Style>
+                      <Border>
+                        <Style>None</Style>
+                      </Border>
+                    </Style>
+                  </Textbox>
+                  <Textbox Name="txtUnidadOpcion2">
+                    <CanGrow>true</CanGrow>
+                    <KeepTogether>true</KeepTogether>
+                    <Paragraphs>
+                      <Paragraph>
+                        <TextRuns>
+                          <TextRun>
+                            <Value>=IIF(Parameters!pUnidad.Value = "$/lt ó $/kg según corresponda", "(*) $/lt ó $/kg según corresponda", "( ) $/lt ó $/kg según corresponda")</Value>
+                            <Style>
+                              <FontSize>8pt</FontSize>
+                            </Style>
+                          </TextRun>
+                        </TextRuns>
+                        <Style />
+                      </Paragraph>
+                    </Paragraphs>
+                    <Top>0.46in</Top>
+                    <Left>0.06in</Left>
+                    <Height>0.18in</Height>
+                    <Width>1.75in</Width>
+                    <ZIndex>2</ZIndex>
+                    <Style>
+                      <Border>
+                        <Style>None</Style>
+                      </Border>
+                    </Style>
+                  </Textbox>
+                </ReportItems>
+                <Top>1.69in</Top>
+                <Left>0.12in</Left>
+                <Height>0.68in</Height>
+                <Width>1.81in</Width>
+                <ZIndex>2</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>Solid</Style>
+                  </Border>
+                </Style>
+              </Rectangle>
+              <Textbox Name="txtNota1">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Los valores "-" corresponden a que el cálculo del precio ex planta para ANCAP está en proceso y todavía no se publicó.</Value>
+                        <Style>
+                          <FontSize>9pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>2.43944in</Top>
+                <Left>0.12in</Left>
+                <Height>0.2in</Height>
+                <Width>6.2in</Width>
+                <ZIndex>3</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Textbox>
+              <Textbox Name="txtNota2">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>A partir de Diciembre 2022 se discontinuó la venta del producto Querosol.</Value>
+                        <Style>
+                          <FontSize>9pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>2.62944in</Top>
+                <Left>0.12in</Left>
+                <Height>0.2in</Height>
+                <Width>5.2in</Width>
+                <ZIndex>4</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Textbox>
+              <Textbox Name="txtNota3">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>A partir del 1/01/2024 se elimina la denominación Supergas Granel, reemplazándola por Propano Industrial (GLP granel).</Value>
+                        <Style>
+                          <FontSize>9pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>2.81944in</Top>
+                <Left>0.12in</Left>
+                <Height>0.22in</Height>
+                <Width>7.2in</Width>
+                <ZIndex>5</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Textbox>
+              <Tablix Name="tablixUSD">
+                <TablixBody>
+                  <TablixColumns>
+                    <TablixColumn>
+                      <Width>1.55in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.54in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.54in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.54in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.54in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.54in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.54in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.54in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.54in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.54in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.54in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.54in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.54in</Width>
+                    </TablixColumn>
+                  </TablixColumns>
+                  <TablixRows>
+                    <TablixRow>
+                      <Height>0.28in</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUsdCorner">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>USD/m3</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>White</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUsd01">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 1=Month(Today()), CStr(Day(Today())) &amp; "-Ene", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),2,0))) &amp; "-Ene")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUsd02">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 2=Month(Today()), CStr(Day(Today())) &amp; "-Feb", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),3,0))) &amp; "-Feb")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUsd03">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 3=Month(Today()), CStr(Day(Today())) &amp; "-Mar", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),4,0))) &amp; "-Mar")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUsd04">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 4=Month(Today()), CStr(Day(Today())) &amp; "-Abr", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),5,0))) &amp; "-Abr")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUsd05">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 5=Month(Today()), CStr(Day(Today())) &amp; "-May", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),6,0))) &amp; "-May")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUsd06">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 6=Month(Today()), CStr(Day(Today())) &amp; "-Jun", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),7,0))) &amp; "-Jun")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUsd07">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 7=Month(Today()), CStr(Day(Today())) &amp; "-Jul", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),8,0))) &amp; "-Jul")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUsd08">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 8=Month(Today()), CStr(Day(Today())) &amp; "-Ago", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),9,0))) &amp; "-Ago")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUsd09">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 9=Month(Today()), CStr(Day(Today())) &amp; "-Sep", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),10,0))) &amp; "-Sep")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUsd10">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 10=Month(Today()), CStr(Day(Today())) &amp; "-Oct", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),11,0))) &amp; "-Oct")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUsd11">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 11=Month(Today()), CStr(Day(Today())) &amp; "-Nov", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),12,0))) &amp; "-Nov")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUsd12">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 12=Month(Today()), CStr(Day(Today())) &amp; "-Dic", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),13,0))) &amp; "-Dic")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                    <TablixRow>
+                      <Height>0.25in</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUsdProducto">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Switch(Fields!Producto.Value = "Asfalto AC-20", "Asfalto AC-30", Fields!Producto.Value = "Super 95 Sp", "Gasolina Super 95", Fields!Producto.Value = "Premium 97 Sp", "Gasolina Premium 97", Fields!Producto.Value = "Gasoil Comun", "Gasoil 50-S", Fields!Producto.Value = "Gasoil Especial", "Gasoil 10-S", Fields!Producto.Value = "Propano", "Propano Industrial", True, Fields!Producto.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <TextDecoration>Underline</TextDecoration>
+                                        <Color>Blue</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <ActionInfo>
+                                <Actions>
+                                  <Action>
+                                    <Drillthrough>
+                                      <ReportName>Precios Unitarios Ex Planta - detalle</ReportName>
+                                      <Parameters>
+                                        <Parameter Name="pAnio">
+                                          <Value>=Parameters!pAnio.Value</Value>
+                                        </Parameter>
+                                        <Parameter Name="pUnidad">
+                                      <Value>=IIF(Parameters!pUnidad.Value = "USD/m3", "USD/m3", "$/lt ó $/kg según corresponda")</Value>
+                                        </Parameter>
+                                        <Parameter Name="pProducto">
+                                          <Value>=Switch(Fields!Producto.Value = "Asfalto AC-20", "Asfalto AC-30", Fields!Producto.Value = "Super 95 Sp", "Gasolina Super 95", Fields!Producto.Value = "Premium 97 Sp", "Gasolina Premium 97", Fields!Producto.Value = "Gasoil Comun", "Gasoil 50-S", Fields!Producto.Value = "Gasoil Especial", "Gasoil 10-S", Fields!Producto.Value = "Propano", "Propano Industrial", True, Fields!Producto.Value)</Value>
+                                        </Parameter>
+                                        <Parameter Name="pVista">
+                                          <Value>Resumen</Value>
+                                        </Parameter>
+                                      </Parameters>
+                                    </Drillthrough>
+                                  </Action>
+                                </Actions>
+                              </ActionInfo>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#dcdcdc</BackgroundColor>
+                                <PaddingLeft>4pt</PaddingLeft>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUsdM01">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 1, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")) OR Max(IIF(Fields!MesNumero.Value = 1, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 1, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUsdM02">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 2, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")) OR Max(IIF(Fields!MesNumero.Value = 2, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 2, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUsdM03">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 3, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")) OR Max(IIF(Fields!MesNumero.Value = 3, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 3, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUsdM04">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 4, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")) OR Max(IIF(Fields!MesNumero.Value = 4, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 4, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUsdM05">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 5, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")) OR Max(IIF(Fields!MesNumero.Value = 5, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 5, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUsdM06">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 6, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")) OR Max(IIF(Fields!MesNumero.Value = 6, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 6, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUsdM07">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 7, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")) OR Max(IIF(Fields!MesNumero.Value = 7, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 7, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUsdM08">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 8, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")) OR Max(IIF(Fields!MesNumero.Value = 8, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 8, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUsdM09">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 9, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")) OR Max(IIF(Fields!MesNumero.Value = 9, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 9, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUsdM10">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 10, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")) OR Max(IIF(Fields!MesNumero.Value = 10, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 10, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUsdM11">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 11, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")) OR Max(IIF(Fields!MesNumero.Value = 11, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 11, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUsdM12">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 12, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")) OR Max(IIF(Fields!MesNumero.Value = 12, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 12, Fields!PrecioExPlantaUSD.Value, Nothing), "grpUSDProduct")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                  </TablixRows>
+                </TablixBody>
+                <TablixColumnHierarchy>
+                  <TablixMembers>
+                    <TablixMember />
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 1 And Not IsNothing(Fields!PrecioExPlantaUSD.Value) And Fields!PrecioExPlantaUSD.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 2 And Not IsNothing(Fields!PrecioExPlantaUSD.Value) And Fields!PrecioExPlantaUSD.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 3 And Not IsNothing(Fields!PrecioExPlantaUSD.Value) And Fields!PrecioExPlantaUSD.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 4 And Not IsNothing(Fields!PrecioExPlantaUSD.Value) And Fields!PrecioExPlantaUSD.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 5 And Not IsNothing(Fields!PrecioExPlantaUSD.Value) And Fields!PrecioExPlantaUSD.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 6 And Not IsNothing(Fields!PrecioExPlantaUSD.Value) And Fields!PrecioExPlantaUSD.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 7 And Not IsNothing(Fields!PrecioExPlantaUSD.Value) And Fields!PrecioExPlantaUSD.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 8 And Not IsNothing(Fields!PrecioExPlantaUSD.Value) And Fields!PrecioExPlantaUSD.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 9 And Not IsNothing(Fields!PrecioExPlantaUSD.Value) And Fields!PrecioExPlantaUSD.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 10 And Not IsNothing(Fields!PrecioExPlantaUSD.Value) And Fields!PrecioExPlantaUSD.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 11 And Not IsNothing(Fields!PrecioExPlantaUSD.Value) And Fields!PrecioExPlantaUSD.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 12 And Not IsNothing(Fields!PrecioExPlantaUSD.Value) And Fields!PrecioExPlantaUSD.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixColumnHierarchy>
+                <TablixRowHierarchy>
+                  <TablixMembers>
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                      <RepeatOnNewPage>true</RepeatOnNewPage>
+                    </TablixMember>
+                    <TablixMember>
+                      <Group Name="grpUSDProduct">
+                        <GroupExpressions>
+                          <GroupExpression>=Fields!Producto.Value</GroupExpression>
+                        </GroupExpressions>
+                      </Group>
+                      <SortExpressions>
+                        <SortExpression>
+                          <Value>=Fields!Orden.Value</Value>
+                        </SortExpression>
+                      </SortExpressions>
+                      <Visibility>
+                        <Hidden>=IsNothing(First(Fields!Producto.Value, "grpUSDProduct")) Or First(Fields!Producto.Value, "grpUSDProduct") = "N/A" Or Count(IIF(Not IsNothing(Fields!PrecioExPlantaUSD.Value) And Fields!PrecioExPlantaUSD.Value &lt;&gt; 0, 1, Nothing), "grpUSDProduct") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixRowHierarchy>
+                <NoRowsMessage>No hay datos disponibles</NoRowsMessage>
+                <DataSetName>dsTabla</DataSetName>
+                <Top>3.16667in</Top>
+                <Left>6.24in</Left>
+                <Height>0.53in</Height>
+                <Width>8.03in</Width>
+                <ZIndex>6</ZIndex>
+                <Visibility>
+                  <Hidden>=Parameters!pUnidad.Value &lt;&gt; "USD/m3"</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Tablix>
+              <Tablix Name="tablixUYU">
+                <TablixBody>
+                  <TablixColumns>
+                    <TablixColumn>
+                      <Width>0.62in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>1.45in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.5in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.5in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.5in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.5in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.5in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.5in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.5in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.5in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.5in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.5in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.5in</Width>
+                    </TablixColumn>
+                    <TablixColumn>
+                      <Width>0.5in</Width>
+                    </TablixColumn>
+                  </TablixColumns>
+                  <TablixRows>
+                    <TablixRow>
+                      <Height>0.28in</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUyu0">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value />
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUyu1">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value />
+                                      <Style />
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUyuM01">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 1=Month(Today()), CStr(Day(Today())) &amp; "-Ene", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),2,0))) &amp; "-Ene")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUyuM02">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 2=Month(Today()), CStr(Day(Today())) &amp; "-Feb", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),3,0))) &amp; "-Feb")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUyuM03">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 3=Month(Today()), CStr(Day(Today())) &amp; "-Mar", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),4,0))) &amp; "-Mar")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUyuM04">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 4=Month(Today()), CStr(Day(Today())) &amp; "-Abr", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),5,0))) &amp; "-Abr")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUyuM05">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 5=Month(Today()), CStr(Day(Today())) &amp; "-May", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),6,0))) &amp; "-May")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUyuM06">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 6=Month(Today()), CStr(Day(Today())) &amp; "-Jun", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),7,0))) &amp; "-Jun")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUyuM07">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 7=Month(Today()), CStr(Day(Today())) &amp; "-Jul", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),8,0))) &amp; "-Jul")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUyuM08">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 8=Month(Today()), CStr(Day(Today())) &amp; "-Ago", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),9,0))) &amp; "-Ago")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUyuM09">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 9=Month(Today()), CStr(Day(Today())) &amp; "-Sep", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),10,0))) &amp; "-Sep")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUyuM10">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 10=Month(Today()), CStr(Day(Today())) &amp; "-Oct", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),11,0))) &amp; "-Oct")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUyuM11">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 11=Month(Today()), CStr(Day(Today())) &amp; "-Nov", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),12,0))) &amp; "-Nov")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="hdrUyuM12">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(CInt(Parameters!pAnio.Value)=Year(Today()) AND 12=Month(Today()), CStr(Day(Today())) &amp; "-Dic", CStr(Day(DateSerial(CInt(Parameters!pAnio.Value),13,0))) &amp; "-Dic")</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <Color>White</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#153767</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                    <TablixRow>
+                      <Height>0.25in</Height>
+                      <TablixCells>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuUnidad">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(Fields!Producto.Value = "Propano" Or Fields!Producto.Value = "Propano Industrial", "$/kg", Fields!Unidad.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#dcdcdc</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuProducto">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=Switch(Fields!Producto.Value = "Asfalto AC-20", "Asfalto AC-30", Fields!Producto.Value = "Super 95 Sp", "Gasolina Super 95", Fields!Producto.Value = "Premium 97 Sp", "Gasolina Premium 97", Fields!Producto.Value = "Gasoil Comun", "Gasoil 50-S", Fields!Producto.Value = "Gasoil Especial", "Gasoil 10-S", Fields!Producto.Value = "Propano", "Propano Industrial", True, Fields!Producto.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                        <TextDecoration>Underline</TextDecoration>
+                                        <Color>Blue</Color>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style />
+                                </Paragraph>
+                              </Paragraphs>
+                              <ActionInfo>
+                                <Actions>
+                                  <Action>
+                                    <Drillthrough>
+                                      <ReportName>Precios Unitarios Ex Planta - detalle</ReportName>
+                                      <Parameters>
+                                        <Parameter Name="pAnio">
+                                          <Value>=Parameters!pAnio.Value</Value>
+                                        </Parameter>
+                                        <Parameter Name="pUnidad">
+                                      <Value>=IIF(Parameters!pUnidad.Value = "USD/m3", "USD/m3", "$/lt ó $/kg según corresponda")</Value>
+                                        </Parameter>
+                                        <Parameter Name="pProducto">
+                                          <Value>=Switch(Fields!Producto.Value = "Asfalto AC-20", "Asfalto AC-30", Fields!Producto.Value = "Super 95 Sp", "Gasolina Super 95", Fields!Producto.Value = "Premium 97 Sp", "Gasolina Premium 97", Fields!Producto.Value = "Gasoil Comun", "Gasoil 50-S", Fields!Producto.Value = "Gasoil Especial", "Gasoil 10-S", Fields!Producto.Value = "Propano", "Propano Industrial", True, Fields!Producto.Value)</Value>
+                                        </Parameter>
+                                        <Parameter Name="pVista">
+                                          <Value>Resumen</Value>
+                                        </Parameter>
+                                      </Parameters>
+                                    </Drillthrough>
+                                  </Action>
+                                </Actions>
+                              </ActionInfo>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#dcdcdc</BackgroundColor>
+                                <PaddingLeft>4pt</PaddingLeft>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuM01">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 1, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")) OR Max(IIF(Fields!MesNumero.Value = 1, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 1, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuM02">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 2, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")) OR Max(IIF(Fields!MesNumero.Value = 2, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 2, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuM03">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 3, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")) OR Max(IIF(Fields!MesNumero.Value = 3, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 3, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuM04">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 4, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")) OR Max(IIF(Fields!MesNumero.Value = 4, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 4, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuM05">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 5, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")) OR Max(IIF(Fields!MesNumero.Value = 5, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 5, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuM06">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 6, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")) OR Max(IIF(Fields!MesNumero.Value = 6, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 6, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuM07">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 7, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")) OR Max(IIF(Fields!MesNumero.Value = 7, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 7, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuM08">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 8, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")) OR Max(IIF(Fields!MesNumero.Value = 8, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 8, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuM09">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 9, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")) OR Max(IIF(Fields!MesNumero.Value = 9, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 9, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuM10">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 10, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")) OR Max(IIF(Fields!MesNumero.Value = 10, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 10, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuM11">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 11, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")) OR Max(IIF(Fields!MesNumero.Value = 11, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 11, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuM12">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(IsNothing(Max(IIF(Fields!MesNumero.Value = 12, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")) OR Max(IIF(Fields!MesNumero.Value = 12, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail") = 0, "-", Format(CDec(Max(IIF(Fields!MesNumero.Value = 12, Fields!PrecioExPlantaUYU.Value, Nothing), "grpUYUDetail")), "N2"))</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Right</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#f2f2f2</BackgroundColor>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                      </TablixCells>
+                    </TablixRow>
+                  </TablixRows>
+                </TablixBody>
+                <TablixColumnHierarchy>
+                  <TablixMembers>
+                    <TablixMember />
+                    <TablixMember />
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 1 And Not IsNothing(Fields!PrecioExPlantaUYU.Value) And Fields!PrecioExPlantaUYU.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 2 And Not IsNothing(Fields!PrecioExPlantaUYU.Value) And Fields!PrecioExPlantaUYU.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 3 And Not IsNothing(Fields!PrecioExPlantaUYU.Value) And Fields!PrecioExPlantaUYU.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 4 And Not IsNothing(Fields!PrecioExPlantaUYU.Value) And Fields!PrecioExPlantaUYU.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 5 And Not IsNothing(Fields!PrecioExPlantaUYU.Value) And Fields!PrecioExPlantaUYU.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 6 And Not IsNothing(Fields!PrecioExPlantaUYU.Value) And Fields!PrecioExPlantaUYU.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 7 And Not IsNothing(Fields!PrecioExPlantaUYU.Value) And Fields!PrecioExPlantaUYU.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 8 And Not IsNothing(Fields!PrecioExPlantaUYU.Value) And Fields!PrecioExPlantaUYU.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 9 And Not IsNothing(Fields!PrecioExPlantaUYU.Value) And Fields!PrecioExPlantaUYU.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 10 And Not IsNothing(Fields!PrecioExPlantaUYU.Value) And Fields!PrecioExPlantaUYU.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 11 And Not IsNothing(Fields!PrecioExPlantaUYU.Value) And Fields!PrecioExPlantaUYU.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                    <TablixMember>
+                      <Visibility>
+                        <Hidden>=Count(IIF(Fields!MesNumero.Value = 12 And Not IsNothing(Fields!PrecioExPlantaUYU.Value) And Fields!PrecioExPlantaUYU.Value &lt;&gt; 0, 1, Nothing), "dsTabla") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixColumnHierarchy>
+                <TablixRowHierarchy>
+                  <TablixMembers>
+                    <TablixMember>
+                      <KeepWithGroup>After</KeepWithGroup>
+                      <RepeatOnNewPage>true</RepeatOnNewPage>
+                    </TablixMember>
+                    <TablixMember>
+                      <Group Name="grpUYUDetail">
+                        <GroupExpressions>
+                          <GroupExpression>=Fields!Orden.Value &amp; "|" &amp; Fields!Producto.Value</GroupExpression>
+                        </GroupExpressions>
+                      </Group>
+                      <SortExpressions>
+                        <SortExpression>
+                          <Value>=Fields!Orden.Value</Value>
+                        </SortExpression>
+                      </SortExpressions>
+                      <Visibility>
+                        <Hidden>=IsNothing(First(Fields!Producto.Value, "grpUYUDetail")) Or First(Fields!Producto.Value, "grpUYUDetail") = "N/A" Or Count(IIF(Not IsNothing(Fields!PrecioExPlantaUYU.Value) And Fields!PrecioExPlantaUYU.Value &lt;&gt; 0, 1, Nothing), "grpUYUDetail") = 0</Hidden>
+                      </Visibility>
+                    </TablixMember>
+                  </TablixMembers>
+                </TablixRowHierarchy>
+                <NoRowsMessage>No hay datos disponibles</NoRowsMessage>
+                <DataSetName>dsTabla</DataSetName>
+                <Top>3.16667in</Top>
+                <Left>6.22in</Left>
+                <Height>0.53in</Height>
+                <Width>8.07in</Width>
+                <ZIndex>7</ZIndex>
+                <Visibility>
+                  <Hidden>=Parameters!pUnidad.Value = "USD/m3"</Hidden>
+                </Visibility>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Tablix>
+              <Textbox Name="txtReferente">
+                <CanGrow>true</CanGrow>
+                <KeepTogether>true</KeepTogether>
+                <Paragraphs>
+                  <Paragraph>
+                    <TextRuns>
+                      <TextRun>
+                        <Value>Referentes: Jefe Ventas Combustibles y Lubricantes</Value>
+                        <Style>
+                          <FontSize>9pt</FontSize>
+                        </Style>
+                      </TextRun>
+                    </TextRuns>
+                    <Style />
+                  </Paragraph>
+                </Paragraphs>
+                <Top>3.855in</Top>
+                <Left>0.16in</Left>
+                <Height>0.2in</Height>
+                <Width>4.5in</Width>
+                <ZIndex>8</ZIndex>
+                <Style>
+                  <Border>
+                    <Style>None</Style>
+                  </Border>
+                </Style>
+              </Textbox>
+            </ReportItems>
+            <Top>0in</Top>
+            <Left>0in</Left>
+            <Height>4.625in</Height>
+            <Width>20.5in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+        </ReportItems>
+        <Height>4.675in</Height>
+        <Style />
+      </Body>
+      <Width>20.5in</Width>
+      <Page>
+        <PageHeader>
+          <Height>0.62in</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Rectangle Name="rectHeader">
+              <ReportItems>
+                <Textbox Name="txtTitulo">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>Composición del precio (Precios unitarios Ex Planta)</Value>
+                          <Style>
+                            <FontFamily>Tahoma</FontFamily>
+                            <FontSize>16pt</FontSize>
+                            <FontWeight>Bold</FontWeight>
+                            <Color>White</Color>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Center</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>0.03in</Top>
+                  <Left>0.3in</Left>
+                  <Height>0.25in</Height>
+                  <Width>19.9in</Width>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                  </Style>
+                </Textbox>
+                <Textbox Name="txtHeaderAnio">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=Parameters!pAnio.Value</Value>
+                          <Style>
+                            <FontSize>12pt</FontSize>
+                            <FontWeight>Bold</FontWeight>
+                            <Color>White</Color>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Center</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <Top>0.28in</Top>
+                  <Left>0.3in</Left>
+                  <Height>0.18in</Height>
+                  <Width>19.9in</Width>
+                  <ZIndex>1</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                  </Style>
+                </Textbox>
+                <Image Name="imgLogo">
+                  <Source>Embedded</Source>
+                  <Value>imgAncapLogo</Value>
+                  <Sizing>FitProportional</Sizing>
+                  <Top>0.05in</Top>
+                  <Left>18.85in</Left>
+                  <Height>0.42in</Height>
+                  <Width>1.45in</Width>
+                  <ZIndex>2</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                  </Style>
+                </Image>
+              </ReportItems>
+              <Top>0in</Top>
+              <Left>0in</Left>
+              <Height>0.6in</Height>
+              <Width>20.5in</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <BottomBorder>
+                  <Color>#ffc728</Color>
+                  <Style>Solid</Style>
+                  <Width>2.25pt</Width>
+                </BottomBorder>
+                <BackgroundColor>#0f254c</BackgroundColor>
+              </Style>
+            </Rectangle>
+          </ReportItems>
+          <Style />
+        </PageHeader>
+        <PageHeight>8.5in</PageHeight>
+        <PageWidth>21in</PageWidth>
+        <LeftMargin>0.25in</LeftMargin>
+        <RightMargin>0.25in</RightMargin>
+        <TopMargin>0.25in</TopMargin>
+        <BottomMargin>0.25in</BottomMargin>
+        <ColumnSpacing>0.13in</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="pAnio">
+      <DataType>Integer</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>=Year(Today())</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Seleccionar Año:</Prompt>
+      <ValidValues>
+        <DataSetReference>
+          <DataSetName>dsAnio</DataSetName>
+          <ValueField>Anio</ValueField>
+          <LabelField>Anio</LabelField>
+        </DataSetReference>
+      </ValidValues>
+    </ReportParameter>
+    <ReportParameter Name="pUnidad">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>USD/m3</Value>
+        </Values>
+      </DefaultValue>
+      <Prompt>Unidad:</Prompt>
+      <ValidValues>
+        <ParameterValues>
+          <ParameterValue>
+            <Value>USD/m3</Value>
+            <Label>USD/m3</Label>
+          </ParameterValue>
+          <ParameterValue>
+            <Value>$/lt ó $/kg según corresponda</Value>
+            <Label>$/lt ó $/kg según corresponda</Label>
+          </ParameterValue>
+        </ParameterValues>
+      </ValidValues>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>2</NumberOfColumns>
+      <NumberOfRows>1</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>pAnio</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>1</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>pUnidad</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <EmbeddedImages>
+    <EmbeddedImage Name="imgAncapLogo">
+      <MIMEType>image/jpeg</MIMEType>
+      <ImageData>/9j/4AAQSkZJRgABAQEAYABgAAD/7QAsUGhvdG9zaG9wIDMuMAA4QklNA+0AAAAAABAASAAAAAEAAQBIAAAAAQAB/+EASkV4aWYAAElJKgAIAAAAAwAaAQUAAQAAADIAAAAbAQUAAQAAADoAAAAoAQMAAQAAAAIAPwAAAAAAAABIAAAAAQAAAEgAAAABAP/bAEMACAYGBwYFCAcHBwkJCAoMFA0MCwsMGRITDxQdGh8eHRocHCAkLicgIiwjHBwoNyksMDE0NDQfJzk9ODI8LjM0Mv/bAEMBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMv/AABEIAB4AnAMBIgACEQEDEQH/xAAfAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgv/xAC1EAACAQMDAgQDBQUEBAAAAX0BAgMABBEFEiExQQYTUWEHInEUMoGRoQgjQrHBFVLR8CQzYnKCCQoWFxgZGiUmJygpKjQ1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4eLj5OXm5+jp6vHy8/T19vf4+fr/xAAfAQADAQEBAQEBAQEBAAAAAAAAAQIDBAUGBwgJCgv/xAC1EQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4+Tl5ufo6ery8/T19vf4+fr/2gAMAwEAAhEDEQA/APIqKK7P
+4feE/wC3tT+23cedPtWBYEcSv1C/ToT+XeuzFYmnhqUq1R6I56VKVWahHdnGUV6L8TfCn2O5OuWcYFvM2LhVH3HP8X0P8/rXnVTgsZTxlFVqfX8H2HWoyozcJBRRXReCdE/t3xPbQOu63iPnTem1e34nA/Gta9aNClKrPZK5FODnJRXUG8C+JUsTeNpjCAR+aT5qZ24z93dnp2xmsCKN5pUijGXdgqjPUnpX0EniW2k8YS+Hjt3rbiQMe79Sn/fJB/OvINb0b+wvHQs1XEJuUkh/3GYEfl0/CvEyzNq+IlKGIiovl5o2vqvvO3E4SFNKVN3V7P1K2p+DfEGkWTXl9pzR26kBnEiPjPqFJNUNK0e/1u8Npp0HnThS+3eq8DqcsQO9fRF/PZARWV7sKXpMKo44c7Sdv4gGuC8NeGJfDPxHkhG5rSa1ke3kPddy5B9x/ge9cmF4hqVKFR1IpTSbjvZpfPp6/kbVcvjGpFRbcW7PujzPU9IvtHvvsV/AYrnAOwMG4PT7pIrbsfh74lvohKth5KEZBncIT+HX8xXptvpNtefEjUb+dA72dtAIgwyAzbvm+o2/rXEeOvGernxFdWFjey2trbN5YELbWZh1JYc9c/lXRRzXFYucaOHUVLlUpN3srpbL5mc8LSpJzqN2vZJHPat4N17RYmmvLB/IXrLGQ6j3OOn41hV6J4b+J0llZS22uJNfD/lnIoBbHcNkjP8A+usXRNKs/E3joRWNu8WmmQztG4HyRjkrxnjPA+oruo4vE01U+uQSUVfmWz+/W5hOjTk4+xe/R7orjwL4laxF6NMbyDH5ufNTO3Gfu7s9O2M1ztfQx8SWw8YDw7gb/s/mBv8Ab67P++ea8Y8ZaL/YXie6tUXbA582H02NzgfQ5H4VzZVmtbFVHTxEVFtKUbdV95risLClHmpu+tn6kn/CBeKP+gRL/wB9p/jTZfAviaGJpW0iYqoydpVj+QOTXr/ja71my0JZdCWZrzzl
+BEMIlbbg54wfbmsfwLqfi291C5j1+CdbZYtyPPbCEh8jAHAzxn8q8+nneNnhnifcsul3f5am8sFRVRU/eu+uljxcggkEYI7UVveNEhTxlqqwY2eeScf3iAW/XNYNfVUantaUalrXSf3nlzjyycexYsbZby9igeeOBHb5pZDhUHc/l279K9PPxD0Hw5pkWm6Fay3awrtDt+7QnuxJ5JJ5PAryiiuXGZfSxjj7ZtxXTZX7vqa0cRKinybvqesWnxO0jVrSSx12weCOZSjsn7xCD7dR+Ga801azt7LUpYbS6jurbO6KZDncp6Z9D6iqVFLCZbRwc5SoXSe63Xr3CriZ1klPVrqFew/Dywh8P+EbrXb35DOplJxyIlzgficn3yK8eop5jgnjKPseblV1fS9123DD1lRnz2uz1UfEbwsL77aPD7i7zu88QReZnpndnOa0PHmmxapa6Pr1phxFNFucfxROwwfwJH/fRrxqiuH+wqdOrCrQm4uPfW67b6G/16UoOM1e/wAj2L4syPFoenyRsVdbsMrKcEEK2CK1fBHiuHxLpyJcMg1O2XEinGWHTevseM+h+orwinI7xnKOynplTispcP05YNYZy96LbUrd/K/6lLMJKs6iWj6Hsl14kttB+Jd1DeuI7W8toVMh6IwztJ9uSPxqr4p+HTa9qT6rpF7bqbjDOkpOwnH3lYA9fpXkruztudix9Sc1JFd3NupWG4ljU9QjkfyqoZNUoyjVw9XlkkovS6dvK4njIzTjUjdXutdj1fTfBGheFtNnu/Es9tcs2MbwQq47KOrE1d8FWtjp+m6n4kNutnbXLM8SY/1dumcfieT78V4xLNLO++aV5G6ZdiT+tHnS7NnmPt6bdxxRVyavWhJVa7bk1fTSy6JX06ahHGQhJOMLJbevqeo/8LG8LG9+2nw+/wBrzu8/yIvMz0zuzmrXxK06LWfDNpr1n8/kgNuA+9E+P5HH5mvIaf50uzZ5j7Om3ccVoskp
+0q1OtQk0497u67b6EvGylCUKivf5HvPjnxFd+GdEhvbKOCSR7lYiJlJGCrHsRz8orzu5+KviGeBo0jsoGb/lpFE24fTcxH6VxTzSyDDyOw64ZiaZSwWQ4ahTUasVOXewVsfUnK8XZDpJHlkaSRmd3JZmY5JJ6k02iivc2OI//9k=</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <Language>es-UY</Language>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+</Report>

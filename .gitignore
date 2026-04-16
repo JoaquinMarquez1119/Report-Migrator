@@ -1,0 +1,30 @@
+# Report Builder / SSRS temp artifacts
+*.rdl.data
+*.rptproj.user
+*.suo
+bin/
+obj/
+
+# OS / editor
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+*.swo
+*~
+
+# IDE
+.vs/
+.vscode/
+.idea/
+
+# Office lock files
+~$*
+
+# Logs
+*.log
+
+# Local settings
+.env
+.env.local
