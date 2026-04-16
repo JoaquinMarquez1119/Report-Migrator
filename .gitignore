@@ -28,3 +28,6 @@ Desktop.ini
 # Local settings
 .env
 .env.local
+
+# Claude Code local session settings
+.claude/
