@@ -2,7 +2,7 @@
 
 **Estado:** EJECUTADO — ver sección 6 para el detalle de movimientos aplicados.
 **Baseline commit:** `fd72eca baseline pre-reorganization`
-**Reorg commit:** (se completa tras `git commit`)
+**Reorg commit:** `7548af9 reorg: move artifacts to 3-layer structure (skills archived pending reconstruction)`
 **Fecha:** 2026-04-16
 
 ---
