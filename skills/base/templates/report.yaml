@@ -1,0 +1,35 @@
+# Metadata del reporte. La skill Capa 1 lee/escribe este archivo.
+# status transitions: intake -> in-progress -> review -> done
+# Cambiar a "done" dispara la propuesta de retrospectiva.
+
+id: report-{{SLUG}}
+name: {{NOMBRE}}
+slug: {{SLUG}}
+status: intake
+created: {{FECHA_ISO}}
+
+# Playbook(s) Capa 2 adoptado(s). Lista vacía hasta completar el Paso 2.
+playbooks: []
+
+source_of_truth:
+  layout: inputs/screenshots        # o inputs/pdf
+  logic: inputs/queries
+  prompts: inputs/xml-spec
+  validation: inputs/pdf            # o inputs/screenshots/validation
+
+inputs:
+  xml_spec: []
+  queries: []
+  evidence: []
+  assets: []
+  mappings: []
+  notes: []
+
+outputs:
+  rdl:
+    - output/{{NOMBRE_ARCHIVO_RDL}}.rdl
+  validation:
+    - output/validation/
+
+# Preguntas bloqueantes para pedir al usuario. Vaciar cuando se resuelven.
+open_questions: []
