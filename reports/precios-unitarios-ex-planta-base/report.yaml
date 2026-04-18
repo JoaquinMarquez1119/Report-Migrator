@@ -1,8 +1,11 @@
 id: report-precios-unitarios-ex-planta-base
 name: Precios Unitarios Ex Planta
 slug: precios-unitarios-ex-planta-base
-status: done
+status: in-progress
 standalone: true
+playbooks:
+  - matriz-comportamiento
+  - drill-through-base-detalle
 source_of_truth:
   layout: inputs/screenshots/report-reference
   logic: inputs/queries
@@ -26,4 +29,14 @@ outputs:
     - Precios_unitarios_ex_planta_base.rdl
   validation:
     - validations/
-open_questions: []
+open_questions:
+  - "A3 (ajuste 2026-04-17): falta screenshot del estado esperado con filtro $/lt ó $/kg. Se deduce del XML Spec + queries al abordar el Bloque 3."
+
+next_action:
+  owner: user
+  description: "Validar visualmente en Report Builder: A2 (bordes corner), A4 (header más fino), A5 (panel colapsado), A3 (orden columnas UYU invertido). Confirmar si A1 (centrado de matriz) sigue viéndose mal tras los otros cambios. Si algún ajuste necesita corrección, reportarlo para abrir nueva iteración."
+
+last_touched:
+  date: 2026-04-17
+  agent: claude-sonnet-4-6
+  session_summary: "Aplicados A2+A4 (layout), A5 (panel colapsado), A3 (swap columnas tablixUYU). A1 diferido — matemáticamente centrado, pendiente validación visual. Bitácora SKILL.md actualizada con las 3 iteraciones del bloque."

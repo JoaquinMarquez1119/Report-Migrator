@@ -470,7 +470,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                 <Width>9.8in</Width>
                 <ZIndex>1</ZIndex>
                 <Visibility>
-                  <Hidden>false</Hidden>
+                  <Hidden>true</Hidden>
                   <ToggleItem>txtToggleDescripcion</ToggleItem>
                 </Visibility>
                 <Style>
@@ -724,9 +724,22 @@ ORDER BY [Orden], [Producto], [MesNumero]
                               </Paragraphs>
                               <Style>
                                 <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <TopBorder>
+                                  <Style>None</Style>
+                                </TopBorder>
+                                <LeftBorder>
+                                  <Style>None</Style>
+                                </LeftBorder>
+                                <RightBorder>
                                   <Color>Gray</Color>
                                   <Style>Solid</Style>
-                                </Border>
+                                </RightBorder>
+                                <BottomBorder>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </BottomBorder>
                                 <BackgroundColor>White</BackgroundColor>
                               </Style>
                             </Textbox>
@@ -1648,10 +1661,10 @@ ORDER BY [Orden], [Producto], [MesNumero]
                 <TablixBody>
                   <TablixColumns>
                     <TablixColumn>
-                      <Width>0.62in</Width>
+                      <Width>1.45in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>1.45in</Width>
+                      <Width>0.62in</Width>
                     </TablixColumn>
                     <TablixColumn>
                       <Width>0.5in</Width>
@@ -2135,37 +2148,6 @@ ORDER BY [Orden], [Producto], [MesNumero]
                       <TablixCells>
                         <TablixCell>
                           <CellContents>
-                            <Textbox Name="txtUyuUnidad">
-                              <CanGrow>true</CanGrow>
-                              <KeepTogether>true</KeepTogether>
-                              <Paragraphs>
-                                <Paragraph>
-                                  <TextRuns>
-                                    <TextRun>
-                                      <Value>=IIF(Fields!Producto.Value = "Propano" Or Fields!Producto.Value = "Propano Industrial", "$/kg", Fields!Unidad.Value)</Value>
-                                      <Style>
-                                        <FontSize>8pt</FontSize>
-                                        <FontWeight>Bold</FontWeight>
-                                      </Style>
-                                    </TextRun>
-                                  </TextRuns>
-                                  <Style>
-                                    <TextAlign>Center</TextAlign>
-                                  </Style>
-                                </Paragraph>
-                              </Paragraphs>
-                              <Style>
-                                <Border>
-                                  <Color>Gray</Color>
-                                  <Style>Solid</Style>
-                                </Border>
-                                <BackgroundColor>#dcdcdc</BackgroundColor>
-                              </Style>
-                            </Textbox>
-                          </CellContents>
-                        </TablixCell>
-                        <TablixCell>
-                          <CellContents>
                             <Textbox Name="txtUyuProducto">
                               <CanGrow>true</CanGrow>
                               <KeepTogether>true</KeepTogether>
@@ -2215,6 +2197,37 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                 </Border>
                                 <BackgroundColor>#dcdcdc</BackgroundColor>
                                 <PaddingLeft>4pt</PaddingLeft>
+                              </Style>
+                            </Textbox>
+                          </CellContents>
+                        </TablixCell>
+                        <TablixCell>
+                          <CellContents>
+                            <Textbox Name="txtUyuUnidad">
+                              <CanGrow>true</CanGrow>
+                              <KeepTogether>true</KeepTogether>
+                              <Paragraphs>
+                                <Paragraph>
+                                  <TextRuns>
+                                    <TextRun>
+                                      <Value>=IIF(Fields!Producto.Value = "Propano" Or Fields!Producto.Value = "Propano Industrial", "$/kg", Fields!Unidad.Value)</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                        <FontWeight>Bold</FontWeight>
+                                      </Style>
+                                    </TextRun>
+                                  </TextRuns>
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
+                                </Paragraph>
+                              </Paragraphs>
+                              <Style>
+                                <Border>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </Border>
+                                <BackgroundColor>#dcdcdc</BackgroundColor>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2733,7 +2746,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
       <Width>20.5in</Width>
       <Page>
         <PageHeader>
-          <Height>0.62in</Height>
+          <Height>0.50in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2760,9 +2773,9 @@ ORDER BY [Orden], [Producto], [MesNumero]
                       </Style>
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.03in</Top>
+                  <Top>0.02in</Top>
                   <Left>0.3in</Left>
-                  <Height>0.25in</Height>
+                  <Height>0.23in</Height>
                   <Width>19.9in</Width>
                   <Style>
                     <Border>
@@ -2790,9 +2803,9 @@ ORDER BY [Orden], [Producto], [MesNumero]
                       </Style>
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.28in</Top>
+                  <Top>0.25in</Top>
                   <Left>0.3in</Left>
-                  <Height>0.18in</Height>
+                  <Height>0.17in</Height>
                   <Width>19.9in</Width>
                   <ZIndex>1</ZIndex>
                   <Style>
@@ -2805,9 +2818,9 @@ ORDER BY [Orden], [Producto], [MesNumero]
                   <Source>Embedded</Source>
                   <Value>imgAncapLogo</Value>
                   <Sizing>FitProportional</Sizing>
-                  <Top>0.05in</Top>
+                  <Top>0.04in</Top>
                   <Left>18.85in</Left>
-                  <Height>0.42in</Height>
+                  <Height>0.40in</Height>
                   <Width>1.45in</Width>
                   <ZIndex>2</ZIndex>
                   <Style>
@@ -2819,7 +2832,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
               </ReportItems>
               <Top>0in</Top>
               <Left>0in</Left>
-              <Height>0.6in</Height>
+              <Height>0.48in</Height>
               <Width>20.5in</Width>
               <Style>
                 <Border>
