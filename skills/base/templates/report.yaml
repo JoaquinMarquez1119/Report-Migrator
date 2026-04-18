@@ -33,3 +33,15 @@ outputs:
 
 # Preguntas bloqueantes para pedir al usuario. Vaciar cuando se resuelven.
 open_questions: []
+
+# Handoff entre sesiones / agentes.
+# next_action.owner: "user" (no avanzar sin confirmación) | "agent" (retomar desde description)
+next_action:
+  owner: user
+  description: ""
+
+# Actualizar al cerrar cada sesión.
+last_touched:
+  date: {{FECHA_ISO}}
+  agent: ""
+  session_summary: ""

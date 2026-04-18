@@ -1,0 +1,31 @@
+# STATUS.md — Índice de reportes
+
+> Actualizar al terminar cada sesión de trabajo. Es el punto de entrada rápido para cualquier agente.
+> Para contexto completo de un reporte: leer `reports/<slug>/report.yaml` y `reports/<slug>/SKILL.md`.
+
+## Estado actual del proyecto
+
+| Reporte | Status | Owner | Próxima acción |
+|---|---|---|---|
+| [precios-unitarios-ex-planta-base](reports/precios-unitarios-ex-planta-base/report.yaml) | in-progress | user | Validar visualmente A2+A4+A5+A3 en Report Builder. Confirmar si A1 (centrado) sigue viéndose mal tras los otros cambios. |
+| [precios-unitarios-ex-planta-detalle](reports/precios-unitarios-ex-planta-detalle/report.yaml) | in-progress | agent | Retomar implementación — leer SKILL.md del reporte para contexto. |
+| [tc-promedio-mensual](reports/tc-promedio-mensual/report.yaml) | done | — | Cerrado. Retrospectiva pendiente si el usuario quiere hacerla. |
+
+## Leyenda
+
+- **Status:** `intake` → `in-progress` → `review` → `done`
+- **Owner:** quién tiene la pelota ahora
+  - `user` — el agente no debe avanzar sin confirmación del usuario
+  - `agent` — el agente puede retomar desde la descripción en `report.yaml:next_action`
+  - `—` — cerrado, sin acción pendiente
+
+## Cómo actualizar
+
+Al cerrar una sesión de trabajo en un reporte:
+1. Editar la fila correspondiente con el nuevo status y próxima acción.
+2. Asegurarse de que `report.yaml:next_action` y `report.yaml:last_touched` estén sincronizados.
+3. Commitear junto con los cambios de la sesión.
+
+## Reportes futuros
+
+_Agregar fila cuando se haga el intake de un reporte nuevo._

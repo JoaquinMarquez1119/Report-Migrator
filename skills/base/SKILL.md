@@ -175,6 +175,48 @@ Esta skill base es cliente-agnóstica. Para replicar el workspace en otro client
 
 ---
 
+## Handoff entre agentes y sesiones
+
+Este proyecto es agnóstico al agente. Claude, Codex, Aider, Cursor u otro pueden trabajar en el mismo repo en sesiones distintas. El contrato de continuidad vive en los archivos, no en el historial de chat.
+
+### Ritual de arranque (obligatorio)
+
+Al comenzar cualquier sesión en cualquier reporte:
+
+1. Leer `AGENTS.md` — estructura del proyecto y reglas de convivencia.
+2. Leer `STATUS.md` — qué reportes existen y cuál tiene acción pendiente.
+3. Leer `reports/<slug>/report.yaml` del reporte a trabajar.
+4. Leer `reports/<slug>/SKILL.md` del reporte a trabajar.
+5. Mirar `next_action.owner`:
+   - `owner: user` → **no avanzar** hasta que el usuario confirme que hizo la acción pendiente.
+   - `owner: agent` → retomar desde `next_action.description`.
+
+No editar `.rdl` ni crear archivos hasta haber hecho el ritual completo.
+
+### Ritual de cierre (obligatorio)
+
+Al terminar cada sesión de trabajo (antes del commit):
+
+1. Agregar entrada a `reports/<slug>/SKILL.md` con: qué se hizo, qué quedó pendiente, próximo paso concreto.
+2. Actualizar `reports/<slug>/report.yaml`:
+   - `next_action.owner`: `user` si hay que validar/decidir, `agent` si el agente puede seguir solo.
+   - `next_action.description`: qué acción específica debe tomarse.
+   - `last_touched.date`: fecha ISO de hoy.
+   - `last_touched.agent`: nombre/versión del agente que trabajó.
+   - `last_touched.session_summary`: 1–2 frases de qué se hizo en esta sesión.
+3. Actualizar `STATUS.md` — fila del reporte con el nuevo estado y próxima acción.
+4. Commitear todo junto.
+
+### Regla de inmutabilidad de la bitácora
+
+Las iteraciones en `SKILL.md` no se reescriben. Si algo quedó mal en una iteración anterior:
+- Agregar nueva entrada fechada que diga qué dejaba mal la anterior y cómo esta lo corrige.
+- La trayectoria completa debe ser legible para el próximo agente.
+
+Si la bitácora crece tanto que es difícil de leer: agregar "## Estado actual" al tope de `SKILL.md` como snapshot + índice de iteraciones abiertas/cerradas. No borrar historial.
+
+---
+
 ## Reglas duras (no se negocian)
 
 - Nunca empezar deduciendo comportamiento desde el `.rdl`.
