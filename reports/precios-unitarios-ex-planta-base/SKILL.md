@@ -13,7 +13,7 @@ description: Bitácora Capa 3 del reporte "Precios Unitarios Ex Planta (base)". 
 - **Slug:** precios-unitarios-ex-planta-base
 - **Creado:** pre-2026-04-17 (implementación original previa a la arquitectura de 3 capas)
 - **Capa 3 iniciada:** 2026-04-17 (retroactiva, mínima)
-- **Estado actual:** review (ajustes A1–A5 resueltos, validados en Service)
+- **Estado actual:** done (2026-04-20)
 - **Playbook(s) adoptado(s):** `matriz-comportamiento`, `drill-through-base-detalle`
 - **Output:** `Precios_unitarios_ex_planta_base.rdl` (en raíz del reporte — layout heredado)
 - **Layout:** heredado (`.rdl` en raíz + `inputs/`). No se migra a `output/` en esta ronda (decisión del usuario).
@@ -232,4 +232,29 @@ _También reflejar en `report.yaml:open_questions` si bloquean el próximo paso.
 
 ## Retrospectiva
 
-_Llenar sólo cuando `report.yaml:status` pase a `done` y el usuario acepte hacer la retro._
+**Fecha:** 2026-04-20. **Aprobado por:** usuario.
+
+### Lecciones promovidas
+
+| Lección | Destino | Artefacto |
+|---|---|---|
+| Validar siempre en el Service, no solo en Report Builder | Capa 1 — Reglas duras | `skills/base/SKILL.md` |
+| `CanGrow` no es propiedad válida de `Rectangle` | Capa 1 — Reglas duras | `skills/base/SKILL.md` |
+| Toggle con `Hidden=true` inicial rompe layout en Service con layout absoluto → fix: dos `Rectangle` hermanos en Body | Componente nuevo | `skills/components/toggle-panel.md` |
+| `TablixMember.Visibility.Hidden` reduce ancho efectivo → off-center visual aunque Left matemático esté correcto | Componente nuevo | `skills/components/tablix-valores-mensuales.md` |
+| Swappear columnas de Tablix = swappear ancho Y contenido juntos | Componente nuevo | `skills/components/tablix-valores-mensuales.md` |
+| `TextAlign>Center` (en Paragraph) + `VerticalAlign>Middle` (en Style del Textbox) — ambos necesarios para centrado completo | Componente nuevo | `skills/components/tablix-valores-mensuales.md` |
+| Celda esquina: border None top/left, Gray Solid right/bottom | Componente nuevo | `skills/components/corner-cell.md` |
+| Page header ANCAP: proporciones, colores, ZIndex | Componente nuevo | `skills/components/page-header.md` |
+| Drill-through: contrato de parámetros + normalización + validación standalone | Componente nuevo | `skills/components/drill-through-action.md` |
+
+### Lecciones locales (no promovidas)
+
+- `VerticalAlign>Middle` + `TextAlign>Center` en celdas de valor → buena práctica de presentación, ya está en el componente.
+- A1 (off-center con meses ocultos) es comportamiento idéntico a Cognos → no hay fix, documentado en el componente.
+
+### Cambios estructurales de esta retro
+
+- Nueva capa 2b (`skills/components/`) incorporada a la arquitectura.
+- `skills/base/SKILL.md` actualizado para documentar la capa 2b.
+- Los 3 playbooks actualizados con referencias a componentes.

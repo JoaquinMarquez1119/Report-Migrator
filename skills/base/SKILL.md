@@ -7,15 +7,20 @@ description: Skill maestra del workspace de migración Cognos → Power BI Repor
 
 Skill maestra. Todo flujo en este workspace arranca acá. No conoce reportes puntuales ni patrones específicos: sabe **cómo se trabaja** en el proyecto y cómo orquestar las otras dos capas.
 
-## Arquitectura de 3 capas
+## Arquitectura de 4 capas
 
 | Capa | Ubicación | Rol | Cantidad |
 |---|---|---|---|
 | 1 — Base | `skills/base/SKILL.md` | Este archivo. Ciclo de vida, reglas universales, convenciones. Cliente-agnóstica. | 1 |
-| 2 — Playbooks | `skills/playbooks/<slug>.md` | Un patrón de reporte por archivo. Pasos específicos, señales de que aplica, errores comunes. | N |
+| 2 — Playbooks | `skills/playbooks/<slug>.md` | Un patrón de reporte completo. Cuándo aplica, orden de pasos, qué componentes usar, errores de proceso. | N |
+| 2b — Componentes | `skills/components/<slug>.md` | Un elemento RDL aislado. Estructura XML, propiedades, errores de construcción, variantes. Los playbooks los referencian. | N |
 | 3 — Por reporte | `reports/<slug>/SKILL.md` | Bitácora viva del reporte: playbook elegido, iteraciones, decisiones, evidencia. | 1 por reporte |
 
-La Capa 1 **lee** Capa 2 para proponer matches; **crea** y **escribe** Capa 3 durante cada iteración. La Capa 3 no se comparte entre reportes.
+**Distinción Playbook vs. Componente:**
+- **Playbook:** responde *¿cómo abordo este tipo de reporte?* — proceso, orden, qué construir.
+- **Componente:** responde *¿cómo construyo este elemento puntual en RDL?* — XML concreto, propiedades, errores de construcción.
+
+La Capa 1 **lee** Capa 2 para proponer matches; **crea** y **escribe** Capa 3 durante cada iteración. La Capa 3 no se comparte entre reportes. Los componentes (2b) son reutilizables entre reportes y entre clientes.
 
 ## Ámbito
 
@@ -227,6 +232,8 @@ Si la bitácora crece tanto que es difícil de leer: agregar "## Estado actual" 
 - Siempre separar normalización de parámetros de la lógica de layout.
 - Siempre dejar rastro en la bitácora Capa 3 antes de cerrar una iteración.
 - Siempre confirmar con el usuario antes de adoptar un playbook, cerrar un reporte, o promover conocimiento.
+- **Validar siempre en el Power BI Service**, no sólo en Report Builder. El renderer del Service puede diferir del de Report Builder — la fuente de verdad es el Service.
+- **`CanGrow` es propiedad de `Textbox`, no de `Rectangle`.** Usarlo en un `Rectangle` genera error de deserialización al abrir el RDL.
 
 ---
 
@@ -245,8 +252,18 @@ Si la bitácora crece tanto que es difícil de leer: agregar "## Estado actual" 
 - `skills/base/templates/report-skill.md` — bitácora Capa 3.
 - `skills/base/templates/report.yaml` — metadata del reporte.
 
-## Playbooks iniciales (Capa 2)
+## Playbooks (Capa 2)
 
 - `skills/playbooks/reporte-lineal-simple.md`
 - `skills/playbooks/matriz-comportamiento.md`
 - `skills/playbooks/drill-through-base-detalle.md`
+
+## Componentes (Capa 2b)
+
+Elementos RDL aislados y reutilizables. Los playbooks los referencian; los componentes no referencian a los playbooks.
+
+- `skills/components/toggle-panel.md` — panel colapsable con toggle (arranca colapsado/expandido).
+- `skills/components/page-header.md` — encabezado de página ANCAP (fondo azul, franja dorada, logo).
+- `skills/components/tablix-valores-mensuales.md` — tablix con columnas de meses dinámicas, centrado de celdas, limitación de centrado visual con meses ocultos.
+- `skills/components/corner-cell.md` — celda esquina del tablix (sin borde top/left, con label de unidad).
+- `skills/components/drill-through-action.md` — acción de drill-through con contrato de parámetros padre→hijo.

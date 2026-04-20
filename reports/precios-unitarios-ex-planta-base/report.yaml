@@ -1,7 +1,7 @@
 id: report-precios-unitarios-ex-planta-base
 name: Precios Unitarios Ex Planta
 slug: precios-unitarios-ex-planta-base
-status: review
+status: done
 standalone: true
 playbooks:
   - matriz-comportamiento
@@ -29,16 +29,13 @@ outputs:
     - Precios_unitarios_ex_planta_base.rdl
   validation:
     - validations/
-open_questions:
-  - "A3 (ajuste 2026-04-17): falta screenshot del estado esperado con filtro $/lt ó $/kg. Se deduce del XML Spec + queries al abordar el Bloque 3. VALIDADO OK en iteración 2026-04-18."
-  - "A1 (ajuste 2026-04-17 + hipótesis 2026-04-18): el tablix está math-centrado en 20.5in body, pero TablixMember.Visibility.Hidden colapsa columnas de meses sin data, corriendo el centro visual a la izquierda. Falta screenshot de Cognos con mismos 4 meses para decidir: si Cognos centra dinámico → replicar; si Cognos también queda off-center → cerrar como comportamiento esperado."
-  - "A5 (corrección 2026-04-18): validar en Service que el push-down vía CanGrow funciona al expandir el panel de descripción. Si Service no pushea siblings, revertir a arranca-expandido o restructurar con contenedor."
+open_questions: []
 
 next_action:
-  owner: user
-  description: "Aprobar el reporte para pasar a done y hacer la retrospectiva, o reportar ajustes adicionales."
+  owner: "—"
+  description: "Cerrado. Sin acción pendiente."
 
 last_touched:
   date: 2026-04-20
-  agent: claude-sonnet-4-6
-  session_summary: "A5 Opción F validada OK en Service (rectDescription sin CanGrow — propiedad no válida en Rectangle, removida). Todos los ajustes A1-A5 resueltos. Status pasado a review."
+  agent: claude-opus-4-7
+  session_summary: "Retrospectiva completada. Capa 2b (5 componentes) creada. Playbooks actualizados. skills/base/SKILL.md con arquitectura 4 capas y nuevas reglas duras."
