@@ -675,40 +675,40 @@ ORDER BY [Orden], [Producto], [MesNumero]
                       <Width>1.55in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.54in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.54in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.54in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.54in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.54in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.54in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.54in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.54in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.54in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.54in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.54in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.54in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                   </TablixColumns>
                   <TablixRows>
@@ -786,6 +786,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -818,6 +819,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -850,6 +852,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -882,6 +885,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -914,6 +918,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -946,6 +951,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -978,6 +984,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1010,6 +1017,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1042,6 +1050,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1074,6 +1083,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1106,6 +1116,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1138,6 +1149,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1680,40 +1692,40 @@ ORDER BY [Orden], [Producto], [MesNumero]
                       <Width>0.62in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.5in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.5in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.5in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.5in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.5in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.5in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.5in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.5in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.5in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.5in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.5in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                     <TablixColumn>
-                      <Width>0.5in</Width>
+                      <Width>0.65in</Width>
                     </TablixColumn>
                   </TablixColumns>
                   <TablixRows>
@@ -1829,6 +1841,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1861,6 +1874,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1893,6 +1907,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1925,6 +1940,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1957,6 +1973,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1989,6 +2006,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2021,6 +2039,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2053,6 +2072,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2085,6 +2105,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2117,6 +2138,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2149,6 +2171,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2181,6 +2204,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#153767</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
