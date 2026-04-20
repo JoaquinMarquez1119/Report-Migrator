@@ -1230,7 +1230,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1240,6 +1240,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1260,7 +1261,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1270,6 +1271,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1290,7 +1292,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1300,6 +1302,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1320,7 +1323,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1330,6 +1333,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1350,7 +1354,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1360,6 +1364,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1380,7 +1385,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1390,6 +1395,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1410,7 +1416,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1420,6 +1426,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1440,7 +1447,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1450,6 +1457,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1470,7 +1478,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1480,6 +1488,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1500,7 +1509,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1510,6 +1519,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1530,7 +1540,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1540,6 +1550,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1560,7 +1571,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -1570,6 +1581,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2316,7 +2328,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -2326,6 +2338,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2346,7 +2359,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -2356,6 +2369,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2376,7 +2390,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -2386,6 +2400,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2406,7 +2421,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -2416,6 +2431,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2436,7 +2452,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -2446,6 +2462,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2466,7 +2483,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -2476,6 +2493,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2496,7 +2514,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -2506,6 +2524,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2526,7 +2545,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -2536,6 +2555,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2556,7 +2576,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -2566,6 +2586,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2586,7 +2607,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -2596,6 +2617,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2616,7 +2638,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -2626,6 +2648,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2646,7 +2669,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                     </TextRun>
                                   </TextRuns>
                                   <Style>
-                                    <TextAlign>Right</TextAlign>
+                                    <TextAlign>Center</TextAlign>
                                   </Style>
                                 </Paragraph>
                               </Paragraphs>
@@ -2656,6 +2679,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                   <Style>Solid</Style>
                                 </Border>
                                 <BackgroundColor>#f2f2f2</BackgroundColor>
+                                <VerticalAlign>Middle</VerticalAlign>
                               </Style>
                             </Textbox>
                           </CellContents>
