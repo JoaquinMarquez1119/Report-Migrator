@@ -418,7 +418,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
     <ReportSection>
       <Body>
         <ReportItems>
-          <Rectangle Name="BodyCanvas">
+          <Rectangle Name="rectDescription">
             <ReportItems>
               <Textbox Name="txtToggleDescripcion">
                 <CanGrow>true</CanGrow>
@@ -479,6 +479,19 @@ ORDER BY [Orden], [Producto], [MesNumero]
                   </Border>
                 </Style>
               </Textbox>
+            </ReportItems>
+            <Top>0in</Top>
+            <Left>0in</Left>
+            <Height>0.43in</Height>
+            <Width>20.5in</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Rectangle>
+          <Rectangle Name="rectContent">
+            <ReportItems>
               <Rectangle Name="rectUnidad">
                 <ReportItems>
                   <Textbox Name="txtUnidadTitulo">
@@ -563,7 +576,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                     </Style>
                   </Textbox>
                 </ReportItems>
-                <Top>1.69in</Top>
+                <Top>0in</Top>
                 <Left>0.12in</Left>
                 <Height>0.68in</Height>
                 <Width>1.81in</Width>
@@ -590,7 +603,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                     <Style />
                   </Paragraph>
                 </Paragraphs>
-                <Top>2.43944in</Top>
+                <Top>0.74944in</Top>
                 <Left>0.12in</Left>
                 <Height>0.2in</Height>
                 <Width>6.2in</Width>
@@ -617,7 +630,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                     <Style />
                   </Paragraph>
                 </Paragraphs>
-                <Top>2.62944in</Top>
+                <Top>0.93944in</Top>
                 <Left>0.12in</Left>
                 <Height>0.2in</Height>
                 <Width>5.2in</Width>
@@ -644,7 +657,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                     <Style />
                   </Paragraph>
                 </Paragraphs>
-                <Top>2.81944in</Top>
+                <Top>1.12944in</Top>
                 <Left>0.12in</Left>
                 <Height>0.22in</Height>
                 <Width>7.2in</Width>
@@ -1643,7 +1656,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                 </TablixRowHierarchy>
                 <NoRowsMessage>No hay datos disponibles</NoRowsMessage>
                 <DataSetName>dsTabla</DataSetName>
-                <Top>3.16667in</Top>
+                <Top>1.47667in</Top>
                 <Left>6.24in</Left>
                 <Height>0.53in</Height>
                 <Width>8.03in</Width>
@@ -1716,18 +1729,35 @@ ORDER BY [Orden], [Producto], [MesNumero]
                                 <Paragraph>
                                   <TextRuns>
                                     <TextRun>
-                                      <Value />
-                                      <Style />
+                                      <Value>$/lt ó $/kg</Value>
+                                      <Style>
+                                        <FontSize>8pt</FontSize>
+                                      </Style>
                                     </TextRun>
                                   </TextRuns>
-                                  <Style />
+                                  <Style>
+                                    <TextAlign>Center</TextAlign>
+                                  </Style>
                                 </Paragraph>
                               </Paragraphs>
                               <Style>
                                 <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <TopBorder>
+                                  <Style>None</Style>
+                                </TopBorder>
+                                <LeftBorder>
+                                  <Style>None</Style>
+                                </LeftBorder>
+                                <RightBorder>
+                                  <Style>None</Style>
+                                </RightBorder>
+                                <BottomBorder>
                                   <Color>Gray</Color>
                                   <Style>Solid</Style>
-                                </Border>
+                                </BottomBorder>
+                                <BackgroundColor>White</BackgroundColor>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -1750,9 +1780,23 @@ ORDER BY [Orden], [Producto], [MesNumero]
                               </Paragraphs>
                               <Style>
                                 <Border>
+                                  <Style>None</Style>
+                                </Border>
+                                <TopBorder>
+                                  <Style>None</Style>
+                                </TopBorder>
+                                <LeftBorder>
+                                  <Style>None</Style>
+                                </LeftBorder>
+                                <RightBorder>
                                   <Color>Gray</Color>
                                   <Style>Solid</Style>
-                                </Border>
+                                </RightBorder>
+                                <BottomBorder>
+                                  <Color>Gray</Color>
+                                  <Style>Solid</Style>
+                                </BottomBorder>
+                                <BackgroundColor>White</BackgroundColor>
                               </Style>
                             </Textbox>
                           </CellContents>
@@ -2687,7 +2731,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                 </TablixRowHierarchy>
                 <NoRowsMessage>No hay datos disponibles</NoRowsMessage>
                 <DataSetName>dsTabla</DataSetName>
-                <Top>3.16667in</Top>
+                <Top>1.47667in</Top>
                 <Left>6.22in</Left>
                 <Height>0.53in</Height>
                 <Width>8.07in</Width>
@@ -2717,7 +2761,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
                     <Style />
                   </Paragraph>
                 </Paragraphs>
-                <Top>3.855in</Top>
+                <Top>2.165in</Top>
                 <Left>0.16in</Left>
                 <Height>0.2in</Height>
                 <Width>4.5in</Width>
@@ -2729,9 +2773,9 @@ ORDER BY [Orden], [Producto], [MesNumero]
                 </Style>
               </Textbox>
             </ReportItems>
-            <Top>0in</Top>
+            <Top>0.43in</Top>
             <Left>0in</Left>
-            <Height>4.625in</Height>
+            <Height>2.4in</Height>
             <Width>20.5in</Width>
             <Style>
               <Border>
@@ -2740,13 +2784,13 @@ ORDER BY [Orden], [Producto], [MesNumero]
             </Style>
           </Rectangle>
         </ReportItems>
-        <Height>4.675in</Height>
+        <Height>2.83in</Height>
         <Style />
       </Body>
       <Width>20.5in</Width>
       <Page>
         <PageHeader>
-          <Height>0.50in</Height>
+          <Height>0.55in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -2773,9 +2817,9 @@ ORDER BY [Orden], [Producto], [MesNumero]
                       </Style>
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.02in</Top>
+                  <Top>0.05in</Top>
                   <Left>0.3in</Left>
-                  <Height>0.23in</Height>
+                  <Height>0.25in</Height>
                   <Width>19.9in</Width>
                   <Style>
                     <Border>
@@ -2803,9 +2847,9 @@ ORDER BY [Orden], [Producto], [MesNumero]
                       </Style>
                     </Paragraph>
                   </Paragraphs>
-                  <Top>0.25in</Top>
+                  <Top>0.32in</Top>
                   <Left>0.3in</Left>
-                  <Height>0.17in</Height>
+                  <Height>0.18in</Height>
                   <Width>19.9in</Width>
                   <ZIndex>1</ZIndex>
                   <Style>
@@ -2818,9 +2862,9 @@ ORDER BY [Orden], [Producto], [MesNumero]
                   <Source>Embedded</Source>
                   <Value>imgAncapLogo</Value>
                   <Sizing>FitProportional</Sizing>
-                  <Top>0.04in</Top>
+                  <Top>0.06in</Top>
                   <Left>18.85in</Left>
-                  <Height>0.40in</Height>
+                  <Height>0.42in</Height>
                   <Width>1.45in</Width>
                   <ZIndex>2</ZIndex>
                   <Style>
@@ -2832,7 +2876,7 @@ ORDER BY [Orden], [Producto], [MesNumero]
               </ReportItems>
               <Top>0in</Top>
               <Left>0in</Left>
-              <Height>0.48in</Height>
+              <Height>0.53in</Height>
               <Width>20.5in</Width>
               <Style>
                 <Border>

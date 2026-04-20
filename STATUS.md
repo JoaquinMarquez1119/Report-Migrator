@@ -7,7 +7,7 @@
 
 | Reporte | Status | Owner | Próxima acción |
 |---|---|---|---|
-| [precios-unitarios-ex-planta-base](reports/precios-unitarios-ex-planta-base/report.yaml) | in-progress | user | Validar visualmente A2+A4+A5+A3 en Report Builder. Confirmar si A1 (centrado) sigue viéndose mal tras los otros cambios. |
+| [precios-unitarios-ex-planta-base](reports/precios-unitarios-ex-planta-base/report.yaml) | review | user | A1–A5 resueltos y validados en Service. Aprobar para pasar a done + retrospectiva. |
 | [precios-unitarios-ex-planta-detalle](reports/precios-unitarios-ex-planta-detalle/report.yaml) | in-progress | agent | Retomar implementación — leer SKILL.md del reporte para contexto. |
 | [tc-promedio-mensual](reports/tc-promedio-mensual/report.yaml) | done | — | Cerrado. Retrospectiva pendiente si el usuario quiere hacerla. |
 

@@ -1,7 +1,7 @@
 id: report-precios-unitarios-ex-planta-base
 name: Precios Unitarios Ex Planta
 slug: precios-unitarios-ex-planta-base
-status: in-progress
+status: review
 standalone: true
 playbooks:
   - matriz-comportamiento
@@ -30,13 +30,15 @@ outputs:
   validation:
     - validations/
 open_questions:
-  - "A3 (ajuste 2026-04-17): falta screenshot del estado esperado con filtro $/lt ó $/kg. Se deduce del XML Spec + queries al abordar el Bloque 3."
+  - "A3 (ajuste 2026-04-17): falta screenshot del estado esperado con filtro $/lt ó $/kg. Se deduce del XML Spec + queries al abordar el Bloque 3. VALIDADO OK en iteración 2026-04-18."
+  - "A1 (ajuste 2026-04-17 + hipótesis 2026-04-18): el tablix está math-centrado en 20.5in body, pero TablixMember.Visibility.Hidden colapsa columnas de meses sin data, corriendo el centro visual a la izquierda. Falta screenshot de Cognos con mismos 4 meses para decidir: si Cognos centra dinámico → replicar; si Cognos también queda off-center → cerrar como comportamiento esperado."
+  - "A5 (corrección 2026-04-18): validar en Service que el push-down vía CanGrow funciona al expandir el panel de descripción. Si Service no pushea siblings, revertir a arranca-expandido o restructurar con contenedor."
 
 next_action:
   owner: user
-  description: "Validar visualmente en Report Builder: A2 (bordes corner), A4 (header más fino), A5 (panel colapsado), A3 (orden columnas UYU invertido). Confirmar si A1 (centrado de matriz) sigue viéndose mal tras los otros cambios. Si algún ajuste necesita corrección, reportarlo para abrir nueva iteración."
+  description: "Aprobar el reporte para pasar a done y hacer la retrospectiva, o reportar ajustes adicionales."
 
 last_touched:
-  date: 2026-04-17
+  date: 2026-04-20
   agent: claude-sonnet-4-6
-  session_summary: "Aplicados A2+A4 (layout), A5 (panel colapsado), A3 (swap columnas tablixUYU). A1 diferido — matemáticamente centrado, pendiente validación visual. Bitácora SKILL.md actualizada con las 3 iteraciones del bloque."
+  session_summary: "A5 Opción F validada OK en Service (rectDescription sin CanGrow — propiedad no válida en Rectangle, removida). Todos los ajustes A1-A5 resueltos. Status pasado a review."
