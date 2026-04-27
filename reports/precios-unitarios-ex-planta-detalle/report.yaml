@@ -3,6 +3,9 @@ name: Precios Unitarios Ex Planta - detalle
 slug: precios-unitarios-ex-planta-detalle
 status: in-progress
 standalone: true
+playbooks:
+  - matriz-comportamiento
+  - drill-through-base-detalle
 source_of_truth:
   layout: inputs/screenshots/report-reference
   logic: inputs/queries
@@ -29,4 +32,13 @@ outputs:
     - validations/
 dependencies:
   parent_report: ../precios-unitarios-ex-planta-base/Precios_unitarios_ex_planta_base.rdl
-open_questions: []
+open_questions:
+  - "Verificar que nombres crudos de TasaURSEASecundaria/IVASecundaria en Precios_Ex_Planta coincidan con los del XML spec"
+  - "Decidir si implementar MostrarPestañaDetalle (ocultar pestaña Detalle para 8 productos)"
+next_action:
+  owner: user
+  description: "Validar en Power BI service: (1) tablixDetailLocal se centra para productos angostos (Butano, Aguarras) y LiquidosBase sigue sin spacer. (2) Si OK, confirmar para extender centrado condicional a tablixSummaryUSD y tablixDetailUSD."
+last_touched:
+  date: 2026-04-24
+  agent: claude-sonnet-4-6
+  session_summary: "Iteración 8: centrado de matrices. Centrado estático de 3 tablixes sub-ancho de Resumen (tablixSummaryUSDTM1 Left→7.75in, tablixSummaryLocal Left→7.28in, tablixSummaryLocalMain Left→1.98in). Piloto de centrado condicional en tablixDetailLocal: columna spacer 11in con ShouldCenterTable() (retorna True para no-LiquidosBase), TablixMember con Visibility condicional, celdas spacer en header y data, Width 29.85→40.85in."
