@@ -6,14 +6,14 @@ Trabajan acá Claude, Codex, Aider, Cursor, o cualquier agente con acceso al rep
 ## Ritual de arranque (obligatorio antes de tocar nada)
 
 1. **Leer este archivo** — ya lo estás haciendo.
-2. **Leer `STATUS.md`** — índice de todos los reportes, cuál está activo, qué falta.
-3. **Si el usuario ya pidió algo concreto:** ir al reporte → leer `reports/<slug>/report.yaml` → leer `reports/<slug>/SKILL.md`.
-4. **Si el usuario no especificó:** preguntarle cuál reporte retomar, o si quiere empezar uno nuevo.
-5. **Leer las skills** si vas a tomar decisiones de diseño:
-   - `skills/base/SKILL.md` — ciclo de vida, reglas universales, convenciones.
-   - `skills/playbooks/<playbook>.md` — patrón específico del reporte.
+2. **Correr `bash tools/sync-skills.sh`** — sincroniza playbooks y componentes instalados con el estado actual del repo. Carpetas con prefijo `_` son drafts y se saltean.
+3. **Leer `STATUS.md`** — índice de todos los reportes, cuál está activo, qué falta.
+4. **Si el usuario ya pidió algo concreto:** ir al reporte → leer `reports/<slug>/report.yaml` → leer `reports/<slug>/SKILL.md`.
+5. **Si el usuario no especificó:** preguntarle cuál reporte retomar, o si quiere empezar uno nuevo.
 
-No empezar a generar código ni editar `.rdl` hasta haber hecho los pasos 1–3.
+Los playbooks y componentes ya están disponibles como skills del sistema — no hace falta leerlos manualmente.
+
+No empezar a generar código ni editar `.rdl` hasta haber hecho los pasos 1–4.
 
 ## Estructura del repo
 
@@ -44,6 +44,7 @@ STATUS.md                 — Índice de estado de todos los reportes
 
 - Cognos es la fuente de verdad. El `.rdl` existente se valida contra Cognos, no al revés.
 - Las iteraciones de las bitácoras (`SKILL.md`) son inmutables: no se reescriben, se agregan entradas nuevas.
+- **Después de cada cambio sustantivo** (edición de `.rdl`, decisión de diseño, diagnóstico, revert, etc.): agregar nueva iteración en `reports/<slug>/SKILL.md` **sin esperar a que el usuario lo pida**. Formato: `### YYYY-MM-DD — Iteración N: <título>` con Pregunta/problema, Decisión, Acción, Evidencia, Próximo paso. Es parte del trabajo, no un paso opcional de cierre.
 - Al terminar una sesión: actualizar `report.yaml` (`next_action`, `last_touched`), actualizar `STATUS.md`, commitear.
 - No saltarse el ritual de arranque aunque el usuario diga "continuá directo".
 - No mezclar trabajo de reportes distintos en el mismo commit.
