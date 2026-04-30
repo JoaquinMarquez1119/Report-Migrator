@@ -8,7 +8,7 @@
 | Reporte | Status | Owner | Próxima acción |
 |---|---|---|---|
 | [precios-unitarios-ex-planta-base](reports/precios-unitarios-ex-planta-base/report.yaml) | done | — | Cerrado. Retrospectiva completada 2026-04-20. |
-| [precios-unitarios-ex-planta-detalle](reports/precios-unitarios-ex-planta-detalle/report.yaml) | in-progress | user | Abrir/publicar nuevamente el RDL tras fix de Name en rectangles del spacer de tablixDetailLocal. Validar que Report Builder deserializa completo; luego validar centrado para productos angostos y que LiquidosBase siga sin spacer. |
+| [precios-unitarios-ex-planta-detalle](reports/precios-unitarios-ex-planta-detalle/report.yaml) | in-progress | user | Abrir/publicar nuevamente el RDL tras reemplazar los ReportItems vacíos del spacer por textboxes vacíos. Validar que Report Builder deserializa completo; luego validar centrado para productos angostos y que LiquidosBase siga sin spacer. |
 | [tc-promedio-mensual](reports/tc-promedio-mensual/report.yaml) | done | — | Cerrado. Retrospectiva pendiente si el usuario quiere hacerla. |
 
 ## Leyenda

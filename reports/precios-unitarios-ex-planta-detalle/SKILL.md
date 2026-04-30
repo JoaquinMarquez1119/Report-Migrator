@@ -229,6 +229,14 @@ La función `GetProductFamily()` en VB.NET mapea producto normalizado → famili
 - **Evidencia:** Verificación local: parseo XML `XML_OK`, chequeo de report items sin `Name` devuelve `MISSING_NAME_OK`, y chequeo de nombres duplicados devuelve `DUPLICATE_NAME_OK`. El validador estructural existente llega a una regla no relacionada sobre `Width` en `2.25pt` de bordes.
 - **Próximo paso:** Usuario vuelve a abrir/publicar el RDL y valida si Report Builder deserializa completo; si aparece otro error de deserialización, continuar desde la línea indicada.
 
+### 2026-04-30 — Iteración 11: Reemplazo de ReportItems vacío en spacer
+
+- **Pregunta/problema:** Report Builder siguió fallando en la línea 5785 con `El contenido del elemento 'ReportItems' ... está incompleto`; el `<ReportItems />` vacío dentro de los rectangles del spacer no cumple el esquema RDL.
+- **Decisión:** No usar rectangles vacíos para el spacer. Reemplazarlos por `Textbox` vacíos, que es el patrón ya usado por otras celdas vacías del RDL.
+- **Acción:** Edición de `Precios Unitarios Ex Planta - detalle.rdl`: `rectDetailLocalSpacerHeader` y `rectDetailLocalSpacerData` se reemplazaron por `txtDetailLocalSpacerHeader` y `txtDetailLocalSpacerData`, ambos con `<Value></Value>`.
+- **Evidencia:** Verificación local: `XML_OK`, `RDL_NAME_CHECK_OK`, y `rg '<ReportItems\s*/>'` no encuentra ocurrencias. El validador estructural amplio sigue frenando por la regla existente de `Width` en `2.25pt`, no relacionada con el spacer.
+- **Próximo paso:** Usuario vuelve a abrir/publicar el RDL y confirma si ya deserializa completo; luego validar centrado de `tablixDetailLocal`.
+
 ### 2026-04-23 — Side-effect: arranque y cierre de sesión automatizados
 
 - **Pregunta/problema:** El usuario tenía que recordar manualmente que yo actualizara la bitácora al cerrar la sesión.

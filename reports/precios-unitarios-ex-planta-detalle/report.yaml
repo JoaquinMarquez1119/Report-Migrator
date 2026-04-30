@@ -37,8 +37,8 @@ open_questions:
   - "Decidir si implementar MostrarPestañaDetalle (ocultar pestaña Detalle para 8 productos)"
 next_action:
   owner: user
-  description: "Abrir/publicar nuevamente el RDL tras fix de Name en rectangles del spacer de tablixDetailLocal. Validar que Report Builder deserializa completo; luego validar en Power BI service el centrado para productos angostos y que LiquidosBase siga sin spacer."
+  description: "Abrir/publicar nuevamente el RDL tras reemplazar los ReportItems vacios del spacer por textboxes vacios. Validar que Report Builder deserializa completo; luego validar en Power BI service el centrado para productos angostos y que LiquidosBase siga sin spacer."
 last_touched:
   date: 2026-04-30
   agent: codex
-  session_summary: "Iteracion 10: corregido error de deserializacion por atributo Name faltante. Se nombraron los rectangles del spacer de tablixDetailLocal como rectDetailLocalSpacerHeader y rectDetailLocalSpacerData. Validacion local: XML_OK, MISSING_NAME_OK y DUPLICATE_NAME_OK."
+  session_summary: "Iteracion 11: corregido error de deserializacion por ReportItems vacio. Se reemplazaron los rectangles vacios del spacer de tablixDetailLocal por txtDetailLocalSpacerHeader y txtDetailLocalSpacerData con Value vacio. Validacion local: XML_OK, RDL_NAME_CHECK_OK y sin <ReportItems /> vacios."
