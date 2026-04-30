@@ -37,8 +37,8 @@ open_questions:
   - "Decidir si implementar MostrarPestañaDetalle (ocultar pestaña Detalle para 8 productos)"
 next_action:
   owner: user
-  description: "Abrir/publicar nuevamente el RDL tras fix XML de ShouldCenterTable. Validar en Power BI service: (1) tablixDetailLocal se centra para productos angostos (Butano, Aguarras) y LiquidosBase sigue sin spacer. (2) Si OK, confirmar para extender centrado condicional a tablixSummaryUSD y tablixDetailUSD."
+  description: "Abrir/publicar nuevamente el RDL tras fix de Name en rectangles del spacer de tablixDetailLocal. Validar que Report Builder deserializa completo; luego validar en Power BI service el centrado para productos angostos y que LiquidosBase siga sin spacer."
 last_touched:
   date: 2026-04-30
   agent: codex
-  session_summary: "Iteracion 9: corregido XML invalido en ShouldCenterTable. El operador VB <> estaba sin escapar dentro del bloque <Code>; se cambio a &lt;&gt;. Validacion local: parseo XML OK y no quedan ocurrencias literales de <>."
+  session_summary: "Iteracion 10: corregido error de deserializacion por atributo Name faltante. Se nombraron los rectangles del spacer de tablixDetailLocal como rectDetailLocalSpacerHeader y rectDetailLocalSpacerData. Validacion local: XML_OK, MISSING_NAME_OK y DUPLICATE_NAME_OK."

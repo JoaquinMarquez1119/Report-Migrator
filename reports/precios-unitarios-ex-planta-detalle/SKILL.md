@@ -221,6 +221,14 @@ La función `GetProductFamily()` en VB.NET mapea producto normalizado → famili
 - **Evidencia:** Parseo XML reproducía el error antes del cambio. Después del cambio, `[xml](Get-Content -Raw ...)` devuelve `XML_OK` y `rg -F '<>'` no encuentra operadores sin escapar.
 - **Próximo paso:** Usuario vuelve a abrir/publicar el RDL en Power BI Report Builder/Service y valida el piloto de centrado de `tablixDetailLocal` para productos angostos y `LiquidosBase`.
 
+### 2026-04-30 — Iteración 10: Fix de Name faltante en rectangles del spacer
+
+- **Pregunta/problema:** Al ejecutar el reporte, Report Builder fallaba con `Falta el atributo 'Name' necesario. línea 5785, posición 91.`
+- **Decisión:** Corregir los report items creados para la columna spacer de `tablixDetailLocal`; los `<Rectangle>` dentro de `CellContents` también requieren atributo `Name`.
+- **Acción:** Edición de `Precios Unitarios Ex Planta - detalle.rdl`: se nombraron los dos rectangles del spacer como `rectDetailLocalSpacerHeader` y `rectDetailLocalSpacerData`.
+- **Evidencia:** Verificación local: parseo XML `XML_OK`, chequeo de report items sin `Name` devuelve `MISSING_NAME_OK`, y chequeo de nombres duplicados devuelve `DUPLICATE_NAME_OK`. El validador estructural existente llega a una regla no relacionada sobre `Width` en `2.25pt` de bordes.
+- **Próximo paso:** Usuario vuelve a abrir/publicar el RDL y valida si Report Builder deserializa completo; si aparece otro error de deserialización, continuar desde la línea indicada.
+
 ### 2026-04-23 — Side-effect: arranque y cierre de sesión automatizados
 
 - **Pregunta/problema:** El usuario tenía que recordar manualmente que yo actualizara la bitácora al cerrar la sesión.
