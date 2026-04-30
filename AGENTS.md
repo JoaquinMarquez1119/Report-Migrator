@@ -45,7 +45,9 @@ STATUS.md                 — Índice de estado de todos los reportes
 - Cognos es la fuente de verdad. El `.rdl` existente se valida contra Cognos, no al revés.
 - Las iteraciones de las bitácoras (`SKILL.md`) son inmutables: no se reescriben, se agregan entradas nuevas.
 - **Después de cada cambio sustantivo** (edición de `.rdl`, decisión de diseño, diagnóstico, revert, etc.): agregar nueva iteración en `reports/<slug>/SKILL.md` **sin esperar a que el usuario lo pida**. Formato: `### YYYY-MM-DD — Iteración N: <título>` con Pregunta/problema, Decisión, Acción, Evidencia, Próximo paso. Es parte del trabajo, no un paso opcional de cierre.
-- Al terminar una sesión: actualizar `report.yaml` (`next_action`, `last_touched`), actualizar `STATUS.md`, commitear.
+- **No hacer un commit por cada iteración.** La bitácora debe ser granular; git debe agrupar iteraciones relacionadas en un commit de sesión o de unidad lógica.
+- Al terminar una sesión o cuando el usuario pida un checkpoint: actualizar `report.yaml` (`next_action`, `last_touched`), actualizar `STATUS.md`, y commitear todos los cambios coherentes del reporte.
+- Si una sesión queda a mitad de diagnóstico o esperando prueba del usuario, dejar el handoff actualizado; commitear sólo si el estado es útil como checkpoint compartible.
 - No saltarse el ritual de arranque aunque el usuario diga "continuá directo".
 - No mezclar trabajo de reportes distintos en el mismo commit.
 

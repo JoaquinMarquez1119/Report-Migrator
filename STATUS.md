@@ -24,7 +24,7 @@
 Al cerrar una sesión de trabajo en un reporte:
 1. Editar la fila correspondiente con el nuevo status y próxima acción.
 2. Asegurarse de que `report.yaml:next_action` y `report.yaml:last_touched` estén sincronizados.
-3. Commitear junto con los cambios de la sesión.
+3. Commitear junto con los cambios coherentes de la sesión o unidad lógica. No hacer un commit por cada iteración de la bitácora.
 
 ## Reportes futuros
 
