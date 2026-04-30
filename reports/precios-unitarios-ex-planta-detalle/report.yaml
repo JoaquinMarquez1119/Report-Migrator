@@ -37,8 +37,8 @@ open_questions:
   - "Decidir si implementar MostrarPestañaDetalle (ocultar pestaña Detalle para 8 productos)"
 next_action:
   owner: user
-  description: "Validar en Power BI service: (1) tablixDetailLocal se centra para productos angostos (Butano, Aguarras) y LiquidosBase sigue sin spacer. (2) Si OK, confirmar para extender centrado condicional a tablixSummaryUSD y tablixDetailUSD."
+  description: "Abrir/publicar nuevamente el RDL tras fix XML de ShouldCenterTable. Validar en Power BI service: (1) tablixDetailLocal se centra para productos angostos (Butano, Aguarras) y LiquidosBase sigue sin spacer. (2) Si OK, confirmar para extender centrado condicional a tablixSummaryUSD y tablixDetailUSD."
 last_touched:
-  date: 2026-04-24
-  agent: claude-sonnet-4-6
-  session_summary: "Iteración 8: centrado de matrices. Centrado estático de 3 tablixes sub-ancho de Resumen (tablixSummaryUSDTM1 Left→7.75in, tablixSummaryLocal Left→7.28in, tablixSummaryLocalMain Left→1.98in). Piloto de centrado condicional en tablixDetailLocal: columna spacer 11in con ShouldCenterTable() (retorna True para no-LiquidosBase), TablixMember con Visibility condicional, celdas spacer en header y data, Width 29.85→40.85in."
+  date: 2026-04-30
+  agent: codex
+  session_summary: "Iteracion 9: corregido XML invalido en ShouldCenterTable. El operador VB <> estaba sin escapar dentro del bloque <Code>; se cambio a &lt;&gt;. Validacion local: parseo XML OK y no quedan ocurrencias literales de <>."

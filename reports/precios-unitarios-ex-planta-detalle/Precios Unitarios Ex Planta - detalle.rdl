@@ -7876,7 +7876,7 @@ Public Function ViewUnitLabel(ByVal unitValue As String, ByVal localUnit As Obje
 End Function
 Public Function ShouldCenterTable(ByVal viewKey As String, ByVal product As String) As Boolean
   Dim family As String = GetProductFamily(product)
-  Return family <> "LiquidosBase"
+  Return family &lt;&gt; "LiquidosBase"
 End Function
 </Code>
 <EmbeddedImages>

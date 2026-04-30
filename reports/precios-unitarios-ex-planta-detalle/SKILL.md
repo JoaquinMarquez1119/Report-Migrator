@@ -213,6 +213,14 @@ La función `GetProductFamily()` en VB.NET mapea producto normalizado → famili
 - **Evidencia:** Verificación programática post-edición: 31 TablixColumns, 31 TablixMember en jerarquía, 31 células en ambas filas, Width=40.85in, tablixDetailUSD sin cambios (Width=29.85in).
 - **Próximo paso:** Validar en Power BI service que tablixDetailLocal se centra correctamente para Butano (y similares) y que LiquidosBase sigue sin spacer. Si OK, extender a tablixSummaryUSD y tablixDetailUSD.
 
+### 2026-04-30 — Iteración 9: Fix de XML inválido en ShouldCenterTable
+
+- **Pregunta/problema:** Al ejecutar/publicar el reporte, Power BI Report Builder fallaba con `Un nombre no puede empezar con el carácter '>', valor hexadecimal 0x3E. línea 7879, posición 18.`
+- **Decisión:** Corregir la causa mínima en el bloque `<Code>`: el operador VB `<>` agregado en `ShouldCenterTable()` quedó sin escapar dentro del XML del RDL.
+- **Acción:** Edición de `Precios Unitarios Ex Planta - detalle.rdl`: `Return family <> "LiquidosBase"` → `Return family &lt;&gt; "LiquidosBase"`.
+- **Evidencia:** Parseo XML reproducía el error antes del cambio. Después del cambio, `[xml](Get-Content -Raw ...)` devuelve `XML_OK` y `rg -F '<>'` no encuentra operadores sin escapar.
+- **Próximo paso:** Usuario vuelve a abrir/publicar el RDL en Power BI Report Builder/Service y valida el piloto de centrado de `tablixDetailLocal` para productos angostos y `LiquidosBase`.
+
 ### 2026-04-23 — Side-effect: arranque y cierre de sesión automatizados
 
 - **Pregunta/problema:** El usuario tenía que recordar manualmente que yo actualizara la bitácora al cerrar la sesión.

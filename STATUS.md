@@ -8,7 +8,7 @@
 | Reporte | Status | Owner | Próxima acción |
 |---|---|---|---|
 | [precios-unitarios-ex-planta-base](reports/precios-unitarios-ex-planta-base/report.yaml) | done | — | Cerrado. Retrospectiva completada 2026-04-20. |
-| [precios-unitarios-ex-planta-detalle](reports/precios-unitarios-ex-planta-detalle/report.yaml) | in-progress | user | Validar layout post-revert + renames de headers (Margen de distribución, Tasa URSEA primaria, PEP calculado por URSEA (*)). Confirmar legibilidad y matching con Cognos. Si OK → review. |
+| [precios-unitarios-ex-planta-detalle](reports/precios-unitarios-ex-planta-detalle/report.yaml) | in-progress | user | Abrir/publicar nuevamente el RDL tras fix XML de ShouldCenterTable. Validar centrado de tablixDetailLocal para productos angostos y que LiquidosBase siga sin spacer. Si OK, confirmar para extender a tablixSummaryUSD y tablixDetailUSD. |
 | [tc-promedio-mensual](reports/tc-promedio-mensual/report.yaml) | done | — | Cerrado. Retrospectiva pendiente si el usuario quiere hacerla. |
 
 ## Leyenda
