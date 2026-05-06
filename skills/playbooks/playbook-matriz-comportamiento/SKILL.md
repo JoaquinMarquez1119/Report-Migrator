@@ -81,9 +81,12 @@ Señales típicas:
 
 - Nunca deducir familias sólo desde screenshots.
 - Nunca tomar el `.rdl` como fuente primaria.
+- **Nunca tomar una `behavior-matrix.md` inferida en sesiones anteriores como fuente primaria.** Si existe, validarla columna por columna contra el XML spec antes de usarla. La matriz inferida es un atajo, el XML spec es la fuente.
 - Nunca asumir una grilla genérica si Cognos ramifica.
 - Nunca mezclar en una familia productos que usan distinta rama de datos.
 - Nunca recrear conversiones si Cognos ya expone campos paralelos (USD/local, unidad, etc.).
+- **Whitelist explícita por familia, no `Return True` genérico.** En `IsColumnAllowed(viewKey, familia, …)` (o equivalente), enumerar las columnas permitidas de cada familia/vista. Un fallback `Return True` permite columnas que el XML spec restringe → aparecen columnas de más en el render.
+- **Validar orden de columnas en TODOS los tablixes, no solo el visible.** Cuando el reporte tiene varios tablixes (Resumen + Detalle, USD + Local), un cambio de orden en uno suele olvidar el otro. Comparar el orden de cada tablix contra Cognos.
 - Separar normalización de parámetros de la lógica de layout.
 
 ## Errores comunes

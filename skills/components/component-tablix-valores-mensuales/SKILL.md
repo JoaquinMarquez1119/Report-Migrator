@@ -194,9 +194,30 @@ Mes N = IIF(Año = Year(Today()) AND N = Month(Today()),
 | Valor mensual (N2) | 0.65in | Números hasta 4 dígitos + 2 decimales |
 | Valor mensual (N2, miles) | 0.72in | Números con separador de miles (1.313,61) |
 
+## Mensaje "sin datos": elegir uno entre `NoRowsMessage` y textbox standalone
+
+SSRS ofrece dos formas de mostrar un mensaje cuando el dataset queda vacío:
+
+1. `<NoRowsMessage>` dentro del tablix → SSRS lo renderiza dentro del área del tablix (esquina superior izquierda, en `Left` del tablix). Útil cuando no querés posicionar el mensaje a mano.
+2. Un textbox standalone (ej. `txtEmptyState`) con `Visibility.Hidden = CountRows("ds...") > 0`, posicionado donde uno quiera dentro del rectángulo padre.
+
+**Elegir uno solo.** Si el reporte tiene ambos coexistiendo, cuando no haya datos aparecen los DOS textos al mismo tiempo (uno en la esquina del tablix, otro centrado). Convención: si querés el mensaje centrado bajo el banner, usar el textbox standalone y dejar `<NoRowsMessage></NoRowsMessage>` vacío; si alcanza con que aparezca dentro del tablix, no usar textbox standalone.
+
+## Push-down: textos al pie pegados al tablix
+
+SSRS aplica push-down vertical: cuando un tablix crece (más filas/meses) empuja hacia abajo los report items que están dentro del mismo rectángulo padre. Para que un texto al pie (nota URSEA, "Referentes…") quede pegado a la última fila del tablix sin gaps:
+
+- Posicionar el textbox al pie con `Top` ≈ `tablix.Top + tablix.Height(diseño)` (apenas debajo del bottom de diseño del tablix).
+- El push-down lo "pegará" automáticamente a la última fila renderizada cuando el tablix crece.
+- No usar `Top` muy lejos hacia abajo (ej. `Top = sectionHeight - 1in`): cuando hay pocas filas, el textbox queda a 2-3in de gap; cuando hay muchas, puede pasar a la página siguiente y "desaparecer" para el usuario.
+
+Limitación: SSRS no permite cerrar el gap dinámicamente con `ColSpan` en footer rows del tablix — en RDL 2016 `ColSpan` solo funciona en header rows de group column hierarchies, no en static rows. Push-down con textbox externo es la solución estable.
+
 ## Errores comunes
 
 - **Ancho de columna insuficiente:** números largos se cortan en el Service. Aumentar a 0.65–0.72in y centrar el contenido.
 - **Solo `TextAlign` sin `VerticalAlign`:** los números quedan en la esquina superior. Agregar `VerticalAlign>Middle` al `Style` del Textbox.
 - **Solo `VerticalAlign` sin `TextAlign`:** los números quedan centrados verticalmente pero pegados a la izquierda. Agregar `TextAlign>Center` al `Style` del `Paragraph`.
 - **Swappear columnas:** al cambiar el orden de dos columnas hay que swappear **ancho (`TablixColumn.Width`) Y contenido de las celdas (`TablixCell`)** juntos. Swappear solo uno deja el ancho equivocado para el contenido.
+- **Coexistencia de `NoRowsMessage` + textbox `txtEmptyState`** → dos mensajes "Sin datos" simultáneos. Elegir uno.
+- **Texto al pie con `Top` lejos del tablix** → gap visual cuando el tablix tiene pocas filas; texto en la página siguiente cuando tiene muchas. Posicionarlo apenas debajo del bottom de diseño del tablix y dejar que el push-down lo acompañe.

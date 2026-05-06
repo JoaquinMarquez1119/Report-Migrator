@@ -493,4 +493,35 @@ La función `GetProductFamily()` en VB.NET mapea producto normalizado → famili
 
 ## Retrospectiva
 
-_Llenar sólo cuando `report.yaml:status` pase a `done`._
+**Fecha:** 2026-05-05. **Aprobado por:** usuario.
+
+### Lecciones promovidas
+
+| Lección | Destino | Artefacto |
+|---|---|---|
+| Cognos `case when ... then ...` = display label, no nombre crudo. En DAX usar el nombre crudo del modelo; en headers RDL usar el display label de Cognos | Capa 1 — Reglas universales | `skills/base/SKILL.md` |
+| `ColSpan` en RDL 2016 sólo es válido en header rows de group column hierarchies; no en filas estáticas/footer | Capa 1 — Reglas universales | `skills/base/SKILL.md` |
+| DAX `EVALUATE` con `@param IN { ... }` inline no funciona — mover decisión a función VB.NET en `<Code>` | Capa 1 — Reglas universales | `skills/base/SKILL.md` |
+| `behavior-matrix.md` inferida en sesión previa no es fuente primaria; validar contra XML spec antes de usarla | Capa 2 — Refuerzo playbook | `skills/playbooks/playbook-matriz-comportamiento/SKILL.md` |
+| `IsColumnAllowed`: whitelist explícita por familia, no `Return True` genérico | Capa 2 — Refuerzo playbook | `skills/playbooks/playbook-matriz-comportamiento/SKILL.md` |
+| Validar orden de columnas en TODOS los tablixes (Resumen + Detalle, USD + Local), no solo el visible | Capa 2 — Refuerzo playbook | `skills/playbooks/playbook-matriz-comportamiento/SKILL.md` |
+| Corner cell debe ocultarse cuando no hay datos: `Visibility.Hidden = CountRows("ds...") = 0` | Capa 2b — Refuerzo componente | `skills/components/component-corner-cell/SKILL.md` |
+| `<NoRowsMessage>` y textbox standalone tipo `txtEmptyState` no deben coexistir — elegir uno | Capa 2b — Refuerzo componente | `skills/components/component-tablix-valores-mensuales/SKILL.md` |
+| Push-down: textos al pie posicionados con `Top` apenas debajo del bottom de diseño del tablix se adhieren a la última fila renderizada | Capa 2b — Refuerzo componente | `skills/components/component-tablix-valores-mensuales/SKILL.md` |
+| Banner Width = ancho del reporte base del cliente (no ancho de tabla más larga del reporte) | Capa 2b — Refuerzo componente | `skills/components/component-page-header/SKILL.md` |
+| Texto del banner: `Width = logo.Left` para centrar en el área no-logo (simetría visual con el logo) | Capa 2b — Refuerzo componente | `skills/components/component-page-header/SKILL.md` |
+| Centrado dinámico de tablix con ancho variable por familia: spacer columns con `Visibility.Hidden` por key | Componente nuevo | `skills/components/component-centrado-dinamico-tablix/SKILL.md` |
+
+### Lecciones locales (no promovidas)
+
+- Iter 6–16: ciclo de tuning del banner width terminó siendo desviación; la regla destilada (banner = ancho base) está promovida.
+- Iter 22: posición de nota URSEA — ubicación específica del reporte.
+- Iter 27, 32: tuning visual fino del banner (alturas y fontsize concretos) — los valores son específicos, la metodología ya está en page-header.
+- Iter 12, 9–11: spacer fijo de centrado fallido reemplazado por la mecánica dinámica de iter 19–21 — la solución estable está promovida en `component-centrado-dinamico-tablix`.
+
+### Cambios estructurales de esta retro
+
+- Nuevo componente `skills/components/component-centrado-dinamico-tablix` agregado al catálogo.
+- `skills/base/SKILL.md` ahora documenta 3 nuevas reglas universales (display labels Cognos, ColSpan en RDL 2016, DAX `@param IN` inline).
+- `skills/playbooks/playbook-matriz-comportamiento/SKILL.md` reforzado con 3 reglas duras adicionales (matriz inferida no es fuente, whitelist explícita, validar orden por tablix).
+- `skills/components/component-corner-cell`, `component-page-header` y `component-tablix-valores-mensuales` con secciones nuevas y errores comunes ampliados.

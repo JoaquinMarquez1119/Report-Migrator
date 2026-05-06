@@ -1,7 +1,7 @@
 id: report-precios-unitarios-ex-planta-detalle
 name: Precios Unitarios Ex Planta - detalle
 slug: precios-unitarios-ex-planta-detalle
-status: in-progress
+status: done
 standalone: true
 playbooks:
   - matriz-comportamiento
@@ -36,9 +36,9 @@ open_questions:
   - "Verificar que nombres crudos de TasaURSEASecundaria/IVASecundaria en Precios_Ex_Planta coincidan con los del XML spec"
   - "Decidir si implementar MostrarPestañaDetalle (ocultar pestaña Detalle para 8 productos)"
 next_action:
-  owner: user
-  description: "Publicar y validar set iters 24-32. Set completo de la sesión 2026-05-05: textos al pie pegados a la tabla, sin duplicado 'No hay datos', corner cells (fondo blanco/letra gris/sin border top-left/oculto sin datos), banner igual al base con altura 0.70in/título 18pt/subtítulo 14pt/textos centrados respecto al área no-logo, columna PEP raw entre PEPSinFlete y Factor en Resumen."
+  owner: "—"
+  description: "Cerrado. Retrospectiva completada 2026-05-05."
 last_touched:
   date: 2026-05-05
   agent: claude-opus-4-7
-  session_summary: "Sesión de ajustes visuales y de orden (iters 24-32): textos al pie, mensaje sin datos, corner cells, banner igual al base, columna PEP reordenada, banner ancho 20.50, simetría texto-logo, banner agrandado a 0.70in con tipografías más grandes."
+  session_summary: "Cierre del reporte: validación OK + retrospectiva. 12 lecciones promovidas (3 a Capa 1, 3 a playbook matriz-comportamiento, 5 a componentes existentes, 1 componente nuevo: centrado-dinamico-tablix)."

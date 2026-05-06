@@ -111,6 +111,9 @@ Estas reglas son de Capa 1 porque trascienden cualquier patrón:
 - **Construir el RDL por capas** en este orden: datasource → datasets de parámetros → datasets auxiliares → dataset principal → parámetros → layout base → tablix/matrix por rama funcional → expresiones de visibilidad → header/footer/logos → detalle fino.
 - **Si Cognos ramifica estructura,** preferir tablixes o datasets separados antes que una sola grilla con condiciones opacas.
 - **No inferir lógica sólo desde screenshots.**
+- **Cognos `case when ... then ...` = display label, no nombre crudo.** En el DAX usar el nombre crudo de la columna del modelo. En los headers del RDL usar el display label que Cognos asigna al campo (extraído del `case when` del XML spec). Confundirlos provoca o headers con strings raros, o filtros DAX que no matchean.
+- **`ColSpan` en RDL 2016 sólo es válido en header rows de group column hierarchies.** En `TablixCell` de filas estáticas (incluyendo footer rows) no es válido — el esquema sólo acepta `CellContents`, `DataElementName`, `DataElementOutput`. Si necesitás un footer con celda combinada, usar textbox standalone fuera del tablix.
+- **DAX `EVALUATE` con `@param IN { ... }` inline no funciona** en Power BI Reports / Analysis Services como query de dataset. Si la lógica necesita comparar el parámetro contra una lista, mover la decisión a una función VB.NET en el bloque `<Code>` y usarla en `Visibility.Hidden` o expresiones de textbox, no en el DAX.
 
 ---
 

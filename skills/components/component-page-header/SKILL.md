@@ -146,9 +146,34 @@ El logo se embebe en el RDL como base64 en la sección `<EmbeddedImages>`:
 </EmbeddedImages>
 ```
 
+## Ancho del banner
+
+Regla: **`rectHeader.Width` = ancho del banner del reporte base** del cliente (en ANCAP, 20.5in para A3 landscape con márgenes 0.25in). No escalar al ancho de la tabla más larga del reporte — eso desincroniza visualmente reportes hermanos (base ↔ detalle) y no aporta funcionalidad. Si la tabla es más ancha que el banner, se acepta scroll horizontal por debajo del banner; el banner no necesita cubrir toda la tabla.
+
+## Centrado del texto respecto al logo
+
+El logo ocupa el sector derecho del banner (en ANCAP: `Left=18.85in, Width=1.45in` sobre banner de 20.5in). Si el textbox del título usa `Left=0in, Width=banner.Width, TextAlign=Center`, el texto queda centrado **respecto al banner completo** — no respecto al área visualmente disponible. Resultado: el texto se ve "apretado contra el logo" porque hay más espacio libre a la izquierda que entre texto y logo.
+
+Fix para simetría visual: que el textbox del título termine donde empieza el logo, **`Width = logo.Left`** (en ANCAP: `Width=18.85in`). Con `TextAlign=Center`, el texto queda centrado en el área no-logo (centro en `logo.Left/2`).
+
+```xml
+<Textbox Name="txtTitulo">
+  ...
+  <Top>0.05in</Top>
+  <Left>0in</Left>
+  <Height>0.25in</Height>
+  <Width>18.85in</Width>   <!-- = imgLogo.Left, no rectHeader.Width -->
+  ...
+</Textbox>
+```
+
+Lo mismo para el subtítulo. El banner del reporte base de ANCAP tiene esta proporción heredada: title/subtitle Width=19.9in con Left=0.3in (centro en 10.25in = banner center). Replicar la lógica de "Width = logo.Left" en reportes nuevos da resultado más equilibrado visualmente.
+
 ## Errores comunes
 
 - Subir `PageHeader.Height` sin subir `rectHeader.Height` → franja dorada queda cortada.
 - Logo con `ZIndex` menor que el título → el título tapa el logo cuando se superponen.
 - No usar `PrintOnFirstPage>true` + `PrintOnLastPage>true` → el header no aparece en todas las páginas.
 - Cambiar el título directamente en vez de usar un parámetro o campo → el header queda hardcodeado y no sirve para otros reportes.
+- **Banner Width = ancho de tabla más larga** del reporte → desincroniza con el reporte base hermano y deja franja vacía con el logo "flotando" lejos. Mantener `rectHeader.Width` igual al banner del base.
+- **Textbox de título con `Width=banner.Width`** → texto centrado pero visualmente desplazado hacia el logo. Usar `Width=logo.Left` para centrar en el área no-logo.

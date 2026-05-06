@@ -123,8 +123,29 @@ En la variante de doble columna: el `RightBorder` de la celda 0 es `None` (las d
 - Si el tablix corresponde a la rama UYU: label `"$/lt ó $/kg"` en la celda más ancha (producto).
 - El label no incluye el nombre de la columna "Producto" — eso se da por contexto visual.
 
+## Visibilidad cuando no hay datos
+
+A diferencia de los headers de columnas de datos (que se ocultan via `Count(...) = 0`), la corner cell no tiene lógica de visibilidad por defecto → se renderiza incluso cuando el tablix queda sin filas. Resultado: aparece un cuadradito aislado "USD/m3" en la esquina superior izquierda del área de datos, sin headers ni filas alrededor.
+
+Fix: agregar `Visibility.Hidden = CountRows("ds...") = 0` al textbox del corner. Ejemplo:
+
+```xml
+<Textbox Name="hdrUsdCorner">
+  <CanGrow>true</CanGrow>
+  <KeepTogether>true</KeepTogether>
+  <Paragraphs>...</Paragraphs>
+  <Visibility>
+    <Hidden>=CountRows("dsDetalle") = 0</Hidden>
+  </Visibility>
+  <Style>...</Style>
+</Textbox>
+```
+
+Donde `dsDetalle` es el dataset que alimenta el tablix. Si el reporte tiene un textbox standalone tipo `txtEmptyState` con el mensaje "No hay datos disponibles", el corner queda oculto y solo se ve ese mensaje, igual que Cognos.
+
 ## Errores comunes
 
 - Aplicar el mismo tratamiento de bordes a ambas celdas en la variante doble → borde vertical entre las dos celdas de identificación, rompiendo la unidad visual del bloque.
 - Poner `BackgroundColor` con el color de header (#153767) → la celda queda oscura cuando debería ser blanca (sin unidad seleccionada).
 - Olvidar `<Border><Style>None</Style></Border>` antes de los bordes individuales → el border general (Solid) puede pisar a los bordes individuales según el renderer.
+- No agregar visibilidad por `CountRows = 0` → corner cell aparece como cuadrado aislado cuando el tablix queda sin datos.

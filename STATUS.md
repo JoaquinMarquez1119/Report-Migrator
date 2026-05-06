@@ -8,7 +8,7 @@
 | Reporte | Status | Owner | Próxima acción |
 |---|---|---|---|
 | [precios-unitarios-ex-planta-base](reports/precios-unitarios-ex-planta-base/report.yaml) | done | — | Cerrado. Retrospectiva completada 2026-04-20. |
-| [precios-unitarios-ex-planta-detalle](reports/precios-unitarios-ex-planta-detalle/report.yaml) | in-progress | user | Publicar y validar set iters 24-32 (sesión 2026-05-05): textos pie pegados a tabla, sin duplicado "No hay datos", corner cells (gris/blanco/sin border top-left/oculto sin datos), banner agrandado (alto 0.70in, título 18pt, subtítulo 14pt, width 20.50in, texto centrado en área no-logo), columna PEP raw entre PEPSinFlete y Factor en Resumen. |
+| [precios-unitarios-ex-planta-detalle](reports/precios-unitarios-ex-planta-detalle/report.yaml) | done | — | Cerrado. Retrospectiva completada 2026-05-05. |
 | [tc-promedio-mensual](reports/tc-promedio-mensual/report.yaml) | done | — | Cerrado. Retrospectiva pendiente si el usuario quiere hacerla. |
 
 ## Leyenda
