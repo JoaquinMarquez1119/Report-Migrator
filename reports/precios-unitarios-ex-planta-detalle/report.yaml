@@ -37,8 +37,8 @@ open_questions:
   - "Decidir si implementar MostrarPestañaDetalle (ocultar pestaña Detalle para 8 productos)"
 next_action:
   owner: user
-  description: "Abrir/publicar nuevamente el RDL tras reemplazar los ReportItems vacios del spacer por textboxes vacios. Validar que Report Builder deserializa completo; luego validar en Power BI service el centrado para productos angostos y que LiquidosBase siga sin spacer."
+  description: "Publicar y validar set iters 24-32. Set completo de la sesión 2026-05-05: textos al pie pegados a la tabla, sin duplicado 'No hay datos', corner cells (fondo blanco/letra gris/sin border top-left/oculto sin datos), banner igual al base con altura 0.70in/título 18pt/subtítulo 14pt/textos centrados respecto al área no-logo, columna PEP raw entre PEPSinFlete y Factor en Resumen."
 last_touched:
-  date: 2026-04-30
-  agent: codex
-  session_summary: "Iteracion 11: corregido error de deserializacion por ReportItems vacio. Se reemplazaron los rectangles vacios del spacer de tablixDetailLocal por txtDetailLocalSpacerHeader y txtDetailLocalSpacerData con Value vacio. Validacion local: XML_OK, RDL_NAME_CHECK_OK y sin <ReportItems /> vacios."
+  date: 2026-05-05
+  agent: claude-opus-4-7
+  session_summary: "Sesión de ajustes visuales y de orden (iters 24-32): textos al pie, mensaje sin datos, corner cells, banner igual al base, columna PEP reordenada, banner ancho 20.50, simetría texto-logo, banner agrandado a 0.70in con tipografías más grandes."
