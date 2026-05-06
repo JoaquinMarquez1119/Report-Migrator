@@ -218,6 +218,8 @@ Las iteraciones en `SKILL.md` no se reescriben. Si algo quedó mal en una iterac
 - Agregar nueva entrada fechada que diga qué dejaba mal la anterior y cómo esta lo corrige.
 - La trayectoria completa debe ser legible para el próximo agente.
 
+**Orden de las iteraciones:** siempre cronológico ascendente — la más antigua arriba, la más nueva abajo. Cada nueva iteración se agrega **al final** de la sección `## Iteraciones`, nunca al principio.
+
 Si la bitácora crece tanto que es difícil de leer: agregar "## Estado actual" al tope de `SKILL.md` como snapshot + índice de iteraciones abiertas/cerradas. No borrar historial.
 
 ---
